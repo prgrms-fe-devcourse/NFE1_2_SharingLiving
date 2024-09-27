@@ -1,9 +1,11 @@
+import LogoImage from '../assets/images/logo.png';
+
 const Header = () => {
     return (
         <header id="headPrimary"> { /** primary, secondary 등의 접미사는 이후 모바일과의 구분을 위해 명명하였음 */ }
             <div className="header-nav-area">
                 <h1 id="logoMain">
-                    <img src="" alt="나누리빙 로고" />
+                    <img src={ LogoImage } alt="나누리빙 로고" />
                 </h1>
 
                 <nav id="navPrimary">

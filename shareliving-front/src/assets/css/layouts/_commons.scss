@@ -8,8 +8,11 @@
 
 .inner-wrapper {
     margin-inline: auto;
-    padding-inline: .4rem;
     width: min(100% - 1.6rem, 80rem);
+}
+
+.separator {
+    width: min(100% - 1.6rem, 20rem);
 }
 
 .icons {
