@@ -1,12 +1,12 @@
 import './assets/css/style.css';
-import Header from './components/Header';
+import Layout from './components/Layout/Layout';
 
 function App() {
   return (
     <>
-      <Header />
-
-      <p>Hello World!</p>
+      <Layout>
+        <p>Hello World!</p>
+      </Layout>
     </>
   );
 }
