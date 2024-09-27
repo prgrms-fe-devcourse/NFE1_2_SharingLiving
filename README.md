@@ -1,101 +1,5 @@
 # NFE1_2_SharingLiving
 
-# 우리 팀의 코드 컨벤션
-
-## 변수 선언 (Variable Declarations)
-
-- **규칙**: `const`를 기본으로 사용, 필요할 때만 `let` 사용, `var`는 사용하지 않음.
-
-## 네이밍 규칙 (Naming Conventions)
-
-- **변수 및 함수**: 카멜 케이스(camelCase)
-  ```jsx
-  const userName = "baby";
-  ```
-- **클래스 및 생성자 함수, 컴포넌트**: 파스칼 케이스(PascalCase)
-  ```jsx
-  class User { ... }
-  const UserProfile = () => {
-    return <div>User Profile</div>;
-  };
-  ```
-- **상수**: 대문자와 언더스코어(UPPER_SNAKE_CASE)
-  ```jsx
-  const API_URL = "https://api.example.com";
-  ```
-
-## 주석 (Comments)
-
-- **규칙**: 코드의 의도를 설명할 때만 사용, 코드 자체를 설명하는 주석은 지양.
-
-## 코딩 컨벤션 (JavaScript 코드 컨벤션)
-
-| 구분        | 내용                           | 예시                                             |
-| ----------- | ------------------------------ | ------------------------------------------------ |
-| 들여쓰기    | 2 spaces                       | `if (condition) { doSomething(); }`              |
-| 세미콜론    | 항상 사용                      | `const a = 10;`                                  |
-| 변수 이름   | camelCase                      | `let myVariable;`                                |
-| 상수 이름   | UPPER_SNAKE_CASE               | `const MY_CONSTANT = 5;`                         |
-| 함수 이름   | 동사로 시작하고 camelCase      | `function fetchData() {}`                        |
-| 클래스 이름 | PascalCase                     | `class MyClass {}`                               |
-| 주석 사용   | 복잡한 코드에 설명 추가        | `// This function fetches data`                  |
-| 가독성      | 80~120자 제한, 줄 바꿈         | `const longVariableName = '...'; // explanation` |
-| 공백        | 연산자와 괄호 주변에 공백 사용 | `if (condition) { }`                             |
-
-## CSS 클래스명 컨벤션
-
-| 구분          | 내용                                                 | 예시                                           |
-| ------------- | ---------------------------------------------------- | ---------------------------------------------- |
-| BEM 구조      | Block Element Modifier 방식 사용                     | `.button`, `.button--primary`, `.button__icon` |
-| 파일 이름     | kebab-case                                           | `my-component.scss`                            |
-| 기본 클래스명 | 의미 있는 이름 사용                                  | `.header`, `.footer`, `.card`                  |
-| 네이밍 규칙   | 모든 클래스는 소문자 사용, 단어는 하이픈(-)으로 구분 | `.nav-menu`, `.user-profile`                   |
-
-## Prettier 기본 설정 (.prettierrc)
-
-```json
-{
-  "singleQuote": true, // 작은따옴표(')를 사용
-  "semi": true, // 세미콜론을 항상 사용
-  "tabWidth": 2 // 들여쓰기 시 탭 너비를 2칸으로 설정
-}
-```
-
-## ESLint 기본 설정 (.eslintrc.json)
-
-```json
-{
-  "env": {
-    "browser": true, // 브라우저 환경을 사용 (window, document 객체 사용 가능)
-    "es2021": true, // 최신 ECMAScript 2021 문법을 사용
-    "node": true // Node.js 환경을 지원 (module.exports 등 사용 가능)
-  },
-  "extends": [
-    "eslint:recommended", // ESLint 기본 추천 규칙 사용
-    "prettier" // Prettier와 ESLint 규칙 충돌 방지
-  ],
-  "rules": {
-    "no-unused-vars": "warn", // 사용하지 않는 변수가 있을 경우 경고
-    "semi": ["error", "always"], // 세미콜론을 반드시 사용 (없으면 오류)
-    "quotes": ["error", "single"] // 작은따옴표(')를 사용하지 않으면 오류
-  }
-}
-```
-
-## VSCode 설정 (settings.json)
-
-```json
-{
-  "editor.formatOnSave": true, // 파일 저장 시 자동으로 코드 포맷팅 실행
-  "editor.codeActionsOnSave": {
-    "source.fixAll": true // 저장 시 가능한 모든 코드 문제 자동 수정
-  }
-}
-```
-
-<br>
-<br>
-
 # 프로젝트 브랜치 관리
 
 ## 주요 브랜치
@@ -111,7 +15,7 @@
 
    - `feature/authentication`
    - 회원가입과 로그아웃 기능을 통합하여 작업.
-   - 하위 브랜치: `feature/authentication-signup`, `feature/authentication-login`, `feature/authentication-logout`
+   - 하위 브랜치 예시: `feature/authentication-signup`, `feature/authentication-logout`
 
 2. **게시글 목록**:
 
