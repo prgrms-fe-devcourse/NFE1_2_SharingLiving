@@ -15,7 +15,7 @@
 
    - `feature/authentication`
    - 회원가입과 로그아웃 기능을 통합하여 작업.
-   - 하위 브랜치 예시: `feature/authentication/signup`, `feature/authentication/logout`
+   - 하위 브랜치 예시: `feature/authentication-signup`, `feature/authentication-logout`
 
 2. **게시글 목록**:
 
@@ -62,14 +62,14 @@
 
   ### 하위의 하위 브랜치 작업 예시
 
-  - 하위의 하위 브랜치에서 작업할 때, 예를 들어 feature/authentication/signup과 같은 브랜치를 사용합니다.
+  - 하위의 하위 기능을 개발할 때는 feature/authentication-signup과 같이 하이픈(-)을 사용하여 브랜치를 구분합니다.
 
     1. 하위의 하위 브랜치 생성:
 
        - feature/authentication에서 하위의 하위 브랜치를 만듭니다.
 
        ```bash
-       git checkout -b feature/authentication/signup
+       git checkout -b feature/authentication-signup
        ```
 
     2. 하위의 하위 브랜치에서 작업:
@@ -78,7 +78,7 @@
 
        ```bash
        git checkout feature/authentication
-       git merge feature/authentication/signup
+       git merge feature/authentication-signup
        ```
 
     3. 하위 브랜치를 feature/full-functionality에 병합:
