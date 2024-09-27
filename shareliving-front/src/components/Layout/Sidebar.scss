@@ -1,6 +1,6 @@
 .sidebar {
   background: #ffffff;
-  font-family: "roboto-regular", sans-serif;
+  font-family: 'roboto-regular', sans-serif;
   min-height: 100%;
   padding: 0;
   width: 255px;
@@ -41,7 +41,7 @@
       background: #f0f0f0;
 
       .nav-link {
-        font-family: "Roboto", sans-serif;
+        font-family: 'Roboto', sans-serif;
         display: block;
         height: auto;
         padding: 2rem;
@@ -65,7 +65,7 @@
 
           .name,
           .designation {
-            font-family: "Roboto", sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin-bottom: 0;
             line-height: 1.5;
           }
@@ -76,9 +76,16 @@
         }
       }
 
-      @media (max-width: 991px) {
+      @media (max-width: 1400px) {
         padding-top: 2rem;
       }
     }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    position: absolute;
+    top: 50px;
+    z-index: 9999;
   }
 }
