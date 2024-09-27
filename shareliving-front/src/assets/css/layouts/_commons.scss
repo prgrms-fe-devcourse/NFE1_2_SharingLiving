@@ -12,7 +12,28 @@
 }
 
 .separator {
+    --border-color: var(--clr-text);
+
+    position: relative;
+    margin-block: .5rem;
     width: min(100% - 1.6rem, 20rem);
+    height: 1px;
+    background-color: rgb(var(--border-color));
+    opacity: 50%;
+    overflow: visible;
+
+    &::after {
+        display: block;
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        width: .4rem;
+        height: .4rem;
+        border: 1px solid rgb(var(--border-color));
+        background-color: rgb(var(--clr-background));
+        rotate: 45deg;
+        content: '';
+    }
 }
 
 .icons {

@@ -6,15 +6,22 @@
     justify-content: space-between;
     align-items: center;
     padding-inline: .8rem;
+    height: 3.6rem;
 }
 
 .header-nav-area {
     display: flex;
     align-items: center;
+    gap: 2.4rem;
 }
 
 #logoMain {
+    height: 2.7rem;
 
+    > img {
+        height: 100%;
+        object-fit: cover;
+    }
 }
 
 #navPrimary {
@@ -23,10 +30,11 @@
 
 .nav-list {
     display: flex;
+    gap: 1.2rem;
 }
 
 .nav-item {
-
+    padding: .8rem;
 }
 
 /* _headers.scss */

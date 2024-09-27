@@ -5,7 +5,6 @@ const LandingPage = () => {
         <main id="contentView" className="inner-wrapper">
             <div id="mainContainer">
 
-                Hello World!
             </div>
 
             <MainSidebar />
