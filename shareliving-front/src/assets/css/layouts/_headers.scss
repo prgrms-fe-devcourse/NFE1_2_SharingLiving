@@ -1,0 +1,11 @@
+/* _headers.scss */
+
+#headPrimary { // 메인 헤더
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: .8rem;
+}
+
+/* _headers.scss */
