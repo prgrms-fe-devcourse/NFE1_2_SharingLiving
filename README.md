@@ -15,7 +15,7 @@
 
    - `feature/authentication`
    - 회원가입과 로그아웃 기능을 통합하여 작업.
-   - 하위 브랜치 예시: `feature/authentication-signup`, `feature/authentication-logout`
+   - 하위 브랜치: `feature/authentication-signup`, `feature/authentication-login`, `feature/authentication-logout`
 
 2. **게시글 목록**:
 
