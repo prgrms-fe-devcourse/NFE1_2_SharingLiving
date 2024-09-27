@@ -656,6 +656,12 @@ a:hover, a:focus, a:active {
   flex: 1;
 }
 
+.temp-container {
+  padding: 1.6rem;
+  border-radius: 0.8rem;
+  background-color: rgb(var(--clr-min));
+}
+
 /* _mainPage.scss */
 /* _subPages.scss */
 /* _subPages.scss */

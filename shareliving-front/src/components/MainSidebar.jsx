@@ -1,7 +1,9 @@
 const MainSidebar = () => {
     return (
         <aside id="sideBarMain">
-            사이드바
+            <div className="temp-container">
+                사이드바
+            </div>
         </aside>
     );
 };
