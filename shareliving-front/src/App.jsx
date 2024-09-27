@@ -1,5 +1,5 @@
-import './assets/css/style.css'
-import Header from './components/Header'
+import './assets/css/style.css';
+import Header from './components/Header';
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
 
       <p>Hello World!</p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
