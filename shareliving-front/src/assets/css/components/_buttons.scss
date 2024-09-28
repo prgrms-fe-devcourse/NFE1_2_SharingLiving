@@ -1,3 +1,22 @@
 /* _buttons.scss */
 
+button {
+    border: 0;
+    outline: 0;
+}
+
+.button-large { // 공통 요소 적용 안된 임시 로그인 버튼
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .4rem;
+    width: 100%;
+    height: 3.6rem;
+    border-radius: .8rem;
+    background-color: green; // 임시
+    color: rgb(var(--clr-min));
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+
 /* _buttons.scss */

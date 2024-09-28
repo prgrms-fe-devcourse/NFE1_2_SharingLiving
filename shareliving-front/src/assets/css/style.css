@@ -573,7 +573,8 @@ a:hover, a:focus, a:active {
 }
 
 .icons {
-  width: 24px;
+  width: 1.2rem;
+  aspect-ratio: 1/1;
 }
 
 #customAlert {
@@ -623,12 +624,14 @@ a:hover, a:focus, a:active {
 }
 
 #logoMain {
+  width: 6rem;
   height: 2.7rem;
 }
 #logoMain > img {
+  width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .nav-list {
@@ -638,6 +641,14 @@ a:hover, a:focus, a:active {
 
 .nav-item {
   padding: 0.8rem;
+  font-size: var(--fnt-lg);
+  font-weight: 700;
+}
+.nav-item:hover {
+  background-image: linear-gradient(to top, rgb(var(--clr-theme)), rgb(var(--clr-theme)) 0.2rem, transparent 0.2rem);
+}
+.nav-item.current {
+  color: rgb(var(--clr-theme));
 }
 
 /* _headers.scss */
@@ -673,27 +684,78 @@ a:hover, a:focus, a:active {
   border-block-start: 1px solid rgb(var(--clr-text)/0.15);
 }
 
-.footer-logo {
-  height: 2.7rem;
+.footer-upper-area {
+  padding-block: 1.6rem;
 }
-.footer-logo > img {
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+
+.footer-social-links {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.footer-lower-area {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  gap: 0.6rem;
+  padding-block: 0.8rem;
+}
+
+.footer-logo {
+  width: 6rem;
+  height: 2.7rem;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .footer-copyright {
   font-size: var(--fnt-sm);
+  font-weight: 100;
 }
 
 /* _footers.scss */
 /* _MainSideBar.scss */
 #sideBarMain {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.6rem;
   width: 16rem;
 }
 
+@media screen and (max-width: 70rem) {
+  #sideBarMain {
+    display: none;
+    position: fixed;
+    inset-block: 0;
+    inset-inline-end: 0;
+    margin-inline-start: auto;
+  }
+  #sideBarMain.open {
+    display: initial;
+  }
+}
 /* _MainSideBar.scss */
 /* _buttons.scss */
+button {
+  border: 0;
+  outline: 0;
+}
+
+.button-large {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  height: 3.6rem;
+  border-radius: 0.8rem;
+  background-color: green;
+  color: rgb(var(--clr-min));
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
 /* _buttons.scss */
 /* _formElements.scss */
 /* _formElements.scss */

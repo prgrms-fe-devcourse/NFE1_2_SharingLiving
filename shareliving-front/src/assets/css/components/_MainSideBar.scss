@@ -1,7 +1,24 @@
 /* _MainSideBar.scss */
 
-#sideBarMain {
+#sideBarMain { // 메인 사이드바
+    display: flex;
+    flex-flow: column nowrap;
+    gap: .6rem;
     width: 16rem;
+}
+
+@media screen and (max-width: 70rem) { // 1400px부터 사이드바 숨김 처리, 버튼 클릭시 사이드에서 나오도록 표시
+    #sideBarMain {
+        display: none;
+        position: fixed;
+        inset-block: 0;
+        inset-inline-end: 0;
+        margin-inline-start: auto;
+
+        &.open {
+            display: initial;
+        }
+    }
 }
 
 /* _MainSideBar.scss */

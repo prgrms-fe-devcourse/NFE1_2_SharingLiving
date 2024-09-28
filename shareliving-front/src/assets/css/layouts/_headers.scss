@@ -16,11 +16,13 @@
 }
 
 #logoMain {
+    width: 6rem;
     height: 2.7rem;
 
     > img {
+        width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
     }
 }
 
@@ -35,6 +37,24 @@
 
 .nav-item {
     padding: .8rem;
+    font-size: var(--fnt-lg);
+    font-weight: 700;
+
+    &:hover {
+        background-image: linear-gradient(to top, rgb(var(--clr-theme)), rgb(var(--clr-theme)) .2rem, transparent .2rem);
+    }
+
+    &.current { // 현재 라우트일 때
+        color: rgb(var(--clr-theme));
+    }
+}
+
+@media screen and (max-width: 42rem) { // 태블릿 (840px) - 네비게이션 축소 및 버거 버튼 표시
+
+}
+
+@media screen and (max-width: 24rem) { // 모바일 (480px) - 상단 네비게이션 완전 축소, 하단 네비게이션 표시
+
 }
 
 /* _headers.scss */
