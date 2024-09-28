@@ -21,7 +21,7 @@ const MainSidebar = () => {
         <aside id="sideBarMain">
             <SideBarContent isLogged={ false } />
 
-            <div className="temp-container">
+            <div className="rounded">
                 사이드바
             </div>
         </aside>

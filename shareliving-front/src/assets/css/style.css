@@ -549,6 +549,12 @@ a:hover, a:focus, a:active {
   width: min(100% - 1.6rem, 80rem);
 }
 
+.rounded {
+  padding: 1.6rem;
+  border-radius: 0.8rem;
+  background-color: rgb(var(--clr-min));
+}
+
 .separator {
   --border-color: var(--clr-text);
   position: relative;
@@ -665,12 +671,6 @@ a:hover, a:focus, a:active {
 
 #mainContainer {
   flex: 1;
-}
-
-.temp-container {
-  padding: 1.6rem;
-  border-radius: 0.8rem;
-  background-color: rgb(var(--clr-min));
 }
 
 /* _mainPage.scss */
