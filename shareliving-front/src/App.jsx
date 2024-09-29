@@ -1,17 +1,17 @@
 import './assets/css/style.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import LandingPage from './components/LandingPage';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home'; 
+import Knowledge from './pages/Knowledge'; 
 
 function App() {
   return (
-    <>
-      <Header />
-
-      <LandingPage />
-
-      <Footer />
-    </>
+     <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/knowledge" element={<Knowledge />} />
+      </Routes>
+    </Router>
   );
 }
 
