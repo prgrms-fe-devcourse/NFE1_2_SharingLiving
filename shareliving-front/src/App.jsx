@@ -2,8 +2,8 @@ import './assets/css/style.css';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home'; 
-import Knowledge from './pages/Knowledge'; 
-import Product from './pages/Product'; 
+import Knowledge from './pages/knowledge'; 
+import Product from './pages/product'; 
 
 function App() {
   return (
