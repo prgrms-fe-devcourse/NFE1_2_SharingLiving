@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Knowledge.scss';
+import './knowledge.scss';
 import { useNavigate } from 'react-router-dom';
 
 const Knowledge = () => {
