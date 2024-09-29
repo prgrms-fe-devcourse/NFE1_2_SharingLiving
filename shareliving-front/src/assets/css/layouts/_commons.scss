@@ -12,7 +12,6 @@
 }
 
 .rounded { // 둥근 테두리 컨테이너
-    padding: 1.6rem;
     border-radius: .8rem;
     background-color: rgb(var(--clr-min));
 }
@@ -45,6 +44,10 @@
 .icons { // svg 아이콘 사용시 이 클래스를 붙여야 함
     width: 1.2rem;
     aspect-ratio: 1 / 1;
+}
+
+#navBreadCrumbs {
+    margin-block-end: .6rem;
 }
 
 #customAlert {

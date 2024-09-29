@@ -550,7 +550,6 @@ a:hover, a:focus, a:active {
 }
 
 .rounded {
-  padding: 1.6rem;
   border-radius: 0.8rem;
   background-color: rgb(var(--clr-min));
 }
@@ -581,6 +580,10 @@ a:hover, a:focus, a:active {
 .icons {
   width: 1.2rem;
   aspect-ratio: 1/1;
+}
+
+#navBreadCrumbs {
+  margin-block-end: 0.6rem;
 }
 
 #customAlert {
@@ -675,6 +678,17 @@ a:hover, a:focus, a:active {
 
 /* _mainPage.scss */
 /* _subPages.scss */
+#navBreadCrumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.4rem 0.8rem;
+}
+
+.breadcrumb-item {
+  padding: 0.4rem;
+}
+
 /* _subPages.scss */
 /* _footers.scss */
 #footPrimary {
@@ -721,6 +735,48 @@ a:hover, a:focus, a:active {
   flex-flow: column nowrap;
   gap: 0.6rem;
   width: 16rem;
+}
+
+#sideBanner {
+  height: 6rem;
+}
+
+.sidebar-news-title {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem;
+  font-weight: 900;
+}
+.sidebar-news-title > .icons {
+  width: 0.8rem;
+}
+
+.sidebar-news-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+  padding-inline: 0.8rem;
+  padding-block-end: 0.8rem;
+}
+
+.sidebar-news-item {
+  padding: 0.8rem;
+  aspect-ratio: 1/1;
+  border: 1px solid rgb(var(--clr-text)/0.15);
+  border-radius: 0.4rem;
+}
+.sidebar-news-item:nth-child(3n+1) {
+  background-color: green;
+  color: rgb(var(--clr-min));
+}
+.sidebar-news-item > a {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  height: 100%;
+}
+.sidebar-news-item .icons {
+  margin-inline-start: auto;
 }
 
 @media screen and (max-width: 70rem) {
