@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './product.scss';
 import { useNavigate } from 'react-router-dom';
+import ImageUploader from '../components/ImageUploader';
 
 const Product = () => {
   const navigate = useNavigate();
@@ -25,14 +26,7 @@ const Product = () => {
   return (
     <div className="knowledge-wrapper">
       <h1 className="title">나눔제품 등록 페이지</h1>
-      <div className="content">
-        <div className="image-upload">
-          <div className="upload-button">
-            <span className="plus-icon">+</span>
-            <span className="image-count">0/5</span>
-          </div>
-        </div>
-      </div>
+      <ImageUploader />
       <form className="knowledge-form">
         <div className="form-group">
           <label htmlFor="input-title" className="form-label">글 제목</label>
