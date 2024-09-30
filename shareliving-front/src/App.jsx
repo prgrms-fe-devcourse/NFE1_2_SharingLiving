@@ -1,8 +1,7 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 
 import './assets/css/style.css';
 
-import Layout from './components/layouts/Layout';
 import LandingPage from './components/LandingPage';
 import ProductWrite from './pages/ProductWrite';
 import KnowledgeWrite from './pages/KnowledgeWrite';
@@ -47,9 +46,7 @@ const baseRouter = createBrowserRouter([
 const App = () => {
   return (
     <>
-      <Layout>
-        <RouterProvider router={ baseRouter } />
-      </Layout>
+      <RouterProvider router={ baseRouter } />
     </>
   );
 };

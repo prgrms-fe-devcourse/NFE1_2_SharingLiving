@@ -3,6 +3,7 @@ import { useState } from 'react';
 import LogoImage from '../assets/images/logo.png';
 import UserControlls from './UserControlls';
 import ShareModal from './ShareModal';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,15 +15,16 @@ const Header = () => {
         <>
             <header id="headPrimary">
                 <div className="header-nav-area fullscreen">
-
-                    <h1 id="logoMain">
-                        <img src={ LogoImage } alt="로고" />
-                    </h1>
+                    <Link to="/">
+                        <h1 id="logoMain">
+                            <img src={ LogoImage } alt="로고" />
+                        </h1>
+                    </Link>
 
                     <nav id="navPrimary">
                         <ul className="nav-list">
                             <li className="nav-item">
-                                제품 나눔
+                                <Link to="/">제품 나눔</Link>
                             </li>
 
                             <li className="nav-item">지식 나눔</li>

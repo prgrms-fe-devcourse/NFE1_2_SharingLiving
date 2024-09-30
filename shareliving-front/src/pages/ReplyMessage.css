@@ -1,0 +1,50 @@
+/* pages/ReplyMessage.scss */
+.reply-message {
+  margin: 20px;
+}
+.reply-message__title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.reply-message__form {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  background-color: #f9f9f9;
+}
+.reply-message__form__input-group {
+  margin-bottom: 15px;
+}
+.reply-message__form__input-group__label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.reply-message__form__textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+.reply-message__submit-button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.reply-message__submit-button:hover {
+  background-color: #0056b3;
+}
+.reply-message__input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
