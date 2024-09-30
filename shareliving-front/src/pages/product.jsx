@@ -5,12 +5,22 @@ import { useNavigate } from 'react-router-dom';
 const Product = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('furniture');
+  const [category, setCategory] = useState('product'); 
+  const [category2, setCategory2] = useState('furniture');
   const [region, setRegion] = useState('');
   const [collection, setCollection] = useState('');
   const [pickupCompany, setPickupCompany] = useState(''); 
   const [pickupCost, setPickupCost] = useState(''); 
   const [description, setDescription] = useState('');
+
+  const handleCategoryChange = (e) => {
+    const selectedCategory = e.target.value;
+    setCategory(selectedCategory);
+    
+    if (selectedCategory === 'knowledge') {
+      navigate('/knowledge');
+    }
+  };
 
   return (
     <div className="knowledge-wrapper">
@@ -37,12 +47,26 @@ const Product = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="dropdown" className="form-label">제품 카테고리 선택</label>
+          <label htmlFor="dropdown" className="form-label">나눔 분류 선택</label>
           <select
             id="dropdown"
             className="dropdown"
             value={category}
-            onChange={(e) => setCategory(e.target.value)}
+              onChange={handleCategoryChange}
+          >
+            <option value="knowledge">지식</option>
+            <option value="product">제품</option>
+          </select>
+        </div>
+
+
+        <div className="form-group">
+          <label htmlFor="dropdown" className="form-label">제품 카테고리 선택</label>
+          <select
+            id="dropdown"
+            className="dropdown"
+            value={category2}
+            onChange={(e) => setCategory2(e.target.value)}
           >
             <option value="furniture">가구</option>
             <option value="appliances">가전</option>

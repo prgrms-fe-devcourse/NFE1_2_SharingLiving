@@ -9,6 +9,15 @@ const Knowledge = () => {
   const [type, setType] = useState('');
   const [description, setDescription] = useState(''); 
 
+  const handleCategoryChange = (e) => {
+    const selectedCategory = e.target.value;
+    setCategory(selectedCategory);
+    
+    if (selectedCategory === 'product') {
+      navigate('/product');
+    }
+  };
+
   return (
     <div className="knowledge-wrapper">
       <h1 className="title">나눔지식 등록 페이지</h1>
@@ -39,7 +48,7 @@ const Knowledge = () => {
             id="dropdown"
             className="dropdown"
             value={category}
-            onChange={(e) => setCategory(e.target.value)}
+              onChange={handleCategoryChange}
           >
             <option value="knowledge">지식</option>
             <option value="product">제품</option>
