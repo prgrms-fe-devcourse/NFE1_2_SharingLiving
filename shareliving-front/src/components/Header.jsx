@@ -1,4 +1,5 @@
 import LogoImage from '../assets/images/logo.png';
+import UserControlls from './UserControlls';
 
 const Header = () => {
     return (
@@ -29,10 +30,7 @@ const Header = () => {
                 </nav>
             </div>
 
-            <div className="header-user-area">
-                placeholder
-                { /** User 컴포넌트 필요 - 로그인 상태에 따라 변경되어야 함 */ }
-            </div>
+            <UserControlls /> { /** 로그인 상태에 따라 변경되어야 함 */ }
         </header>
     );
 };

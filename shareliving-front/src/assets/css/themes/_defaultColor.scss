@@ -16,13 +16,13 @@
 
     --clr-tint-100: 52 114 53; // 하이라이트 100%
     --clr-tint-75: ; // 하이라이트 75%
-    --clr-tint-50: ; // 하이라이트 50%
+    --clr-tint-50: 76 175 79; // 하이라이트 50%
     --clr-tint-25: ; // 하이라이트 25%
     --clr-tint-10: ; // 하이라이트 10%
     --clr-tint-5: ; // 하이라이트 5%
 
     --clr-text: 78 69 69; // 문자
-    --clr-text-highlight: 51 51 51; // 하이라이트 된 문자
+    --clr-text-highlight: var(--clr-theme); // 하이라이트 된 문자
     --clr-text-on-tint: 255 255 255; // 틴트 배경 위의 문자
     --clr-text-on-surface: ; // 표면 배경 위의 문자
     --clr-text-on-invert: ; // 반전 배경 위의 문자

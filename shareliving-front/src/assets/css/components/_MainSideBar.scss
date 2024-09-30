@@ -41,8 +41,8 @@
     border-radius: .4rem;
 
     &:nth-child(3n + 1) {
-        background-color: green; // 임시 배경색
-        color: rgb(var(--clr-min));
+        background-color: rgb(var(--clr-tint-50));
+        color: rgb(var(--clr-text-on-tint));
     }
 
     > a {

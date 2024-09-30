@@ -1,3 +1,81 @@
 /* _formElements.scss */
 
+@mixin input-commons {
+    padding-inline: .4rem;
+    height: 1.6rem;
+    border: 1px solid rgb(var(--clr-theme) / .5);
+    border-radius: .2rem;
+    background-color: rgb(var(--clr-min) / .25);
+    backdrop-filter: blur(.4rem);
+
+    &:hover {
+        border-color: rgb(var(--clr-theme) / .6);
+        background-color: rgb(var(--clr-min) / .5);
+    }
+
+    &:focus {
+        border-color: rgb(var(--clr-theme) / .75);
+        background-color: rgb(var(--clr-min));
+        outline: 3px solid rgb(var(--clr-tint-50) / .5);
+    }
+
+    &:valid {
+
+    }
+
+    &:invalid {
+
+    }
+
+    &:disabled {
+
+    }
+}
+
+input,
+select,
+button {
+    padding: 0;
+    border: 0;
+    outline: 0;
+}
+
+input { // 폼 입력 요소 공통
+    &[type="text"],
+    &[type="number"],
+    &[type="email"],
+    &[type="tel"],
+    &[type="email"],
+    &[type="url"],
+    &[type="password"],
+    &[type="datetime-local"],
+    &[type="date"],
+    &[type="month"],
+    &[type="week"],
+    &[type="time"],
+    &[type="search"] {
+        @include input-commons();
+    }
+}
+
+select {
+    @include input-commons();
+}
+
+input[type="radio"] { // 라디오 버튼 - 반드시 label과 짝을 이루어야 함
+
+
+    & + label {
+
+    }
+}
+
+input[type="checkbox"] { // 체크박스 - 반드시 label과 짝을 이루어야 함
+
+
+    & + label {
+
+    }
+}
+
 /* _formElements.scss */

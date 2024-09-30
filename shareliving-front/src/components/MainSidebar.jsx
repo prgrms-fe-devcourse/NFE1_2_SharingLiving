@@ -9,7 +9,7 @@ const SideBarContent = (isLogged) => { // 로그인 상태에 따른 사이드 �
 
     return (
         <div>
-            <button type="button" id="btnSideLogin" className="button-large"> { /** 임시 엘리먼트 - 라우터 링크로 바꿔야 함 */ }
+            <button type="button" id="btnSideLogin" title="로그인 / 회원가입"> { /** 임시 엘리먼트 - 라우터 링크로 바꿔야 함 */ }
                 로그인 / 회원가입
             </button>
         </div>
@@ -22,7 +22,7 @@ const MainSidebar = () => {
             <SideBarContent isLogged={ false } />
 
             <div id="sideBanner" className="rounded">
-                이용 가이드
+                이용 가이드 배너
             </div>
 
             <div id="sideNews" className="rounded">
