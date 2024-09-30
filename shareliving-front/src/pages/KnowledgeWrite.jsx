@@ -1,25 +1,28 @@
 import React, { useState } from 'react';
 import './knowledge.scss';
 import { useNavigate } from 'react-router-dom';
+import ImageUploader from '../components/ImageUploader';
 
 const KnowledgeWrite = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('knowledge');
+  const [category, setCategory] = useState('knowledge'); 
   const [type, setType] = useState('');
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState(''); 
+
+  const handleCategoryChange = (e) => {
+    const selectedCategory = e.target.value;
+    setCategory(selectedCategory);
+    
+    if (selectedCategory === 'product') {
+      navigate('/add-product');
+    }
+  };
 
   return (
     <div className="knowledge-wrapper">
       <h1 className="title">나눔지식 등록 페이지</h1>
-      <div className="content">
-        <div className="image-upload">
-          <div className="upload-button">
-            <span className="plus-icon">+</span>
-            <span className="image-count">0/5</span>
-          </div>
-        </div>
-      </div>
+      <ImageUploader />
       <form className="knowledge-form">
         <div className="form-group">
           <label htmlFor="input-title" className="form-label">글 제목</label>
@@ -39,7 +42,7 @@ const KnowledgeWrite = () => {
             id="dropdown"
             className="dropdown"
             value={category}
-            onChange={(e) => setCategory(e.target.value)}
+              onChange={handleCategoryChange}
           >
             <option value="knowledge">지식</option>
             <option value="product">제품</option>
