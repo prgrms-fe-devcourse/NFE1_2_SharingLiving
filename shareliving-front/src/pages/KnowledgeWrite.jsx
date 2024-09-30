@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import './knowledge.scss';
 import { useNavigate } from 'react-router-dom';
 
-const Knowledge = () => {
+const KnowledgeWrite = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('knowledge'); 
+  const [category, setCategory] = useState('knowledge');
   const [type, setType] = useState('');
-  const [description, setDescription] = useState(''); 
+  const [description, setDescription] = useState('');
 
   return (
     <div className="knowledge-wrapper">
@@ -78,4 +78,4 @@ const Knowledge = () => {
   );
 };
 
-export default Knowledge;
+export default KnowledgeWrite;

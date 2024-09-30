@@ -1,0 +1,107 @@
+/* _cardItems.scss */
+
+.card-item {
+    border-radius: .8rem;
+    background-color: rgb(var(--clr-min));
+    overflow: hidden;
+
+    &.products {
+
+    }
+
+    &.knowledge {
+        display: flex;
+        height: 9rem;
+
+        .card-image-container {
+            width: 13.75rem;
+            height: 100%;
+        }
+
+        .card-description-container {
+            display: flex;
+            flex-flow: column nowrap;
+        }
+    }
+}
+
+.card-image-container {
+    position: relative;
+    width: 100%;
+    height: 12.25rem;
+    background-color: rgb(var(--clr-max) / .75);
+
+    > .card-image {
+        position: absolute;
+        inset: 0;
+    }
+
+    > .card-tags-container {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: .4rem;
+        position: absolute;
+        inset: 0;
+        margin-block-start: auto;
+        padding: .4rem;
+        height: fit-content;
+        color: white;
+    }
+}
+
+.card-description-container {
+    flex: 1;
+}
+
+.card-descriptions {
+    flex: 1;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: .6rem;
+    padding: .6rem .8rem;
+
+    > .card-title {
+        font-size: var(--fnt-title-md);
+        font-weight: 900;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    > .card-type {
+        opacity: .75;
+    }
+
+    > .card-text {
+        flex: 1;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        line-height: 1.4;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    > .card-price {
+        color: rgb(var(--clr-text) / .5);
+        font-size: var(--fnt-sm);
+        vertical-align: bottom;
+
+        span {
+            color: rgb(var(--clr-text));
+            font-size: var(--fnt-lg);
+            font-weight: 900;
+        }
+    }
+}
+
+.card-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .6rem .8rem;
+    border-block-start: 1px solid rgb(var(--clr-text) / .15);
+}
+
+/* _cardItems.scss */

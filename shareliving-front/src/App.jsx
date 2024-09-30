@@ -1,26 +1,32 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import './assets/css/style.css';
+
 import Layout from './components/layouts/Layout';
 import LandingPage from './components/LandingPage';
+import ProductWrite from './pages/ProductWrite';
+import KnowledgeWrite from './pages/KnowledgeWrite';
 
-import Home from './pages/Home';
-import Knowledge from './pages/knowledge';
-import Product from './pages/product';
+const baseRouter = createBrowserRouter([
+  {
+    path: '/',
+    element: <LandingPage />
+  },
+  {
+    path: '/product',
+    element: <ProductWrite />
+  },
+  {
+    path: '/knowledge',
+    element: <KnowledgeWrite />
+  }
+]);
 
 function App() {
   return (
     <>
       <Layout>
-        <Router>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/knowledge" element={<Knowledge />} />
-            <Route path="/product" element={<Product />} />
-          </Routes>
-        </Router>
-        <LandingPage />
+        <RouterProvider router={ baseRouter } />
       </Layout>
     </>
   );

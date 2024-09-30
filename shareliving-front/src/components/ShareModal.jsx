@@ -1,6 +1,5 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './ShareModal.scss'; 
+import './ShareModal.scss';
 
 const ShareModal = ({ closeModal }) => {
     const navigate = useNavigate();

@@ -1,3 +1,5 @@
+import CardProducts from "./items/CardProducts";
+
 const LandingPage = () => {
     return (
         <>
@@ -13,10 +15,14 @@ const LandingPage = () => {
             </section>
 
             <section id="secShareProducts">
+                <CardProducts type="product" />
+
                 최근 제품 나눔 글
             </section>
 
             <section id="secShareKnowledge">
+                <CardProducts type="knowledge" />
+
                 최근 지식 나눔 글
             </section>
 

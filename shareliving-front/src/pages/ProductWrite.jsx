@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import './product.scss';
 import { useNavigate } from 'react-router-dom';
 
-const Product = () => {
+const ProductWrite = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('furniture');
   const [region, setRegion] = useState('');
   const [collection, setCollection] = useState('');
-  const [pickupCompany, setPickupCompany] = useState(''); 
-  const [pickupCost, setPickupCost] = useState(''); 
+  const [pickupCompany, setPickupCompany] = useState('');
+  const [pickupCost, setPickupCost] = useState('');
   const [description, setDescription] = useState('');
 
   return (
@@ -76,7 +76,7 @@ const Product = () => {
           </select>
         </div>
 
-        
+
         <div className="form-group">
           <label htmlFor="input-pickupCompany" className="form-label">수거 업체</label>
           <input
@@ -121,4 +121,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default ProductWrite;

@@ -269,8 +269,8 @@ summary {
   scroll-behavior: smooth;
   --opaq: 1;
   --fnt-title-xl: 2.4rem;
-  --fnt-title-lg: 1.8rem;
-  --fnt-title-md: 1.5rem;
+  --fnt-title-lg: 1.5rem;
+  --fnt-title-md: 1.2rem;
   --fnt-title-sm: 1rem;
   --fnt-xl: .9rem;
   --fnt-lg: .8rem;
@@ -936,3 +936,96 @@ select:focus {
   }
 }
 /* _MainSideBar.scss */
+/* _cardItems.scss */
+.card-item {
+  border-radius: 0.8rem;
+  background-color: rgb(var(--clr-min));
+  overflow: hidden;
+}
+.card-item.knowledge {
+  display: flex;
+  height: 9rem;
+}
+.card-item.knowledge .card-image-container {
+  width: 13.75rem;
+  height: 100%;
+}
+.card-item.knowledge .card-description-container {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.card-image-container {
+  position: relative;
+  width: 100%;
+  height: 12.25rem;
+  background-color: rgb(var(--clr-max)/0.75);
+}
+.card-image-container > .card-image {
+  position: absolute;
+  inset: 0;
+}
+.card-image-container > .card-tags-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.4rem;
+  position: absolute;
+  inset: 0;
+  margin-block-start: auto;
+  padding: 0.4rem;
+  height: -moz-fit-content;
+  height: fit-content;
+  color: white;
+}
+
+.card-description-container {
+  flex: 1;
+}
+
+.card-descriptions {
+  flex: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.6rem;
+  padding: 0.6rem 0.8rem;
+}
+.card-descriptions > .card-title {
+  font-size: var(--fnt-title-md);
+  font-weight: 900;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.card-descriptions > .card-type {
+  opacity: 0.75;
+}
+.card-descriptions > .card-text {
+  flex: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.card-descriptions > .card-price {
+  color: rgb(var(--clr-text)/0.5);
+  font-size: var(--fnt-sm);
+  vertical-align: bottom;
+}
+.card-descriptions > .card-price span {
+  color: rgb(var(--clr-text));
+  font-size: var(--fnt-lg);
+  font-weight: 900;
+}
+
+.card-info-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0.8rem;
+  border-block-start: 1px solid rgb(var(--clr-text)/0.15);
+}
+
+/* _cardItems.scss */
