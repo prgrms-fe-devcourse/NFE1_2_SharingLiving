@@ -1,0 +1,203 @@
+/* _mainPage.scss */
+
+#todoList {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: .8rem;
+    padding-block: 1.2rem;
+}
+
+.empty-list {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    height: 12rem;
+    user-select: none;
+    pointer-events: none;
+
+    > .big-icon {
+        width: 3rem;
+        fill: rgb(var(--clr-surface-10));
+        opacity: .3;
+    }
+
+    > p {
+        font-size: var(--fnt-xl);
+        font-weight: 100;
+        opacity: .5;
+    }
+}
+
+.todo-item {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 1.2rem;
+    position: relative;
+    padding: 1.2rem;
+    border-radius: .6rem;
+    transition: .15s;
+
+    &:hover {
+        background-color: rgb(var(--clr-surface-75));
+
+        .todo-button-container {
+            button {
+                background-color: rgb(var(--clr-surface-10));
+            }
+        }
+    }
+
+    &[data-item-imp="important"] {
+        background-color: rgb(var(--clr-min) / .75);
+        background-image: linear-gradient(135deg, rgb(var(--clr-warn)) 1rem, transparent 1rem);
+        outline: 1px solid rgb(var(--clr-warn));
+        box-shadow: 0 0 .5rem rgb(var(--clr-warn) / .25);
+
+        .todo-status {
+            display: initial;
+        }
+    }
+
+    &[data-item-status="done"] {
+        .todo-label {
+            color: rgb(var(--clr-max) / .5);
+            text-decoration: line-through;
+        }
+    }
+}
+
+.button-todo-item-done {
+    display: grid;
+    place-items: center;
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 1px solid rgb(var(--clr-surface-10) / .5);
+    border-radius: .4rem;
+    background-color: rgb(var(--clr-min) / .2);
+    cursor: pointer;
+
+    &:hover {
+        border-color: rgb(var(--clr-tint-25));
+        background-color: rgb(var(--clr-min) / .5);
+        outline: .15rem solid rgb(var(--clr-tint-25) / .25);
+    }
+
+    &.done {
+        background-color: rgb(var(--clr-theme));
+        color: rgb(var(--clr-max));
+
+        > .icons {
+            display: initial;
+        }
+    }
+
+    > .icons {
+        display: none;
+        width: .8rem;
+    }
+
+    &:disabled {
+        background-color: rgb(var(--clr-surface-50));
+        cursor: not-allowed;
+    }
+}
+
+.todo-item-aligner {
+    flex: 1;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: .4rem;
+}
+
+.todo-label-container {
+    flex: 1;
+    position: relative;
+}
+
+.todo-label {
+    flex: 1;
+    line-height: 1.6;
+
+    &[contenteditable] {
+        display: flex;
+        padding-block: .6rem;
+        padding-inline: .4rem;
+        border: 1px solid rgb(var(--clr-surface-10) / .2);
+        border-radius: .4rem;
+        background-color: rgb(var(--clr-min) / .2);
+        color: rgb(var(--clr-max));
+        transition: .15s;
+
+        &:focus {
+            border-color: rgb(var(--clr-tint-25));
+            background-color: rgb(var(--clr-min) / .5);
+            outline: .15rem solid rgb(var(--clr-tint-25) / .25);
+        }
+    }
+}
+
+.todo-edit-legends {
+    display: none;
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: .6rem;
+    margin-block: auto;
+    height: fit-content;
+    pointer-events: none;
+
+    > .legends-keys {
+        padding: .2rem .4rem;
+        border-radius: .2rem;
+        background-color: rgb(var(--clr-surface-75));
+        font-size: .6rem;
+    }
+}
+
+.todo-item:has([contenteditable]) {
+    .todo-edit-legends {
+        display: initial;
+    }
+
+    .todo-button-container {
+        opacity: .25;
+        pointer-events: none;
+    }
+}
+
+.todo-status {
+    display: none;
+    position: absolute;
+    inset-block-start: .4rem;
+    inset-inline-end: .4rem;
+    color: rgb(var(--clr-warn));
+
+    > .icons {
+        width: 1rem;
+    }
+}
+
+.todo-button-container {
+    margin-inline-start: auto;
+
+    button {
+        padding: .4rem;
+        border: 0;
+        border-radius: .4rem;
+        background-color: rgb(var(--clr-surface-75));
+        transition: .15s;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgb(var(--clr-theme)) !important;
+            color: rgb(var(--clr-tint-100));
+        }
+
+        > .icons {
+            width: .8rem;
+        }
+    }
+}
+
+/* _mainPage.scss */
