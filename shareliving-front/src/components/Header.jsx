@@ -7,15 +7,12 @@ const Header = () => {
         <header id="headPrimary">
             <div className="header-nav-area">
                 <h1 id="logoMain">
-                    <img src="" alt="나누리빙 로고" />
+                    <img src="/img/MainLogo.png" alt="나누리빙 로고" />
                 </h1>
                 <nav id="navPrimary">
                     <ul className="nav-list fullscreen">
                         <li className="nav-item">
                             <Link to="/login">Login</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/signup">Signup</Link>
                         </li>
                     </ul>
                 </nav>

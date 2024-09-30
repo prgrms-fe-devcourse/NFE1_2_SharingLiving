@@ -12,8 +12,11 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
+                <Route path="/auth/kakao/callback" element={<Login />} />
+                <Route path="/Signup" element={<Signup />} />
+                {/* 다른 라우트들을 여기에 추가하세요 */}
             </Routes>
+
         </>
     );
 }

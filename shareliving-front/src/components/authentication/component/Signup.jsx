@@ -10,6 +10,7 @@ const SignUp = () => {
     email: "",
     fullName: "",
     password: "",
+    passwordConfirm: "",
     phoneNumber: "",
     nickname: "",
   });
@@ -21,6 +22,7 @@ const SignUp = () => {
     marketing: false,
   });
 
+  const [isAllChecked, setIsAllChecked] = useState(false);
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -32,6 +34,30 @@ const SignUp = () => {
   const handleTermsChange = (e) => {
     const { name, checked } = e.target;
     setTerms((prevTerms) => ({ ...prevTerms, [name]: checked }));
+
+    // If any individual checkbox is unchecked, uncheck the "전체 동의" box
+    if (!checked) {
+      setIsAllChecked(false);
+    } else {
+      // Check if all checkboxes are now checked to mark "전체 동의" as true
+      const allChecked = Object.values({ ...terms, [name]: checked }).every(
+        (value) => value
+      );
+      setIsAllChecked(allChecked);
+    }
+  };
+
+  const handleAllCheck = () => {
+    const newCheckState = !isAllChecked;
+    setIsAllChecked(newCheckState);
+
+    // Set all terms checkboxes to the state of "전체 동의"
+    setTerms({
+      age: newCheckState,
+      service: newCheckState,
+      privacy: newCheckState,
+      marketing: newCheckState,
+    });
   };
 
   const validateForm = () => {
@@ -48,7 +74,7 @@ const SignUp = () => {
 
   const registerUser = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
 
     setIsLoading(true);
@@ -57,7 +83,7 @@ const SignUp = () => {
     const { email, fullName, password, ...additionalFields } = formData;
     const customFieldsJson = JSON.stringify({
       ...additionalFields,
-      terms: terms
+      terms: terms,
     });
 
     try {
@@ -65,7 +91,7 @@ const SignUp = () => {
         email,
         fullName,
         password,
-        customFields: customFieldsJson
+        customFields: customFieldsJson,
       };
 
       console.log("Sending registration data:", signupData);
@@ -140,6 +166,16 @@ const SignUp = () => {
         />
 
         <div className="terms-container">
+          <div className="all-terms">
+            <input
+              type="checkbox"
+              id="all"
+              name="all"
+              checked={isAllChecked}
+              onChange={handleAllCheck}
+            />
+            <label htmlFor="all">전체 동의</label>
+          </div>
           {Object.entries(terms).map(([key, value]) => (
             <div key={key}>
               <input
@@ -165,6 +201,7 @@ const SignUp = () => {
         </button>
       </form>
       {message && <p className="error-message">{message}</p>}
+      
     </div>
   );
 };

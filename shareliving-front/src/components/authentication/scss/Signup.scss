@@ -43,6 +43,25 @@
       border-top: 1px solid #ccc;
       padding-top: 15px;
 
+      .all-terms {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+
+        label {
+          font-size: 14px;
+          color: #333;
+          cursor: pointer;
+        }
+
+        input[type='checkbox'] {
+          width: 16px;
+          height: 16px;
+          margin-right: 10px;
+        }
+      }
+
       div {
         display: flex;
         align-items: center;

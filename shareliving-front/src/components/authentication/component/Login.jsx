@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { login, logout, getAuthUser } from "../utils/service/apiUtil";
+import { useNavigate, useLocation, Link } from "react-router-dom";
+import axios from "axios";
+import { login, getAuthUser } from "../utils/service/apiUtil";
 import "../scss/Login.scss";
-import "../utils/service/KakaoLogin";
+
+const KAKAO_CLIENT_ID = import.meta.env.VITE_APP_KAKAO_CLIENT_ID;
+const KAKAO_REDIRECT_URI = import.meta.env.VITE_APP_KAKAO_REDIRECT_URI;
+const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${encodeURIComponent(KAKAO_REDIRECT_URI)}&response_type=code`;
+
+const API_BASE_URL = "https://kdt.frontend.5th.programmers.co.kr:5003";
 
 const Login = () => {
   const navigate = useNavigate();
-
+  const location = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -16,7 +22,12 @@ const Login = () => {
 
   useEffect(() => {
     checkAuthStatus();
-  }, []);
+    const code = new URLSearchParams(location.search).get("code");
+    if (code) {
+      console.log("Kakao auth code detected:", code);
+      handleKakaoCallback(code);
+    }
+  }, [location]);
 
   const checkAuthStatus = async () => {
     try {
@@ -24,14 +35,9 @@ const Login = () => {
       if (userData && userData.fullName) {
         setIsLoggedIn(true);
         setFullName(userData.fullName);
-      } else {
-        setIsLoggedIn(false);
-        setFullName("");
       }
     } catch (error) {
       console.error("Auth check error:", error);
-      setIsLoggedIn(false);
-      setFullName("");
     }
   };
 
@@ -45,17 +51,44 @@ const Login = () => {
 
     try {
       const response = await login(email, password);
-      if (response && response.user) {
-        setIsLoggedIn(true);
-        setFullName(response.user.fullName);
-        navigate("/posts");
-      } else {
-        throw new Error("로그인 응답에 사용자 정보가 없습니다.");
-      }
+      setIsLoggedIn(true);
+      setFullName(response.user.fullName);
+      navigate("/");
     } catch (error) {
       console.error("Login error:", error);
       setMessage(error.response?.data?.message || "로그인에 실패했습니다. 다시 시도해주세요.");
-      setIsLoggedIn(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleKakaoLogin = () => {
+    console.log("Initiating Kakao login, redirecting to:", KAKAO_AUTH_URL);
+    window.location.href = KAKAO_AUTH_URL;
+  };
+
+  const handleKakaoCallback = async (code) => {
+    setIsLoading(true);
+    try {
+      console.log("Received Kakao auth code:", code);
+
+      // 서버에 카카오 인증 코드를 보내 처리
+      const response = await axios.post(`${API_BASE_URL}/auth/kakao/callback`, { code });
+
+      console.log("Server login response:", response.data);
+
+      if (response.data && response.data.token) {
+        localStorage.setItem("Token", response.data.token);
+        setIsLoggedIn(true);
+        setFullName(response.data.user.fullName);
+        navigate("/");
+      } else {
+        throw new Error("Login response does not contain a token");
+      }
+    } catch (error) {
+      console.error("Kakao login error:", error);
+      console.error("Error details:", error.response?.data);
+      setMessage("카카오 로그인에 실패했습니다. 다시 시도해주세요.");
     } finally {
       setIsLoading(false);
     }
@@ -64,7 +97,11 @@ const Login = () => {
   const handleLogout = async () => {
     setIsLoading(true);
     try {
-      await logout();
+      // 로그아웃 API 호출
+      await axios.post(`${API_BASE_URL}/logout`, {}, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` }
+      });
+      localStorage.removeItem("Token");
       setIsLoggedIn(false);
       setFullName("");
       setMessage("로그아웃 되었습니다.");
@@ -76,10 +113,21 @@ const Login = () => {
     }
   };
 
+  // 다른 소셜 로그인
+  const handleGoogleLogin = () => {
+    console.log("Google login not implemented yet");
+    // 구글 로그인 로직 구현
+  };
+
+  const handleNaverLogin = () => {
+    console.log("Naver login not implemented yet");
+    // 네이버 로그인 로직 구현
+  };
+
   if (isLoggedIn) {
     return (
       <div className="login-container">
-        <h2>환영합니다, {fullName}님!</h2>
+        <h2>나누리빙에 방문해주셔서 감사합니다.</h2>
         <button onClick={handleLogout} disabled={isLoading}>
           {isLoading ? "처리 중..." : "로그아웃"}
         </button>
@@ -92,7 +140,7 @@ const Login = () => {
     <div className="login-container">
       <main className="login-content">
         <div className="login-form-container">
-          <img src="path/to/logo.png" alt="Namu Living" className="form-logo" />
+          <img src="/img/MainLogo.png" alt="" className="form-logo" />
           <form className="login-form" onSubmit={handleLogin}>
             <input
               type="email"
@@ -115,13 +163,18 @@ const Login = () => {
           {message && <p className="error-message">{message}</p>}
           <div className="login-links">
             <a href="#find-info">아이디/비밀번호 찾기</a>
-            <a href="#signup">회원가입</a>
+            <Link to="/signup">회원가입</Link>
           </div>
           <div className="social-login">
-            <i className="icon-apple"><button onClick={handleLogin}>카카오 로그인</button></i>
-            <i className="icon-google"></i>
-            <i className="icon-facebook"></i>
-            <i className="icon-twitter"></i>
+            <button onClick={handleKakaoLogin} className="kakao-login-button">
+              <img src="/img/kakao.png" alt="Kakao" className="kakao-icon" />
+            </button>
+            <button onClick={handleGoogleLogin} className="google-login-button">
+              <img src="/img/google.png" alt="Google" className="google-icon" />
+            </button>
+            <button onClick={handleNaverLogin} className="naver-login-button">
+              <img src="/img/naver.png" alt="Naver" className="naver-icon" />
+            </button>
           </div>
         </div>
       </main>
