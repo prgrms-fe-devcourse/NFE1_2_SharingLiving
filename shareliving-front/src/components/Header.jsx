@@ -35,7 +35,7 @@ const Header = () => {
                             <li className="nav-item" onClick={ openModal }>나눔하기</li>
 
                             <li className="nav-item">
-                                <Link to="/">마이 페이지</Link>
+                                <Link to="/mypage">마이 페이지</Link>
                             </li>
                         </ul>
                     </nav>

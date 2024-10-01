@@ -53,7 +53,7 @@ const MessageList = ({ receivedMessages, sentMessages }) => {
             {sentMessages.map((message) => (
               <li key={message.id}>
                 <Link to={`/messages/${message.id}`}>
-                  {message.subject} (받는 사람: 현재 사용자)
+                  {message.subject} (받는 사람: {message.recipient})
                 </Link>
               </li>
             ))}
