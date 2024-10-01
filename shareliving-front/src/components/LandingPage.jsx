@@ -2,6 +2,14 @@ import Layout from './layouts/Layout';
 import CardProducts from './items/CardProducts';
 
 const LandingPage = () => {
+  const getTotalSaved = async () => {
+    const response = await fetch('url', {})
+      .then()
+      .finally();
+
+    return response;
+  }
+
   return (
     <>
       <Layout>
