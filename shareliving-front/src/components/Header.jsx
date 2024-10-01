@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isMobileNavOn, setNavStatus] = useState(false);
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
@@ -27,13 +28,21 @@ const Header = () => {
                                 <Link to="/">제품 나눔</Link>
                             </li>
 
-                            <li className="nav-item">지식 나눔</li>
+                            <li className="nav-item">
+                                <Link to="/">지식 나눔</Link>
+                            </li>
 
                             <li className="nav-item" onClick={ openModal }>나눔하기</li>
 
-                            <li className="nav-item need-auth">마이 페이지</li>
+                            <li className="nav-item">
+                                <Link to="/">마이 페이지</Link>
+                            </li>
                         </ul>
                     </nav>
+                </div>
+
+                <div className="mobile-burger">
+                    버거 버튼
                 </div>
 
                 <UserControlls /> { /** 로그인 상태에 따라 변경되어야 함 */ }

@@ -5,6 +5,13 @@ const ProductDetail = () => {
   const location = useLocation();
   const { product } = location.state; // 상태에서 제품 정보 가져오기
 
+  const getProdDetail = async (dataIndex) => { // 제품 정보 가지고 오기
+    const response = await fetch('url', {})
+      .then()
+
+    return response;
+  }
+
   return (
     <div>
       <h1>제품 나눔 상세 페이지</h1>

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*! modern-normalize v1.1.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
 /*
 Document
@@ -622,8 +623,14 @@ a:hover, a:focus, a:active {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  inset-block-start: 0;
   padding-inline: 0.8rem;
   height: 3.6rem;
+  background-color: rgb(var(--clr-background)/0.75);
+  -webkit-backdrop-filter: blur(0.8rem);
+          backdrop-filter: blur(0.8rem);
+  z-index: 50000;
 }
 
 .header-nav-area {
@@ -719,6 +726,32 @@ a:hover, a:focus, a:active {
   width: 1rem;
 }
 
+/* 모바일 반응형 */
+.mobile-burger {
+  display: none;
+}
+
+/* 하단 네비 바 */
+#navMobile {
+  display: none;
+  position: sticky;
+  inset-block-end: 0;
+}
+
+/* 미디어 쿼리 */
+@media screen and (max-width: 42rem) {
+  #navPrimary {
+    display: none;
+  }
+  .mobile-burger {
+    display: initial;
+  }
+}
+@media screen and (max-width: 24rem) {
+  #navMobile {
+    display: initial;
+  }
+}
 /* _headers.scss */
 /* _mainPage.scss */
 #contentView {

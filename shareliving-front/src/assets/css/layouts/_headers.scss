@@ -5,8 +5,13 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    inset-block-start: 0;
     padding-inline: .8rem;
     height: 3.6rem;
+    background-color: rgb(var(--clr-background) / .75);
+    backdrop-filter: blur(.8rem);
+    z-index: 50000;
 }
 
 .header-nav-area {
@@ -110,12 +115,40 @@
     }
 }
 
-@media screen and (max-width: 42rem) { // 태블릿 (840px) - 네비게이션 축소 및 버거 버튼 표시
+/* 모바일 반응형 */
 
+.mobile-burger {
+    display: none;
+}
+
+/* 하단 네비 바 */
+
+#navMobile {
+    display: none;
+    position: sticky;
+    inset-block-end: 0;
+}
+
+/* 미디어 쿼리 */
+
+@media screen and (max-width: 42rem) { // 태블릿 (840px) - 네비게이션 축소 및 버거 버튼 표시
+    #navPrimary {
+        display: none;
+    }
+
+    .mobile-burger {
+        display: initial;
+    }
 }
 
 @media screen and (max-width: 24rem) { // 모바일 (480px) - 상단 네비게이션 완전 축소, 하단 네비게이션 표시
+    #headPrimary {
 
+    }
+
+    #navMobile {
+        display: initial;
+    }
 }
 
 /* _headers.scss */
