@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://kdt.frontend.5th.programmers.co.kr:5003';
+const BASE_URL = 'http://localhost:5173';
 
 const api = axios.create({
   baseURL: BASE_URL,

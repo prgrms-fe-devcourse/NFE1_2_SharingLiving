@@ -20,7 +20,7 @@ const FindAccountInfo = () => {
     e.preventDefault();
     try {
       
-      const response = await axios.post('https://kdt.frontend.5th.programmers.co.kr:5003/users', { phoneNumber });
+      const response = await axios.post('https://kdt.frontend.5th.programmers.co.kr:5003//settings/update-user', { username });
       setMessage(`찾은 아이디: ${response.data.id}`);
     } catch (error) {
       setMessage('아이디를 찾을 수 없습니다.');

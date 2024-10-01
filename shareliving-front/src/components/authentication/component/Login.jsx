@@ -16,7 +16,7 @@ const NAVER_CLIENT_ID = import.meta.env.VITE_APP_NAVER_CLIENT_ID;
 const NAVER_REDIRECT_URI = import.meta.env.VITE_APP_NAVER_REDIRECT_URI;
 const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&redirect_uri=${encodeURIComponent(NAVER_REDIRECT_URI)}&state=${Math.random().toString(36).substr(2, 11)}`;
 
-const API_BASE_URL = "https://kdt.frontend.5th.programmers.co.kr:5003";
+const API_BASE_URL = "http://localhost:5173";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -75,7 +75,7 @@ const Login = () => {
       setIsLoading(false);
     }
   };
-
+  //카카오
   const handleKakaoLogin = () => {
     console.log("Initiating Kakao login, redirecting to:", KAKAO_AUTH_URL);
     window.location.href = KAKAO_AUTH_URL;
@@ -106,7 +106,7 @@ const Login = () => {
       setIsLoading(false);
     }
   };
-
+  //네이버
   const handleNaverLogin = () => {
     console.log("Initiating Naver login, redirecting to:", NAVER_AUTH_URL);
     window.location.href = NAVER_AUTH_URL;
@@ -155,7 +155,8 @@ const Login = () => {
       setIsLoading(false);
     }
   };
-
+  
+  //구글
   const handleGoogleLogin = () => {
     console.log("Google login not implemented yet");
   };

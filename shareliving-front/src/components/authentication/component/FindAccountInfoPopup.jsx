@@ -11,16 +11,14 @@ const FindAccountInfo = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
   const [message, setMessage] = useState('');
-  const [isVerified, setIsVerified] = useState(false);
+  const [isCodeSent, setIsCodeSent] = useState(false);
 
   const handleModeChange = (newMode) => {
     setMode(newMode);
     setMessage('');
-    setIsVerified(false);
-    setFullName('');
-    setEmail('');
-    setPassword('');
+    setIsCodeSent(false);
   };
 
   const handleFindId = async (e) => {
@@ -37,30 +35,29 @@ const FindAccountInfo = () => {
     }
   };
 
-  const handleVerifyUser = async (e) => {
+  const handleSendVerificationCode = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get(`${API_BASE_URL}/search/users/${fullName}`);
-      if (response.data.length > 0 && response.data[0].email === email) {
-        setIsVerified(true);
-        setMessage('사용자 확인이 완료되었습니다. 새 비밀번호를 입력해주세요.');
-      } else {
-        setMessage('이름과 이메일이 일치하지 않습니다.');
-      }
+      
+      await axios.post(`${API_BASE_URL}/send-verification-code`, { email });
+      setIsCodeSent(true);
+      setMessage('인증 코드가 이메일로 전송되었습니다.');
     } catch (error) {
-      setMessage('사용자 확인에 실패했습니다.');
+      setMessage('인증 코드 전송에 실패했습니다.');
     }
   };
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
     try {
+      
       await axios.put(`${API_BASE_URL}/settings/update-password`, { 
-        email,
-        password
+        email, 
+        verificationCode, 
+        newPassword: password 
       });
       setMessage('비밀번호가 성공적으로 변경되었습니다.');
-      setIsVerified(false);
+      setIsCodeSent(false);
     } catch (error) {
       setMessage('비밀번호 변경에 실패했습니다.');
     }
@@ -86,34 +83,34 @@ const FindAccountInfo = () => {
           <button type="submit">아이디 찾기</button>
         </form>
       ) : (
-        <form onSubmit={isVerified ? handleResetPassword : handleVerifyUser}>
-          <input
-            type="text"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            placeholder="이름을 입력하세요"
-            required
-            disabled={isVerified}
-          />
+        <form onSubmit={isCodeSent ? handleResetPassword : handleSendVerificationCode}>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="이메일을 입력하세요"
             required
-            disabled={isVerified}
           />
-          {isVerified && (
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="새 비밀번호를 입력하세요"
-              required
-            />
+          {isCodeSent && (
+            <>
+              <input
+                type="text"
+                value={verificationCode}
+                onChange={(e) => setVerificationCode(e.target.value)}
+                placeholder="인증 코드를 입력하세요"
+                required
+              />
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="새 비밀번호를 입력하세요"
+                required
+              />
+            </>
           )}
           <button type="submit">
-            {isVerified ? '비밀번호 변경' : '사용자 확인'}
+            {isCodeSent ? '비밀번호 변경' : '인증 코드 받기'}
           </button>
         </form>
       )}
