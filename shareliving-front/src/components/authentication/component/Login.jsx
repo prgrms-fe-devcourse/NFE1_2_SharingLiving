@@ -3,6 +3,10 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import axios from "axios";
 import { login, getAuthUser } from "../utils/service/apiUtil";
 import "../scss/Login.scss";
+import kakao from "../../../public/img/kakao.png"
+import Google from "../../../public/img/Google.png"
+import MainLogo from "../../../public/img/MainLogo.png"
+import naver from "../../../public/img/naver.png"
 
 const KAKAO_CLIENT_ID = import.meta.env.VITE_APP_KAKAO_CLIENT_ID;
 const KAKAO_REDIRECT_URI = import.meta.env.VITE_APP_KAKAO_REDIRECT_URI;
@@ -29,6 +33,12 @@ const Login = () => {
     }
   }, [location]);
 
+
+
+
+
+  
+
   const checkAuthStatus = async () => {
     try {
       const userData = await getAuthUser();
@@ -40,6 +50,7 @@ const Login = () => {
       console.error("Auth check error:", error);
     }
   };
+  
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -72,7 +83,6 @@ const Login = () => {
     try {
       console.log("Received Kakao auth code:", code);
 
-      // 서버에 카카오 인증 코드를 보내 처리
       const response = await axios.post(`${API_BASE_URL}/auth/kakao/callback`, { code });
 
       console.log("Server login response:", response.data);
@@ -97,7 +107,6 @@ const Login = () => {
   const handleLogout = async () => {
     setIsLoading(true);
     try {
-      // 로그아웃 API 호출
       await axios.post(`${API_BASE_URL}/logout`, {}, {
         headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` }
       });
@@ -113,15 +122,12 @@ const Login = () => {
     }
   };
 
-  // 다른 소셜 로그인
   const handleGoogleLogin = () => {
     console.log("Google login not implemented yet");
-    // 구글 로그인 로직 구현
   };
 
   const handleNaverLogin = () => {
     console.log("Naver login not implemented yet");
-    // 네이버 로그인 로직 구현
   };
 
   if (isLoggedIn) {
@@ -140,7 +146,7 @@ const Login = () => {
     <div className="login-container">
       <main className="login-content">
         <div className="login-form-container">
-          <img src="/img/MainLogo.png" alt="" className="form-logo" />
+          <img src={MainLogo} alt="" className="form-logo" />
           <form className="login-form" onSubmit={handleLogin}>
             <input
               type="email"
@@ -162,19 +168,19 @@ const Login = () => {
           </form>
           {message && <p className="error-message">{message}</p>}
           <div className="login-links">
-            <a href="#find-info">아이디/비밀번호 찾기</a>
+            <Link to="/find-account-info">아이디/비밀번호 찾기</Link>
             <Link to="/signup">회원가입</Link>
           </div>
           <div className="social-login">
-            <button onClick={handleKakaoLogin} className="kakao-login-button">
-              <img src="/img/kakao.png" alt="Kakao" className="kakao-icon" />
-            </button>
-            <button onClick={handleGoogleLogin} className="google-login-button">
-              <img src="/img/google.png" alt="Google" className="google-icon" />
-            </button>
-            <button onClick={handleNaverLogin} className="naver-login-button">
-              <img src="/img/naver.png" alt="Naver" className="naver-icon" />
-            </button>
+            <a onClick={handleKakaoLogin} className="kakao-login-button">
+              <img src={kakao} alt="Kakao" className="kakao-icon" />
+            </a>
+            <a onClick={handleGoogleLogin} className="google-login-button">
+              <img src={Google} alt="Google" className="google-icon" />
+            </a>
+            <a onClick={handleNaverLogin} className="naver-login-button">
+              <img src={naver} alt="Naver" className="naver-icon" />
+            </a>
           </div>
         </div>
       </main>
