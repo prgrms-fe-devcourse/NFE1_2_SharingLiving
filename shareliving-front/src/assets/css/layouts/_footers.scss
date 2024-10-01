@@ -1,0 +1,39 @@
+/* _footers.scss */
+
+#footPrimary { // 메인 푸터
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    border-block-start: 1px solid rgb(var(--clr-text) / .15);
+}
+
+.footer-upper-area {
+    padding-block: 1.6rem;
+}
+
+.footer-social-links {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.footer-lower-area {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: .6rem;
+    padding-block: .8rem;
+}
+
+.footer-logo {
+    width: 6rem;
+    height: 2.7rem;
+    object-fit: contain;
+}
+
+.footer-copyright {
+    font-size: var(--fnt-sm);
+    font-weight: 100;
+}
+
+/* _footers.scss */

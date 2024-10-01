@@ -1,0 +1,41 @@
+/* _buttons.scss */
+
+button {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    outline: 0;
+    cursor: pointer;
+}
+
+#btnSideLogin { // 공통 요소 적용 안된 임시 로그인 버튼
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .4rem;
+    width: 100%;
+    height: 3.6rem;
+    border-radius: .8rem;
+    background-color: rgb(var(--clr-theme)); // 임시
+    color: rgb(var(--clr-min));
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+
+#btnTotalSearch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1.6rem;
+    aspect-ratio: 1 / 1;
+    border: 1px solid rgb(var(--clr-theme) / .5);
+    border-radius: .2rem;
+    background-color: rgb(var(--clr-theme));
+    color: rgb(var(--clr-text-on-tint));
+
+    > .icons {
+        width: .8rem;
+    }
+}
+
+/* _buttons.scss */

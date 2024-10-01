@@ -1,0 +1,74 @@
+/* _MainSideBar.scss */
+
+#sideBarMain { // 메인 사이드바
+    display: flex;
+    flex-flow: column nowrap;
+    gap: .6rem;
+    width: 16rem;
+}
+
+#sideBanner { // 사이드바 이용 안내 배너
+    height: 6rem;
+}
+
+#sideNews { // 사이드바 최신 공지사항
+
+}
+
+.sidebar-news-title {
+    display: flex;
+    align-items: center;
+    padding: .8rem;
+    font-weight: 900;
+
+    > .icons {
+        width: .8rem;
+    }
+}
+
+.sidebar-news-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: .6rem;
+    padding-inline: .8rem;
+    padding-block-end: .8rem;
+}
+
+.sidebar-news-item {
+    padding: .8rem;
+    aspect-ratio: 1 / 1;
+    border: 1px solid rgb(var(--clr-text) / .15);
+    border-radius: .4rem;
+
+    &:nth-child(3n + 1) {
+        background-color: rgb(var(--clr-tint-50));
+        color: rgb(var(--clr-text-on-tint));
+    }
+
+    > a {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+        height: 100%;
+    }
+
+    .icons {
+        margin-inline-start: auto;
+    }
+}
+
+@media screen and (max-width: 70rem) { // 1400px부터 사이드바 숨김 처리, 버튼 클릭시 사이드에서 나오도록 표시
+    #sideBarMain {
+        display: none;
+        position: fixed;
+        inset-block: 0;
+        inset-inline-end: 0;
+        margin-inline-start: auto;
+
+        &.open {
+            display: initial;
+        }
+    }
+}
+
+/* _MainSideBar.scss */
