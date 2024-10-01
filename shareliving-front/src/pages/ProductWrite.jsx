@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './product.scss';
 import { useNavigate } from 'react-router-dom';
-import ImageUploader from '../components/ImageUploader';
+import ImageUploader from '../components/ImageUploader'; // 이미지 업로더 컴포넌트
+import axios from 'axios';
 
 const ProductWrite = () => {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ const ProductWrite = () => {
   const [pickupCompany, setPickupCompany] = useState(''); 
   const [pickupCost, setPickupCost] = useState(''); 
   const [description, setDescription] = useState('');
+  const [images, setImages] = useState([]); 
 
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
@@ -64,23 +66,47 @@ const ProductWrite = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); 
-    console.log('글 제목:', title);
-    console.log('나눔 분류:', category);
-    console.log('제품 카테고리:', category2);
-    console.log('Tree 값:', tree);
-    console.log('지역:', region);
-    console.log('수거 방법:', collection);
-    console.log('수거 업체:', pickupCompany);
-    console.log('수거 비용:', pickupCost);
-    console.log('소개글:', description);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('title', JSON.stringify({
+      title,
+      category,
+      category2,
+      tree,
+      region,
+      collection,
+      pickupCompany,
+      pickupCost,
+      description,
+    }));
+
+    if (images) {
+      formData.append('image', images[0]);
+    } else {
+      formData.append('image', null);
+    }
+
+    formData.append('channelId', '66fb6b7fa43c32148e509529');
+    
+    try {
+      const response = await axios.post('https://kdt.frontend.5th.programmers.co.kr:5003/posts/create', formData, {
+        headers: {
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY0ZWRiYTNmOTQzNTU4MTFmZWNkYzg0MyIsImVtYWlsIjoiYWRtaW5AcHJvZ3JhbW1lcnMuY28ua3IifSwiaWF0IjoxNzI3Nzk4MDY3fQ.1xNOBXJzCCDt9Ov_KnFYq5_yQ66vkn8au-ZNoN1thhU'
+        },
+      });
+      console.log(response.data);
+      // navigate('/');
+    } catch (error) {
+      console.error('데이터 전송 중 오류 발생:', error);
+    }
   };
 
   return (
     <div className="knowledge-wrapper">
       <h1 className="title">나눔제품 등록 페이지</h1>
-      <ImageUploader />
+      <ImageUploader images={images} setImages={setImages} />
       <form className="knowledge-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="input-title" className="form-label">글 제목</label>
