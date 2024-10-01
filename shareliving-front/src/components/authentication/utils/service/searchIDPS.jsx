@@ -19,7 +19,7 @@ const FindAccountInfo = () => {
   const handleFindId = async (e) => {
     e.preventDefault();
     try {
-      // 실제 API 엔드포인트로 변경 필요
+      
       const response = await axios.post('https://kdt.frontend.5th.programmers.co.kr:5003/users', { phoneNumber });
       setMessage(`찾은 아이디: ${response.data.id}`);
     } catch (error) {
@@ -30,7 +30,7 @@ const FindAccountInfo = () => {
   const handleSendVerificationCode = async (e) => {
     e.preventDefault();
     try {
-      // 실제 API 엔드포인트로 변경 필요
+      
       await axios.post('https://kdt.frontend.5th.programmers.co.kr:5003/send-verification', { email });
       setIsCodeSent(true);
       setMessage('인증 코드가 이메일로 전송되었습니다.');
@@ -42,7 +42,7 @@ const FindAccountInfo = () => {
   const handleResetPassword = async (e) => {
     e.preventDefault();
     try {
-      // 실제 API 엔드포인트로 변경 필요
+     
       await axios.post('https://kdt.frontend.5th.programmers.co.kr:5003/update-password', {
         email,
         verificationCode,

@@ -12,6 +12,10 @@ const KAKAO_CLIENT_ID = import.meta.env.VITE_APP_KAKAO_CLIENT_ID;
 const KAKAO_REDIRECT_URI = import.meta.env.VITE_APP_KAKAO_REDIRECT_URI;
 const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${encodeURIComponent(KAKAO_REDIRECT_URI)}&response_type=code`;
 
+const NAVER_CLIENT_ID = import.meta.env.VITE_APP_NAVER_CLIENT_ID;
+const NAVER_REDIRECT_URI = import.meta.env.VITE_APP_NAVER_REDIRECT_URI;
+const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&redirect_uri=${encodeURIComponent(NAVER_REDIRECT_URI)}&state=${Math.random().toString(36).substr(2, 11)}`;
+
 const API_BASE_URL = "https://kdt.frontend.5th.programmers.co.kr:5003";
 
 const Login = () => {
@@ -27,17 +31,17 @@ const Login = () => {
   useEffect(() => {
     checkAuthStatus();
     const code = new URLSearchParams(location.search).get("code");
+    const state = new URLSearchParams(location.search).get("state");
     if (code) {
-      console.log("Kakao auth code detected:", code);
-      handleKakaoCallback(code);
+      if (state) {
+        console.log("Naver auth code detected:", code);
+        handleNaverCallback(code);
+      } else {
+        console.log("Kakao auth code detected:", code);
+        handleKakaoCallback(code);
+      }
     }
   }, [location]);
-
-
-
-
-
-  
 
   const checkAuthStatus = async () => {
     try {
@@ -50,7 +54,6 @@ const Login = () => {
       console.error("Auth check error:", error);
     }
   };
-  
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -104,6 +107,37 @@ const Login = () => {
     }
   };
 
+  const handleNaverLogin = () => {
+    console.log("Initiating Naver login, redirecting to:", NAVER_AUTH_URL);
+    window.location.href = NAVER_AUTH_URL;
+  };
+
+  const handleNaverCallback = async (code) => {
+    setIsLoading(true);
+    try {
+      console.log("Received Naver auth code:", code);
+
+      const response = await axios.post(`${API_BASE_URL}/auth/naver/callback`, { code });
+
+      console.log("Server login response:", response.data);
+
+      if (response.data && response.data.token) {
+        localStorage.setItem("Token", response.data.token);
+        setIsLoggedIn(true);
+        setFullName(response.data.user.fullName);
+        navigate("/");
+      } else {
+        throw new Error("Login response does not contain a token");
+      }
+    } catch (error) {
+      console.error("Naver login error:", error);
+      console.error("Error details:", error.response?.data);
+      setMessage("네이버 로그인에 실패했습니다. 다시 시도해주세요.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleLogout = async () => {
     setIsLoading(true);
     try {
@@ -124,10 +158,6 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     console.log("Google login not implemented yet");
-  };
-
-  const handleNaverLogin = () => {
-    console.log("Naver login not implemented yet");
   };
 
   if (isLoggedIn) {
