@@ -1,17 +1,19 @@
 // pages/ReplyMessage.jsx
 import React, { useState } from 'react';
+import { useAppContext } from '../context/AppContext'; // Context import
 import { useParams, useNavigate } from 'react-router-dom';
 import './ReplyMessage.scss'; // SCSS 파일 import
 
-const ReplyMessage = ({ onSendReply }) => {
+const ReplyMessage = () => {
   const { messageId } = useParams();
-  const navigate = useNavigate();
+  const { handleSendReply, currentUser } = useAppContext(); // currentUser 가져오기
   const [replyContent, setReplyContent] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // 메시지 전송 로직 구현
-    onSendReply(messageId, replyContent); // 답장 전송
+    handleSendReply(messageId, replyContent); // 답장 전송
     console.log('답장 메시지가 전송되었습니다.');
 
     // 메시지함으로 리디렉션
@@ -40,6 +42,7 @@ const ReplyMessage = ({ onSendReply }) => {
           답장 전송
         </button>
       </form>
+      <p>보내는 사람: {currentUser.name}</p> {/* 현재 사용자 이름 표시 */}
     </div>
   );
 };

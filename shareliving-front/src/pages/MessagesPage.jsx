@@ -1,8 +1,11 @@
 // pages/MessagesPage.jsx
 import React from 'react';
+import { useAppContext } from '../context/AppContext'; // Context import
 import MessageList from '../components/MessageList';
 
-const MessagesPage = ({ receivedMessages, sentMessages }) => {
+const MessagesPage = () => {
+  const { receivedMessages, sentMessages } = useAppContext();
+
   return (
     <div>
       <h1>메시지함</h1>
@@ -10,7 +13,6 @@ const MessagesPage = ({ receivedMessages, sentMessages }) => {
         receivedMessages={receivedMessages}
         sentMessages={sentMessages}
       />
-      {/* 메시지 상세 내용 컴포넌트는 라우팅에 의해 표시됩니다. */}
     </div>
   );
 };

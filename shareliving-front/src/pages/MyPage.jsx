@@ -1,13 +1,26 @@
 // pages/MyPage.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAppContext } from '../context/AppContext';
 import { Link } from 'react-router-dom';
 import './MyPage.scss';
 
 const MyPage = () => {
+  const { setHideSidebar } = useAppContext();
+
   const userInfo = {
     nickname: '현재 닉네임',
     stamps: 5, // 예시: 나무 스탬프 개수
   };
+
+  useEffect(() => {
+    // 페이지가 렌더링될 때 Sidebar 숨김
+    setHideSidebar(true);
+
+    // 페이지가 언마운트되면(이탈할 때) Sidebar 기본값으로 되돌림
+    return () => {
+      setHideSidebar(false);
+    };
+  }, [setHideSidebar]);
 
   return (
     <div className="mypage">

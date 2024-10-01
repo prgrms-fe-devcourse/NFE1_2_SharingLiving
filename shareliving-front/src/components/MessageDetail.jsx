@@ -1,13 +1,15 @@
-// components/MessageDetail.jsx
+// src/components/MessageDetail.jsx
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { useAppContext } from '../context/AppContext'; // Context import
 import './MessageDetail.scss'; // SCSS 파일 import
 
-const MessageDetail = ({ messages, sentMessages }) => {
+const MessageDetail = () => {
+  const { receivedMessages, sentMessages } = useAppContext(); // Context에서 메시지 가져오기
   const { messageId } = useParams();
 
   // 메시지가 보낸 메시지 리스트에 있는지, 받은 메시지 리스트에 있는지 구분
-  const messageIndex = messages.findIndex(
+  const messageIndex = receivedMessages.findIndex(
     (msg) => msg.id === Number(messageId)
   );
   const sentMessageIndex = sentMessages.findIndex(
@@ -20,15 +22,15 @@ const MessageDetail = ({ messages, sentMessages }) => {
   // 현재 메시지 구하기 (보낸 메시지 or 받은 메시지)
   const currentMessage = isSentMessage
     ? sentMessages[sentMessageIndex]
-    : messages[messageIndex];
+    : receivedMessages[messageIndex];
 
   // 이전, 다음 메시지 구하기 (각각 리스트 내에서만)
   const previousMessage = isSentMessage
     ? sentMessages[sentMessageIndex - 1] || null
-    : messages[messageIndex - 1] || null;
+    : receivedMessages[messageIndex - 1] || null;
   const nextMessage = isSentMessage
     ? sentMessages[sentMessageIndex + 1] || null
-    : messages[messageIndex + 1] || null;
+    : receivedMessages[messageIndex + 1] || null;
 
   return (
     <div className="message-detail">
