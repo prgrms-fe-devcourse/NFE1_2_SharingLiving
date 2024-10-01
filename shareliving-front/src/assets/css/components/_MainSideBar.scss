@@ -57,7 +57,7 @@
     }
 }
 
-@media screen and (max-width: 70rem) { // 1400px부터 사이드바 숨김 처리, 버튼 클릭시 사이드에서 나오도록 표시
+@media screen and (max-width: 1400px) { // 1400px부터 사이드바 숨김 처리, 버튼 클릭시 사이드에서 나오도록 표시
     #sideBarMain {
         display: none;
         position: fixed;

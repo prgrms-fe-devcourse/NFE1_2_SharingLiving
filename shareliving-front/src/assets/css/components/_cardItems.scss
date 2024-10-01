@@ -220,9 +220,34 @@
     }
 }
 
+/* 지식 나눔 글 모바일 미디어 쿼리 */
+
+@media screen and (max-width: 840px) { // 태블릿 (840px) - 이미지 사이즈 축소
+    .card-item.knowledge {
+        > .card-image-container {
+            width: auto;
+            height: 100%;
+            aspect-ratio: .6 / 1;
+        }
+    }
+}
+
+@media screen and (max-width: 540px) { // 모바일 (640px) - 이미지 축소 및 글 영역 확대
+    .card-item.knowledge {
+        > .card-image-container {
+            margin: .4rem;
+            height: 5rem;
+            aspect-ratio: 1 / 1;
+            border-radius: .4rem;
+            overflow: hidden;
+        }
+    }
+}
+
 /* 나눔 후기 글 아이템 */
 
 .review-item {
+    flex: 1;
     border-radius: .8rem;
     background-color: rgb(var(--clr-min));
     overflow: hidden;

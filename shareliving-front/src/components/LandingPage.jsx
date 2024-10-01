@@ -1,20 +1,26 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { Splide, SplideSlide } from '@splidejs/react-splide'; // Splide 슬라이더 - 사용 여부 아직 확실하지 않음
+import '@splidejs/react-splide/css';
 
-import 'swiper/css/bundle';
-
-import Layout from './layouts/Layout';
 import LandingSectionTitle from './LandingSectionTitle';
 import CardProducts from './items/CardProducts';
 import CardReview from './items/CardReview';
 
 const LandingPage = () => {
-  const getTotalSaved = async () => {
-    const response = await fetch('url', {})
+  const getTotalSaved = async () => { // 전체 보호한 나무 그루 수
+    const response = await fetch('url', {
+      method: 'GET'
+    })
       .then()
       .finally();
 
     return response;
+  }
+
+  const sliderOptions = {
+    type: 'loop',
+    perPage: 4,
+    rewind: true,
+    gap: '.6rem',
   }
 
   return (
@@ -65,11 +71,13 @@ const LandingPage = () => {
 
           <div className="section-content review-list">
             <CardReview />
+            <CardReview />
+            <CardReview />
           </div>
         </section>
 
         <section id="secNews">
-          <LandingSectionTitle secDesc="나누리빙의 최근 소식입니다.." secTitle="나누리빙 News" secGoto="/" />
+          <LandingSectionTitle secDesc="나누리빙의 최근 소식입니다." secTitle="나누리빙 News" secGoto="/" />
 
           최신 소식이나 소셜 업데이트 등
         </section>

@@ -5,6 +5,7 @@
 .message-list__tabs {
   display: flex;
   margin-bottom: 20px;
+  gap: 20px;
 }
 .message-list__tabs__tab {
   flex: 1;

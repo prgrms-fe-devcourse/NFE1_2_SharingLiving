@@ -19,13 +19,7 @@ const CardReview = ({ itemObject }) => { // 아이템의 데이터 객체를 받
           </dt>
 
           <dd className="review-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus praesentium, accusantium illum obcaecati temporibus sint omnis accusamus. Non dolorem, nihil optio molestias facilis illum alias excepturi adipisci cum, maxime iure.
-            Ab est hic accusantium ad quisquam sunt sequi, laudantium tempore vel totam. Magni, molestias, nostrum delectus incidunt sequi quia ullam quasi ratione quis dolores recusandae libero ea? Asperiores, molestiae excepturi!
-            Ea provident enim in ut laborum, reprehenderit reiciendis, error consectetur veritatis, iste tempore harum. Fugiat reprehenderit delectus rem iste assumenda incidunt veritatis repudiandae molestias saepe. Totam possimus reiciendis aperiam delectus!
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus quam itaque at suscipit voluptatibus officiis, esse veritatis qui reprehenderit doloribus atque nobis nostrum praesentium quisquam officia excepturi adipisci? Aliquam, ipsa.
-            Eos nesciunt neque ab deleniti incidunt facere, odio expedita qui quas inventore? Pariatur sed illum ea quod omnis fuga ab autem dolore! Mollitia tempora nisi deleniti? Animi nihil a beatae.
-            Error ratione expedita quibusdam enim id aperiam nam hic porro cumque in, possimus, dignissimos quos ullam doloremque praesentium perferendis dolorum ipsam necessitatibus at officiis, blanditiis adipisci! Assumenda deleniti nemo voluptates?
-            Ipsam adipisci modi porro animi iusto nobis, veniam minus esse ipsa officia, repellat cupiditate veritatis autem corporis beatae? Culpa sit ullam quos et nobis perspiciatis soluta expedita natus inventore veritatis.
+            나눔 후기 본문
           </dd>
         </dl>
 

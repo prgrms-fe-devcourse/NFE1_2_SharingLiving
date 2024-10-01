@@ -78,10 +78,14 @@
 /* 섹션 공통 요소 */
 
 .section-content {
-    width: 100%;
+    height: 100%;
 }
 
 /* 섹션별 특수 요소 */
+
+#sliderProducts {
+
+}
 
 .product-list {
     display: flex;
@@ -91,6 +95,11 @@
 .knowledge-list {
     display: flex;
     flex-flow: column nowrap;
+    gap: .6rem;
+}
+
+.review-list {
+    display: flex;
     gap: .6rem;
 }
 

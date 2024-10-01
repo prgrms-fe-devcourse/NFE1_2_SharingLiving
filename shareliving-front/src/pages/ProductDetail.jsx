@@ -1,15 +1,27 @@
-import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 const ProductDetail = () => {
-  const location = useLocation();
-  const { product } = location.state; // 상태에서 제품 정보 가져오기
+  const thisLocation = useLocation();
 
-  const getProdDetail = async (dataIndex) => { // 제품 정보 가지고 오기
-    const response = await fetch('url', {})
-      .then()
+  // 팀 요청 API URL : https://kdt.frontend.5th.programmers.co.kr:5003/
 
-    return response;
+  // const getProdDetail = async (dataIndex) => { // 제품 정보 가지고 오기
+  //   const response = await fetch(`https://kdt.frontend.5th.programmers.co.kr:5003/posts/${ dataIndex }`, {
+  //     method: 'GET',
+  //     mode: 'cors',
+  //     headers: {
+  //       'Content-type': 'application/json'
+  //     }
+  //   })
+  //     .then(res => console.log(res));
+
+  //   return response.json();
+  // }
+
+  const product = {
+    name: 'ㅇㅇㅇ',
+    treeCount: 3,
+    imageUrl: '/'
   }
 
   return (
@@ -19,6 +31,8 @@ const ProductDetail = () => {
       <p>나무 그루 수: {product.treeCount}</p>
       <img src={product.imageUrl} alt="제품 이미지" />
       {/* 제품에 대한 추가 정보 표시 가능 */}
+
+      { thisLocation }
     </div>
   );
 };

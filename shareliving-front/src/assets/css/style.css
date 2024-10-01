@@ -729,17 +729,71 @@ a:hover, a:focus, a:active {
 /* 모바일 반응형 */
 .mobile-burger {
   display: none;
+  position: relative;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 25rem;
+}
+.mobile-burger:focus {
+  background-color: red;
+}
+
+.burger-stripe {
+  display: block;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 0.1rem;
+  height: 0.8rem;
+  background-color: rgb(var(--clr-text));
+}
+.burger-stripe.top {
+  margin-inline-start: 0.6rem;
+}
+.burger-stripe.bottom {
+  margin-inline-end: 0.6rem;
 }
 
 /* 하단 네비 바 */
 #navMobile {
-  display: none;
+  display: block;
   position: sticky;
+  inset-inline: 0;
   inset-block-end: 0;
+  width: 100%;
+  height: 70px;
+  background-color: rgb(var(--clr-min));
+  box-shadow: 0 0 1.8rem -1.2rem rgb(var(--clr-text));
+  z-index: 50000;
+}
+
+.bottom-nav-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.bottom-nav-item {
+  height: 100%;
+}
+.bottom-nav-item > a {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  padding-inline: 0.4rem;
+  height: 100%;
 }
 
 /* 미디어 쿼리 */
-@media screen and (max-width: 42rem) {
+@media screen and (max-width: 1100px) {
+  .header-user-area {
+    display: none;
+  }
+}
+@media screen and (max-width: 840px) {
   #navPrimary {
     display: none;
   }
@@ -747,7 +801,7 @@ a:hover, a:focus, a:active {
     display: initial;
   }
 }
-@media screen and (max-width: 24rem) {
+@media screen and (max-width: 600px) {
   #navMobile {
     display: initial;
   }
@@ -894,7 +948,7 @@ a:hover, a:focus, a:active {
 
 /* 섹션 공통 요소 */
 .section-content {
-  width: 100%;
+  height: 100%;
 }
 
 /* 섹션별 특수 요소 */
@@ -906,6 +960,11 @@ a:hover, a:focus, a:active {
 .knowledge-list {
   display: flex;
   flex-flow: column nowrap;
+  gap: 0.6rem;
+}
+
+.review-list {
+  display: flex;
   gap: 0.6rem;
 }
 
@@ -1051,7 +1110,7 @@ select:focus {
   margin-inline-start: auto;
 }
 
-@media screen and (max-width: 70rem) {
+@media screen and (max-width: 1400px) {
   #sideBarMain {
     display: none;
     position: fixed;
@@ -1266,8 +1325,26 @@ select:focus {
   content: " 님";
 }
 
+/* 지식 나눔 글 모바일 미디어 쿼리 */
+@media screen and (max-width: 840px) {
+  .card-item.knowledge > .card-image-container {
+    width: auto;
+    height: 100%;
+    aspect-ratio: 0.6/1;
+  }
+}
+@media screen and (max-width: 540px) {
+  .card-item.knowledge > .card-image-container {
+    margin: 0.4rem;
+    height: 5rem;
+    aspect-ratio: 1/1;
+    border-radius: 0.4rem;
+    overflow: hidden;
+  }
+}
 /* 나눔 후기 글 아이템 */
 .review-item {
+  flex: 1;
   border-radius: 0.8rem;
   background-color: rgb(var(--clr-min));
   overflow: hidden;
