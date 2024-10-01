@@ -1,0 +1,61 @@
+/* pages/MyPage.scss */
+.mypage {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.mypage__title {
+  text-align: center;
+  color: #4caf50;
+}
+.mypage__dashboard, .mypage__other-features {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+.mypage__dashboard-title, .mypage__other-features-title {
+  color: #333;
+}
+.mypage__user-info, .mypage__user-stamps {
+  margin-bottom: 15px;
+}
+.mypage__user-info-title, .mypage__user-stamps-title {
+  margin: 0;
+}
+.mypage__user-nickname, .mypage__stamps-count {
+  font-size: 18px;
+  color: #555;
+}
+.mypage__edit-button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+.mypage__features-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.mypage__feature-item {
+  margin-bottom: 10px;
+}
+.mypage__feature-link {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+.mypage__feature-link:hover {
+  background-color: #0056b3;
+}
