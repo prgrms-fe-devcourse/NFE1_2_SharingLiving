@@ -16,10 +16,14 @@ const SideBarContent = (isLogged) => { // 로그인 상태에 따른 사이드 �
     );
 }
 
-const MainSidebar = () => {
+const MainSidebar = ({ isLogged, hideSidebar }) => {
+    if (hideSidebar) {
+      return null;
+    }
+
     return (
         <aside id="sideBarMain">
-            <SideBarContent isLogged={ false } />
+            <SideBarContent isLogged={isLogged} />
 
             <div id="sideBanner" className="rounded">
                 이용 가이드 배너
