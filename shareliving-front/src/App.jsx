@@ -17,6 +17,9 @@ import ShareHistory from './pages/ShareHistory';
 import ProductDetail from './pages/ProductDetail';
 import KnowledgeDetail from './pages/KnowledgeDetail';
 import { AppProvider } from './context/AppContext'; // Context import
+import Login from './components/authentication/component/Login'; 
+import Signup from './components/authentication/component/Signup'; 
+import FindAccountInfo from './components/authentication/component/FindAccountInfoPopup';
 /*  
   주석 규칙
   
@@ -108,6 +111,26 @@ const baseRouter = createBrowserRouter([
         path: '/add-knowledge',
         element: <KnowledgeWrite />,
         errorElement: <div>지식 등록에 실패했습니다.</div>,
+      },
+      {
+        path: '/login',
+        element: <Login />,
+        errorElement: <div>로그인에 실패했습니다.</div>,
+      },
+      {
+        path: '/auth/kakao/callback',
+        element: <Login />,
+        errorElement: <div>로그인에 실패했습니다.</div>,
+      },
+      {
+        path: '/signup',
+        element: <Signup />,
+        errorElement: <div>회원가입에 실패했습니다.</div>,
+      },
+      {
+        path: '/find-account-info',
+        element: <FindAccountInfo />,
+        errorElement: <div>회원가입에 실패했습니다.</div>,
       },
       // 필요한 경로를 추가
     ],
