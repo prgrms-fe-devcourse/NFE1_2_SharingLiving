@@ -10,8 +10,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
+<<<<<<< HEAD
     },
   },
+=======
+>>>>>>> feature/authentication
       '/kakao-api': {
         target: 'https://kauth.kakao.com',
         changeOrigin: true,
@@ -39,4 +42,9 @@ export default defineConfig({
         },
       },
     },
+<<<<<<< HEAD
 );
+=======
+  },
+});
+>>>>>>> feature/authentication

@@ -35,11 +35,19 @@ const SignUp = () => {
     const { name, checked } = e.target;
     setTerms((prevTerms) => ({ ...prevTerms, [name]: checked }));
 
+<<<<<<< HEAD
     // If any individual checkbox is unchecked, uncheck the "전체 동의" box
     if (!checked) {
       setIsAllChecked(false);
     } else {
       // Check if all checkboxes are now checked to mark "전체 동의" as true
+=======
+    
+    if (!checked) {
+      setIsAllChecked(false);
+    } else {
+     
+>>>>>>> feature/authentication
       const allChecked = Object.values({ ...terms, [name]: checked }).every(
         (value) => value
       );
@@ -51,7 +59,11 @@ const SignUp = () => {
     const newCheckState = !isAllChecked;
     setIsAllChecked(newCheckState);
 
+<<<<<<< HEAD
     // Set all terms checkboxes to the state of "전체 동의"
+=======
+  
+>>>>>>> feature/authentication
     setTerms({
       age: newCheckState,
       service: newCheckState,

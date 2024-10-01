@@ -4,6 +4,7 @@
   align-items: center;
   min-height: 100vh;
   background-color: #f9f9f9;
+<<<<<<< HEAD
 }
 
 .login-header {
@@ -129,11 +130,171 @@
       .icon-twitter {
         font-size: 24px;
         cursor: pointer;
+=======
+
+  .login-header {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;  // 헤더의 모서리를 둥글게
+
+    .logo {
+      height: 40px;
+    }
+
+    .navbar {
+      display: flex;
+      gap: 20px;
+
+      a {
+        color: #333;
+        text-decoration: none;
+        font-size: 16px;
+>>>>>>> feature/authentication
 
         &:hover {
           color: #007bff;
         }
       }
     }
+<<<<<<< HEAD
+=======
+
+    .login-button {
+      padding: 10px 20px;
+      background-color: #3d6e36;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;  // 로그인 버튼의 모서리를 둥글게
+      cursor: pointer;
+
+      &:hover {
+        background-color: #2f542a;
+      }
+    }
+  }
+
+  .login-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 20px;
+
+    .login-form-container {
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 15px;  // 로그인 창의 모서리를 둥글게
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 630px;  // 고정 너비 설정
+      max-width: 100%;
+
+      .form-logo {
+        height: 60px;
+        margin-bottom: 20px;
+      }
+
+      .login-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 20px;
+
+        input {
+          width: 100%; // 입력 창의 가로 크기
+          height: 70px; // 입력 창의 높이
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 15px;  // 입력 창의 모서리를 둥글게
+          font-size: 16px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  // 입력 창에 쉐도우 추가
+
+          &:focus {
+            border-color: #3d6e36;
+            outline: none;
+          }
+        }
+
+        .submit-button {
+          width: 100%; // 버튼의 가로 크기
+          height: 70px; // 버튼의 높이
+          padding: 12px;
+          background-color: #3d6e36;
+          color: #ffffff;
+          border: none;
+          border-radius: 15px;  // 버튼의 모서리를 둥글게
+          font-size: 16px;
+          cursor: pointer;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  // 버튼에 쉐도우 추가
+
+          &:hover {
+            background-color: #2f542a;
+          }
+        }
+      }
+
+      .login-links {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
+        a {
+          color: #007bff;
+          text-decoration: none;
+          font-size: 14px;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      .social-login {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+
+        img {
+          width: 70px; // 소셜 로그인 아이콘의 가로 크기
+          height: 70px; // 소셜 로그인 아이콘의 세로 크기
+          border-radius: 50%; // 아이콘을 원형으로 만들기
+          object-fit: cover; // 이미지의 비율을 유지하면서 크기 조정
+          cursor: pointer;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); // 아이콘에 쉐도우 추가
+
+          &:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); // 마우스 오버 시 효과
+          }
+          .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+          }
+          
+          .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+          }
+        }
+      }
+    }
+>>>>>>> feature/authentication
   }
 }

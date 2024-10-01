@@ -3,12 +3,27 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import axios from "axios";
 import { login, getAuthUser } from "../utils/service/apiUtil";
 import "../scss/Login.scss";
+<<<<<<< HEAD
+=======
+import kakao from "../../../public/img/kakao.png"
+import Google from "../../../public/img/Google.png"
+import MainLogo from "../../../public/img/MainLogo.png"
+import naver from "../../../public/img/naver.png"
+>>>>>>> feature/authentication
 
 const KAKAO_CLIENT_ID = import.meta.env.VITE_APP_KAKAO_CLIENT_ID;
 const KAKAO_REDIRECT_URI = import.meta.env.VITE_APP_KAKAO_REDIRECT_URI;
 const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${encodeURIComponent(KAKAO_REDIRECT_URI)}&response_type=code`;
 
+<<<<<<< HEAD
 const API_BASE_URL = "https://kdt.frontend.5th.programmers.co.kr:5003";
+=======
+const NAVER_CLIENT_ID = import.meta.env.VITE_APP_NAVER_CLIENT_ID;
+const NAVER_REDIRECT_URI = import.meta.env.VITE_APP_NAVER_REDIRECT_URI;
+const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&redirect_uri=${encodeURIComponent(NAVER_REDIRECT_URI)}&state=${Math.random().toString(36).substr(2, 11)}`;
+
+const API_BASE_URL = "http://localhost:5173";
+>>>>>>> feature/authentication
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,9 +38,21 @@ const Login = () => {
   useEffect(() => {
     checkAuthStatus();
     const code = new URLSearchParams(location.search).get("code");
+<<<<<<< HEAD
     if (code) {
       console.log("Kakao auth code detected:", code);
       handleKakaoCallback(code);
+=======
+    const state = new URLSearchParams(location.search).get("state");
+    if (code) {
+      if (state) {
+        console.log("Naver auth code detected:", code);
+        handleNaverCallback(code);
+      } else {
+        console.log("Kakao auth code detected:", code);
+        handleKakaoCallback(code);
+      }
+>>>>>>> feature/authentication
     }
   }, [location]);
 
@@ -61,7 +88,11 @@ const Login = () => {
       setIsLoading(false);
     }
   };
+<<<<<<< HEAD
 
+=======
+  //카카오
+>>>>>>> feature/authentication
   const handleKakaoLogin = () => {
     console.log("Initiating Kakao login, redirecting to:", KAKAO_AUTH_URL);
     window.location.href = KAKAO_AUTH_URL;
@@ -72,7 +103,10 @@ const Login = () => {
     try {
       console.log("Received Kakao auth code:", code);
 
+<<<<<<< HEAD
       // 서버에 카카오 인증 코드를 보내 처리
+=======
+>>>>>>> feature/authentication
       const response = await axios.post(`${API_BASE_URL}/auth/kakao/callback`, { code });
 
       console.log("Server login response:", response.data);
@@ -93,11 +127,48 @@ const Login = () => {
       setIsLoading(false);
     }
   };
+<<<<<<< HEAD
+=======
+  //네이버
+  const handleNaverLogin = () => {
+    console.log("Initiating Naver login, redirecting to:", NAVER_AUTH_URL);
+    window.location.href = NAVER_AUTH_URL;
+  };
+
+  const handleNaverCallback = async (code) => {
+    setIsLoading(true);
+    try {
+      console.log("Received Naver auth code:", code);
+
+      const response = await axios.post(`${API_BASE_URL}/auth/naver/callback`, { code });
+
+      console.log("Server login response:", response.data);
+
+      if (response.data && response.data.token) {
+        localStorage.setItem("Token", response.data.token);
+        setIsLoggedIn(true);
+        setFullName(response.data.user.fullName);
+        navigate("/");
+      } else {
+        throw new Error("Login response does not contain a token");
+      }
+    } catch (error) {
+      console.error("Naver login error:", error);
+      console.error("Error details:", error.response?.data);
+      setMessage("네이버 로그인에 실패했습니다. 다시 시도해주세요.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+>>>>>>> feature/authentication
 
   const handleLogout = async () => {
     setIsLoading(true);
     try {
+<<<<<<< HEAD
       // 로그아웃 API 호출
+=======
+>>>>>>> feature/authentication
       await axios.post(`${API_BASE_URL}/logout`, {}, {
         headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` }
       });
@@ -112,6 +183,7 @@ const Login = () => {
       setIsLoading(false);
     }
   };
+<<<<<<< HEAD
 
   // 다른 소셜 로그인
   const handleGoogleLogin = () => {
@@ -122,6 +194,12 @@ const Login = () => {
   const handleNaverLogin = () => {
     console.log("Naver login not implemented yet");
     // 네이버 로그인 로직 구현
+=======
+  
+  //구글
+  const handleGoogleLogin = () => {
+    console.log("Google login not implemented yet");
+>>>>>>> feature/authentication
   };
 
   if (isLoggedIn) {
@@ -140,7 +218,11 @@ const Login = () => {
     <div className="login-container">
       <main className="login-content">
         <div className="login-form-container">
+<<<<<<< HEAD
           <img src="/img/MainLogo.png" alt="" className="form-logo" />
+=======
+          <img src={MainLogo} alt="" className="form-logo" />
+>>>>>>> feature/authentication
           <form className="login-form" onSubmit={handleLogin}>
             <input
               type="email"
@@ -162,6 +244,7 @@ const Login = () => {
           </form>
           {message && <p className="error-message">{message}</p>}
           <div className="login-links">
+<<<<<<< HEAD
             <a href="#find-info">아이디/비밀번호 찾기</a>
             <Link to="/signup">회원가입</Link>
           </div>
@@ -175,6 +258,21 @@ const Login = () => {
             <button onClick={handleNaverLogin} className="naver-login-button">
               <img src="/img/naver.png" alt="Naver" className="naver-icon" />
             </button>
+=======
+            <Link to="/find-account-info">아이디/비밀번호 찾기</Link>
+            <Link to="/signup">회원가입</Link>
+          </div>
+          <div className="social-login">
+            <a onClick={handleKakaoLogin} className="kakao-login-button">
+              <img src={kakao} alt="Kakao" className="kakao-icon" />
+            </a>
+            <a onClick={handleGoogleLogin} className="google-login-button">
+              <img src={Google} alt="Google" className="google-icon" />
+            </a>
+            <a onClick={handleNaverLogin} className="naver-login-button">
+              <img src={naver} alt="Naver" className="naver-icon" />
+            </a>
+>>>>>>> feature/authentication
           </div>
         </div>
       </main>
