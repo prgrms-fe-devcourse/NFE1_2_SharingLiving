@@ -31,6 +31,7 @@ export const AppProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState({
     name: '현재 사용자',
     email: 'currentuser@example.com',
+    token: 'your_jwt_token_here', // 임시 JWT 토큰 추가
   });
 
   // 답장 메시지 추가 함수
