@@ -40,6 +40,8 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        user-select: none;
+        pointer-events: none;
     }
 
     > .card-tags-container {
@@ -52,7 +54,7 @@
         margin-block-start: auto;
         padding: .4rem;
         height: fit-content;
-        color: white;
+        color: rgb(255 255 255);
     }
 }
 
@@ -221,7 +223,93 @@
 /* 나눔 후기 글 아이템 */
 
 .review-item {
+    border-radius: .8rem;
+    background-color: rgb(var(--clr-min));
+    overflow: hidden;
+}
 
+.review-image-container {
+    position: relative;
+    height: 12rem;
+    background-color: rgb(var(--clr-max) / .75);
+
+    > .review-image {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        user-select: none;
+        pointer-events: none;
+    }
+}
+
+.review-title-area {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .4rem .8rem;
+}
+
+.review-user-picture {
+    margin-block-start: -.8rem;
+    width: 3.2rem;
+    height: 3.2rem;
+    border: .2rem solid rgb(var(--clr-min));
+    border-radius: 25rem;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.review-title {
+    margin-block-end: .2rem;
+    font-size: var(--fnt-lg);
+    font-weight: 900;
+}
+
+.review-author {
+    font-size: var(--fnt-sm);
+    font-weight: 600;
+}
+
+.review-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    position: relative;
+    padding: 0 .8rem .6rem;
+    height: 5.2rem;
+    font-size: var(--fnt-sm);
+    font-weight: 600;
+    line-height: 1.4;
+    line-clamp: 5;
+    -webkit-line-clamp: 5;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    opacity: .5;
+
+    &::after {
+        display: block;
+        position: absolute;
+        inset: 0;
+        margin-block-start: auto;
+        height: 1.8rem;
+        background-image: linear-gradient(to top, rgb(var(--clr-min)), transparent);
+        content: '';
+    }
+}
+
+.review-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .6rem .8rem;
+    border-block-start: 1px solid rgb(var(--clr-text) / .15);
+
+    > .review-written-date {
+        margin-inline-start: auto;
+        font-size: var(--fnt-sm);
+        opacity: .5;
+    }
 }
 
 /* _cardItems.scss */

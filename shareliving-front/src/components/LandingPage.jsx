@@ -6,6 +6,7 @@ import 'swiper/css/bundle';
 import Layout from './layouts/Layout';
 import LandingSectionTitle from './LandingSectionTitle';
 import CardProducts from './items/CardProducts';
+import CardReview from './items/CardReview';
 
 const LandingPage = () => {
   const getTotalSaved = async () => {
@@ -64,7 +65,7 @@ const LandingPage = () => {
             <LandingSectionTitle secDesc="나누어 주신 분들께 감사의 마음을 표현해 보세요." secTitle="나눔 이용 후기" secGoto="/" />
 
             <div className="section-content review-list">
-              최근 나눔 이용 후기
+              <CardReview />
             </div>
           </section>
 

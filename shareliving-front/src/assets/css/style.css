@@ -1101,6 +1101,10 @@ select:focus {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  pointer-events: none;
 }
 .card-image-container > .card-tags-container {
   display: flex;
@@ -1113,7 +1117,7 @@ select:focus {
   padding: 0.4rem;
   height: -moz-fit-content;
   height: fit-content;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 .card-tag-item {
@@ -1263,4 +1267,94 @@ select:focus {
 }
 
 /* 나눔 후기 글 아이템 */
+.review-item {
+  border-radius: 0.8rem;
+  background-color: rgb(var(--clr-min));
+  overflow: hidden;
+}
+
+.review-image-container {
+  position: relative;
+  height: 12rem;
+  background-color: rgb(var(--clr-max)/0.75);
+}
+.review-image-container > .review-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  pointer-events: none;
+}
+
+.review-title-area {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.8rem;
+}
+
+.review-user-picture {
+  margin-block-start: -0.8rem;
+  width: 3.2rem;
+  height: 3.2rem;
+  border: 0.2rem solid rgb(var(--clr-min));
+  border-radius: 25rem;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.review-title {
+  margin-block-end: 0.2rem;
+  font-size: var(--fnt-lg);
+  font-weight: 900;
+}
+
+.review-author {
+  font-size: var(--fnt-sm);
+  font-weight: 600;
+}
+
+.review-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  position: relative;
+  padding: 0 0.8rem 0.6rem;
+  height: 5.2rem;
+  font-size: var(--fnt-sm);
+  font-weight: 600;
+  line-height: 1.4;
+  line-clamp: 5;
+  -webkit-line-clamp: 5;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  opacity: 0.5;
+}
+.review-text::after {
+  display: block;
+  position: absolute;
+  inset: 0;
+  margin-block-start: auto;
+  height: 1.8rem;
+  background-image: linear-gradient(to top, rgb(var(--clr-min)), transparent);
+  content: "";
+}
+
+.review-info-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0.8rem;
+  border-block-start: 1px solid rgb(var(--clr-text)/0.15);
+}
+.review-info-container > .review-written-date {
+  margin-inline-start: auto;
+  font-size: var(--fnt-sm);
+  opacity: 0.5;
+}
+
 /* _cardItems.scss */
