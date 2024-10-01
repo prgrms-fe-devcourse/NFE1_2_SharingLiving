@@ -56,7 +56,12 @@ const CardProducts = ({ type, itemObject }) => { // 아이템의 종류와 데�
 
                 <div className="card-description-container">
                     <dl className="card-descriptions">
-                        <dt className="card-title">분류 태그, 글 제목</dt>
+                        <dt className="card-title">
+                            <div className="card-category-tag">분류 태그</div>
+
+                            <h4 className="card-title-text">글 제목</h4>
+                        </dt>
+
                         <dd className="card-text">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque at architecto tenetur cum quia fugiat, nostrum enim odio officiis quis consequatur tempora, in illo! Dolores earum at blanditiis! Fuga, nostrum.
                             Beatae, distinctio eaque mollitia repellat exercitationem maiores? Dignissimos vel amet odit perspiciatis cumque provident quasi nam facere, placeat quaerat. Doloribus distinctio quidem quis, adipisci quae reiciendis eum dignissimos id voluptates?
@@ -68,8 +73,11 @@ const CardProducts = ({ type, itemObject }) => { // 아이템의 종류와 데�
 
                     <div className="card-info-container">
                         <div className="user-nametag">
-                            <div>사진</div>
-                            사용자명
+                            <div className="user-nametag-picture">
+                                <img src="https://picsum.photos/100/100?random=2" alt="사용자 프로파일 이미지" />
+                            </div>
+
+                            <p className="user-nametag-name">사용자명</p>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,13 @@
 /* _landingPages.scss */
 
+/* 히어로 섹션 */
+
+.landing-page-aligner {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1.2rem;
+}
+
 #secHero {
     height: 30vh;
 }
@@ -10,7 +18,7 @@
 }
 
 .slide-insert {
-    --slide-background-color: 55 107 67;
+    --slide-background-color: var(--clr-tint-75);
     --slide-text-color: 255 255 255;
 
     display: flex;
@@ -23,6 +31,77 @@
     border-radius: .8rem;
     background-color: rgb(var(--slide-background-color));
     color: rgb(var(--slide-text-color));
+}
+
+/* 섹션 타이틀 */
+
+.section-titlebar {
+    margin-block-end: .6rem;
+}
+
+.section-description {
+    margin-block-end: .2rem;
+    font-size: var(--fnt-lg);
+    opacity: .5;
+}
+
+.section-name-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-name {
+    font-size: var(--fnt-title-lg);
+    font-weight: 900;
+    line-height: 1.2;
+}
+
+.button-section-more {
+    padding: .2rem 1rem;
+    border: 1px solid rgb(var(--clr-tint-75));
+    border-radius: .2rem;
+    color: rgb(var(--clr-tint-75));
+    font-size: var(--fnt-sm);
+    font-weight: 900;
+
+    &:hover {
+        background-color: rgb(var(--clr-tint-75));
+        color: rgb(255 255 255);
+    }
+
+    a:hover {
+        color: inherit;
+    }
+}
+
+/* 섹션 공통 요소 */
+
+.section-content {
+    width: 100%;
+}
+
+/* 섹션별 특수 요소 */
+
+.product-list {
+    display: flex;
+    gap: .6rem;
+}
+
+.knowledge-list {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: .6rem;
+}
+
+#secBanners {
+
+}
+
+#secInfoBanner {
+    height: 7.5rem;
+    border-radius: .8rem;
+    background-color: orange;
 }
 
 /* _landingPages.scss */
