@@ -51,7 +51,7 @@ const MyPage = () => {
             </Link>
           </li>
           <li className="mypage__feature-item">
-            <Link to="/messages" className="mypage__feature-link">
+            <Link to="/messages/conversations" className="mypage__feature-link">
               메시지함 이동
             </Link>
           </li>

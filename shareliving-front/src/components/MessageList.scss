@@ -1,60 +1,73 @@
-/* components/MessageList.scss */
-
 .message-list {
-  margin: 20px;
+  padding: 20px;
+  background-color: #f9f9f9; // 배경 색상
+  border-radius: 8px; // 모서리 둥글게
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); // 그림자 효과
 
   &__tabs {
-    display: flex;
-    margin-bottom: 20px;
-    gap: 20px;
+    display: flex; // 탭을 가로로 나열
+    margin-bottom: 20px; // 탭과 내용 간격
 
-    &__tab {
-      flex: 1;
-      padding: 10px;
-      cursor: pointer;
-      border: 1px solid #ccc;
-      background-color: #f9f9f9;
-      text-align: center;
-      transition: background-color 0.3s;
-
-      &.active {
-        background-color: #007bff;
-        color: white;
-      }
+    // 탭 버튼 기본 스타일
+    .message-list__tab {
+      flex: 1; // 탭 버튼이 동일한 비율로 공간 차지
+      padding: 10px; // 버튼 내부 여백
+      background-color: #e0e0e0; // 기본 배경 색상
+      border: none; // 테두리 제거
+      border-radius: 4px; // 둥글게
+      cursor: pointer; // 커서 포인터로 변경
+      transition: background-color 0.3s ease; // 배경 색상 변화에 애니메이션 추가
 
       &:hover {
-        background-color: #e0e0e0;
+        background-color: #d5d5d5; // 마우스 오버 시 색상 변화
+      }
+
+      &.active {
+        background-color: #007bff; // 활성화된 탭 색상
+        color: white; // 텍스트 색상
       }
     }
   }
 
   &__content {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 15px;
-    background-color: #f9f9f9;
+    padding: 10px; // 내용 내부 여백
 
     h2 {
-      margin-top: 0;
+      margin-bottom: 10px; // 제목과 내용 간격
+      color: #333; // 제목 색상
     }
 
     ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    }
+      list-style-type: none; // 리스트 스타일 제거
+      padding: 0; // 기본 패딩 제거
 
-    li {
-      margin-bottom: 10px;
-
-      a {
-        text-decoration: none;
-        color: #007bff;
+      li {
+        margin: 10px 0; // 각 메시지 간격
+        padding: 10px; // 메시지 내부 여백
+        background-color: #ffffff; // 메시지 배경 색상
+        border: 1px solid #ddd; // 메시지 테두리
+        border-radius: 4px; // 메시지 둥글게
+        transition: background-color 0.3s ease; // 배경 색상 변화에 애니메이션 추가
 
         &:hover {
-          text-decoration: underline;
+          background-color: #f0f0f0; // 마우스 오버 시 메시지 배경 색상 변화
+        }
+
+        a {
+          text-decoration: none; // 링크의 기본 밑줄 제거
+          color: #007bff; // 링크 색상
+          font-weight: bold; // 링크 텍스트 두껍게
+
+          &:hover {
+            text-decoration: underline; // 링크 마우스 오버 시 밑줄 추가
+          }
         }
       }
+    }
+
+    p {
+      color: #666; // 메시지 없을 때 텍스트 색상
+      margin: 10px 0; // 문단 간격
     }
   }
 }
