@@ -756,7 +756,7 @@ a:hover, a:focus, a:active {
 
 /* 하단 네비 바 */
 #navMobile {
-  display: block;
+  display: none;
   position: sticky;
   inset-inline: 0;
   inset-block-end: 0;
@@ -775,7 +775,10 @@ a:hover, a:focus, a:active {
 }
 
 .bottom-nav-item {
+  flex: 1;
+  position: relative;
   height: 100%;
+  font-size: var(--fnt-sm);
 }
 .bottom-nav-item > a {
   display: flex;
@@ -785,6 +788,11 @@ a:hover, a:focus, a:active {
   gap: 0.4rem;
   padding-inline: 0.4rem;
   height: 100%;
+}
+.bottom-nav-item:has(.active) {
+  background-image: linear-gradient(to bottom, rgb(var(--clr-tint-50)), rgb(var(--clr-tint-50)) 0.2rem, transparent 0.2rem), linear-gradient(to bottom, rgb(var(--clr-tint-50)/0.25), transparent 50%);
+  color: rgb(var(--clr-theme));
+  font-weight: 900;
 }
 
 /* 미디어 쿼리 */
@@ -881,6 +889,7 @@ a:hover, a:focus, a:active {
   display: flex;
   flex-flow: column nowrap;
   gap: 1.2rem;
+  max-width: 63.2rem;
 }
 
 #secHero {
@@ -947,14 +956,13 @@ a:hover, a:focus, a:active {
 }
 
 /* 섹션 공통 요소 */
-.section-content {
-  height: 100%;
+/* 섹션별 특수 요소 */
+.splide {
+  width: 100%;
 }
 
-/* 섹션별 특수 요소 */
 .product-list {
   display: flex;
-  gap: 0.6rem;
 }
 
 .knowledge-list {

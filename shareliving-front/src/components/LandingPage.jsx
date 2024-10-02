@@ -1,7 +1,5 @@
-import { Splide, SplideSlide } from '@splidejs/react-splide'; // Splide 슬라이더 - 사용 여부 아직 확실하지 않음
-import '@splidejs/react-splide/css';
-
 import LandingSectionTitle from './LandingSectionTitle';
+import TempSlider from './TempSlider';
 import CardProducts from './items/CardProducts';
 import CardReview from './items/CardReview';
 
@@ -14,13 +12,6 @@ const LandingPage = () => {
       .finally();
 
     return response;
-  }
-
-  const sliderOptions = {
-    type: 'loop',
-    perPage: 4,
-    rewind: true,
-    gap: '.6rem',
   }
 
   return (
@@ -45,10 +36,7 @@ const LandingPage = () => {
           <LandingSectionTitle secDesc="사용한 물건에 새로운 가치를 부여해 보세요." secTitle="물품 나눔" secGoto="/" />
 
           <div className="section-content product-list">
-            <CardProducts type="product" />
-            <CardProducts type="product" />
-            <CardProducts type="product" />
-            <CardProducts type="product" />
+            <TempSlider />
           </div>
         </section>
 

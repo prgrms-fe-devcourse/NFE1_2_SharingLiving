@@ -6,6 +6,7 @@
     display: flex;
     flex-flow: column nowrap;
     gap: 1.2rem;
+    max-width: 63.2rem;
 }
 
 #secHero {
@@ -78,18 +79,17 @@
 /* 섹션 공통 요소 */
 
 .section-content {
-    height: 100%;
+
 }
 
 /* 섹션별 특수 요소 */
 
-#sliderProducts {
-
+.splide {
+    width: 100%;
 }
 
 .product-list {
     display: flex;
-    gap: .6rem;
 }
 
 .knowledge-list {

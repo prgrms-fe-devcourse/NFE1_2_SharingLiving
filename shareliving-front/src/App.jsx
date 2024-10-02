@@ -18,10 +18,11 @@ import NoticeDetail from './components/NoticeDetail';
 import ShareHistory from './pages/ShareHistory';
 import ProductDetail from './pages/ProductDetail';
 import KnowledgeDetail from './pages/KnowledgeDetail';
-import { AppProvider } from './context/AppContext'; // Context import
+
 import Login from './components/authentication/component/Login';
 import Signup from './components/authentication/component/Signup';
 import FindAccountInfo from './components/authentication/component/FindAccountInfoPopup';
+
 /*
   주석 규칙
 
@@ -95,8 +96,18 @@ const baseRouter = createBrowserRouter([
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
+        path: '/product',
+        element: <ProductDetail />,
+        errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
+      },
+      {
         path: '/product/:id',
         element: <ProductDetail />,
+        errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
+      },
+      {
+        path: '/knowledge',
+        element: <KnowledgeDetail />,
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {

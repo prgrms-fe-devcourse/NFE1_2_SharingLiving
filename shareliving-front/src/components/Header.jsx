@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import LogoImage from '../assets/images/logo.png';
 import UserControlls from './UserControlls';
@@ -16,26 +16,28 @@ const Header = () => {
     <>
       <header id="headPrimary">
         <div className="header-nav-area fullscreen">
-          <Link to="/">
+          <NavLink to="/">
             <h1 id="logoMain">
               <img src={ LogoImage } alt="로고" />
             </h1>
-          </Link>
+          </NavLink>
 
           <nav id="navPrimary">
             <ul className="nav-list">
               <li className="nav-item">
-                <Link to="/">제품 나눔</Link>
+                <NavLink to="/product">제품 나눔</NavLink>
               </li>
 
               <li className="nav-item">
-                <Link to="/">지식 나눔</Link>
+                <NavLink to="/knowledge">지식 나눔</NavLink>
               </li>
 
-              <li className="nav-item" onClick={ openModal }>나눔하기</li>
+              <li className="nav-item" onClick={ openModal }>
+                나눔하기
+              </li>
 
               <li className="nav-item">
-                <Link to="/mypage">마이 페이지</Link>
+                <NavLink to="/mypage">마이 페이지</NavLink>
               </li>
             </ul>
           </nav>
