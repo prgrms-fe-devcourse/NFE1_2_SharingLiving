@@ -1,7 +1,36 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+const API_BASE_URL = "https://kdt.frontend.5th.programmers.co.kr:5003"; // API 기본 URL 확인
+
 const UserControlls = () => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [message, setMessage] = useState('');
+    const navigate = useNavigate();
+
     const { notifications, messages } = {
         notifications: [1],
         messages: []
+    };
+
+    const handleLogout = async () => {
+        setIsLoading(true);
+        try {
+            const token = localStorage.getItem('Token');
+            await axios.post(`${API_BASE_URL}/logout`, {}, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            localStorage.removeItem('Token');
+            setMessage("");
+            // 로그아웃 후 상태 업데이트 또는 리다이렉션
+            navigate('/'); // 홈페이지로 리다이렉트
+        } catch (error) {
+            console.error("Logout error:", error);
+            setMessage("로그아웃 중 오류가 발생했습니다.");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -27,12 +56,20 @@ const UserControlls = () => {
                     </button>
                 </div>
 
-                <button type="button" id="btnHeaderLogout" className="button-with-icon front" title="로그아웃">
-                    로그아웃
+      <button 
+                    type="button" 
+                    id="btnHeaderLogout" 
+                    className="button-with-icon front" 
+                    title="로그아웃"
+                    onClick={handleLogout}
+                    disabled={isLoading}
+                >
+                    {isLoading ? "처리 중..." : "로그아웃"}
                 </button>
             </div>
+            {message && <p className="info-message">{message}</p>}
         </div>
-    );
+    )
 };
 
 export default UserControlls;

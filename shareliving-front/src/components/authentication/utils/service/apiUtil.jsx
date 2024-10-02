@@ -54,7 +54,7 @@ export const logout = async () => {
 export const getAuthUser = async () => {
   const token = localStorage.getItem('Token');
   if (!token) {
-    throw new Error('No auth token found');
+    // throw new Error('No auth token found');
   }
 
   try {

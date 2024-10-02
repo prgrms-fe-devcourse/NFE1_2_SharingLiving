@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 const SideBarContent = (isLogged) => { // 로그인 상태에 따른 사이드 바 내용 표시 (나중에 별도 컴포넌트화 해야 함)
     if (isLogged === true) {
         return (
@@ -9,10 +10,11 @@ const SideBarContent = (isLogged) => { // 로그인 상태에 따른 사이드 �
 
     return (
         <div>
-            <button type="button" id="btnSideLogin" title="로그인 / 회원가입"> { /** 임시 엘리먼트 - 라우터 링크로 바꿔야 함 */ }
-                로그인 / 회원가입
-            </button>
-        </div>
+            <Link to="/login" className="button-style" id="btnSideLogin" title="로그인 / 회원가입">
+             로그인 / 회원가입
+            </Link>
+            </div>
+        
     );
 }
 

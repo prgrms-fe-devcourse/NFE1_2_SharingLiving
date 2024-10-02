@@ -6,8 +6,15 @@ import "../scss/Login.scss";
 import Google from "../../../public/img/Google.png"
 import MainLogo from "../../../public/img/MainLogo.png"
 import naver from "../../../public/img/naver.png"
+import kakaoIcon from "../../../public/img/kakao.png"; 
+import axios from "axios";
 
 const API_BASE_URL = "https://kdt.frontend.5th.programmers.co.kr:5003";
+
+
+const KAKAO_CLIENT_ID = import.meta.env.VITE_APP_KAKAO_CLIENT_ID;
+const KAKAO_REDIRECT_URI = import.meta.env.VITE_APP_KAKAO_REDIRECT_URI;
+const link = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${encodeURIComponent(KAKAO_REDIRECT_URI)}&response_type=code`;
 
 const Login = () => {
   const navigate = useNavigate();
@@ -64,6 +71,12 @@ const Login = () => {
     console.log("Naver login not implemented yet");
   };
 
+  const handleKakaoLogin = () => {
+    window.location.href = link;
+
+
+  };
+
   return (
     <div className="login-container">
       <main className="login-content">
@@ -94,7 +107,9 @@ const Login = () => {
             <Link to="/signup">회원가입</Link>
           </div>
           <div className="social-login">
-            <Kakao />
+            <a onClick={handleKakaoLogin} className="kakao-login-button">
+              <img src={kakaoIcon} alt="kakaoIcon" className="google-icon" />
+            </a>
             <a onClick={handleGoogleLogin} className="google-login-button">
               <img src={Google} alt="Google" className="google-icon" />
             </a>

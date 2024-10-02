@@ -20,6 +20,7 @@ import { AppProvider } from './context/AppContext'; // Context import
 import Login from './components/authentication/component/Login'; 
 import Signup from './components/authentication/component/Signup'; 
 import FindAccountInfo from './components/authentication/component/FindAccountInfoPopup';
+import KakaoCallback from './components/authentication/utils/service/kakaoCallback';
 /*  
   주석 규칙
   
@@ -119,7 +120,7 @@ const baseRouter = createBrowserRouter([
       },
       {
         path: '/auth/kakao/callback',
-        element: <Login />,
+        element: <KakaoCallback />,
         errorElement: <div>로그인에 실패했습니다.</div>,
       },
       {
@@ -132,6 +133,7 @@ const baseRouter = createBrowserRouter([
         element: <FindAccountInfo />,
         errorElement: <div>회원가입에 실패했습니다.</div>,
       },
+      
       // 필요한 경로를 추가
     ],
   },

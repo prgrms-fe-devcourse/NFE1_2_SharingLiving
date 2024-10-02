@@ -13,7 +13,6 @@ export default defineConfig({
       '/kakao-api': {
         target: 'https://kauth.kakao.com',
         changeOrigin: true,
-        secure: true,
         rewrite: (path) => path.replace(/^\/kakao-api/, ''),
         configure: (proxy, _options) => {
           proxy.on('error', (err, _req, _res) => {
