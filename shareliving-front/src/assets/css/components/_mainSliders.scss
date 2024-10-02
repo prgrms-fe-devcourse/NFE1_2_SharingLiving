@@ -1,0 +1,24 @@
+/* _mainSliders.scss */
+
+.swiper {
+    position: absolute !important;
+    inset: 0;
+
+    .card-item {
+        width: 16rem;
+    }
+
+    .review-item {
+        width: 20rem;
+    }
+}
+
+.swiper-wrapper {
+    width: 100%;
+}
+
+.swiper-slide {
+    width: fit-content !important;
+}
+
+/* _mainSliders.scss */

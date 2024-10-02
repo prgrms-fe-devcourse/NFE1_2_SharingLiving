@@ -1,5 +1,6 @@
 import LandingSectionTitle from './LandingSectionTitle';
-import TempSlider from './TempSlider';
+import ProductSlider from './ProductSlider';
+import ReviewSlider from './ReviewSlider';
 import CardProducts from './items/CardProducts';
 import CardReview from './items/CardReview';
 
@@ -16,7 +17,7 @@ const LandingPage = () => {
 
   return (
     <>
-      <div class="landing-page-aligner">
+      <div className="landing-page-aligner">
         <section id="secHero">
           <div className="hero-slide-item">
             <div className="slide-insert">
@@ -36,7 +37,7 @@ const LandingPage = () => {
           <LandingSectionTitle secDesc="사용한 물건에 새로운 가치를 부여해 보세요." secTitle="물품 나눔" secGoto="/" />
 
           <div className="section-content product-list">
-            <TempSlider />
+            <ProductSlider />
           </div>
         </section>
 
@@ -58,9 +59,7 @@ const LandingPage = () => {
           <LandingSectionTitle secDesc="나누어 주신 분들께 감사의 마음을 표현해 보세요." secTitle="나눔 이용 후기" secGoto="/" />
 
           <div className="section-content review-list">
-            <CardReview />
-            <CardReview />
-            <CardReview />
+            <ReviewSlider />
           </div>
         </section>
 

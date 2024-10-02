@@ -84,12 +84,9 @@
 
 /* 섹션별 특수 요소 */
 
-.splide {
-    width: 100%;
-}
-
 .product-list {
-    display: flex;
+    position: relative;
+    height: 20rem;
 }
 
 .knowledge-list {
@@ -99,8 +96,8 @@
 }
 
 .review-list {
-    display: flex;
-    gap: .6rem;
+    position: relative;
+    height: 24rem;
 }
 
 #secBanners {

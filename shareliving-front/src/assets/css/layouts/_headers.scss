@@ -147,6 +147,23 @@
     }
 }
 
+#navToggle {
+    position: fixed;
+    inset-block: 0;
+    inset-inline-start: 0;
+    margin: auto;
+    width: 75vw;
+    background-color: rgb(0 0 0 / .75);
+    translate: -100%;
+    transition: translate .25s;
+    z-index: 50000;
+
+    &.on {
+        translate: 0;
+
+    }
+}
+
 /* 하단 네비 바 */
 
 #navMobile {
@@ -155,7 +172,7 @@
     inset-inline: 0;
     inset-block-end: 0;
     width: 100%;
-    height: 70px;
+    height: 3.6rem;
     background-color: rgb(var(--clr-min));
     box-shadow: 0 0 1.8rem -1.2rem rgb(var(--clr-text));
     z-index: 50000;
@@ -207,7 +224,7 @@
     }
 
     .mobile-burger {
-        display: initial;
+        display: block;
     }
 }
 
@@ -217,7 +234,7 @@
     }
 
     #navMobile {
-        display: initial;
+        display: block;
     }
 }
 
