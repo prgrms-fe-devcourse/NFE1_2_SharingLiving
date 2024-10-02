@@ -6,6 +6,8 @@ import axios from 'axios';
 
 const KnowledgeWrite = () => {
   const navigate = useNavigate();
+  const token = localStorage.getItem('Token');
+  
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('knowledge');
   const [type, setType] = useState('');
@@ -49,7 +51,7 @@ const KnowledgeWrite = () => {
         formData,
         {
           headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY0ZWRiYTNmOTQzNTU4MTFmZWNkYzg0MyIsImVtYWlsIjoiYWRtaW5AcHJvZ3JhbW1lcnMuY28ua3IifSwiaWF0IjoxNzI3Nzk4MDY3fQ.1xNOBXJzCCDt9Ov_KnFYq5_yQ66vkn8au-ZNoN1thhU', 
+            'Authorization': `Bearer ${token}`
           },
         }
       );
