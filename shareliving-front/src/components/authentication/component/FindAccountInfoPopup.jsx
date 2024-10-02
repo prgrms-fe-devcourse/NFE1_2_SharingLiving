@@ -44,8 +44,6 @@ const FindAccountInfo = () => {
       if (response.data.length > 0) {
         setIsVerified(true);
         setMessage('사용자 확인이 완료되었습니다. 새 비밀번호를 입력해주세요.');
-        // 여기서 임시 토큰을 받아 localStorage에 저장할 수 있습니다.
-        // localStorage.setItem('tempToken', response.data[0].tempToken);
       } else {
         setMessage('입력한 정보와 일치하는 사용자가 없습니다.');
       }

@@ -1,7 +1,5 @@
 import axios from 'axios';
-
 const BASE_URL = 'https://kdt.frontend.5th.programmers.co.kr:5003';
-
 const api = axios.create({
   baseURL: BASE_URL,
 });

@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  publicDir: 'public',
   server: {
     proxy: {
       '/api': {
@@ -13,6 +14,7 @@ export default defineConfig({
       '/kakao-api': {
         target: 'https://kauth.kakao.com',
         changeOrigin: true,
+        secure: true,
         rewrite: (path) => path.replace(/^\/kakao-api/, ''),
         configure: (proxy, _options) => {
           proxy.on('error', (err, _req, _res) => {

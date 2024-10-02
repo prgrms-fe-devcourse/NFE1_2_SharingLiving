@@ -1,6 +1,6 @@
-import React from 'react';
-import axios from 'axios';
-import kakaoIcon from "../../../../public/img/kakao.png";
+import React from "react";
+import axios from "axios";
+import kakaoIcon from "../../../../public/img/kakaoIcon.png";
 
 const KAKAO_CLIENT_ID = import.meta.env.VITE_APP_KAKAO_CLIENT_ID;
 const KAKAO_REDIRECT_URI = import.meta.env.VITE_APP_KAKAO_REDIRECT_URI;

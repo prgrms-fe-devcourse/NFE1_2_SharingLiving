@@ -6,7 +6,7 @@ import "../scss/Login.scss";
 import Google from "../../../public/img/Google.png"
 import MainLogo from "../../../public/img/MainLogo.png"
 import naver from "../../../public/img/naver.png"
-import kakaoIcon from "../../../public/img/kakao.png"; 
+import kakaoIcon from "../../../public/img/kakaoIcon.png"
 import axios from "axios";
 
 const API_BASE_URL = "https://kdt.frontend.5th.programmers.co.kr:5003";
@@ -107,16 +107,16 @@ const Login = () => {
             <Link to="/signup">회원가입</Link>
           </div>
           <div className="social-login">
-            <a onClick={handleKakaoLogin} className="kakao-login-button">
-              <img src={kakaoIcon} alt="kakaoIcon" className="google-icon" />
-            </a>
-            <a onClick={handleGoogleLogin} className="google-login-button">
-              <img src={Google} alt="Google" className="google-icon" />
-            </a>
-            <a onClick={handleNaverLogin} className="naver-login-button">
-              <img src={naver} alt="Naver" className="naver-icon" />
-            </a>
-          </div>
+        <a onClick={handleKakaoLogin} className="kakao-login-button">
+          <img src={kakaoIcon} alt="Kakao" className="kakao-icon" />
+        </a>
+        <a onClick={handleGoogleLogin} className="google-login-button">
+          <img src={Google} alt="Google" className="google-icon" />
+        </a>
+        <a onClick={handleNaverLogin} className="naver-login-button">
+          <img src={naver} alt="Naver" className="naver-icon" />
+        </a>
+      </div>
         </div>
       </main>
     </div>
