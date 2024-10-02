@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import axios from "axios";
 import { login, getAuthUser } from "../utils/service/apiUtil";
+import Kakao from "../utils/service/Kakao";  
 import "../scss/Login.scss";
-import kakao from "../../../public/img/kakao.png"
 import Google from "../../../public/img/Google.png"
 import MainLogo from "../../../public/img/MainLogo.png"
 import naver from "../../../public/img/naver.png"
-
-const KAKAO_CLIENT_ID = import.meta.env.VITE_APP_KAKAO_CLIENT_ID;
-const KAKAO_REDIRECT_URI = import.meta.env.VITE_APP_KAKAO_REDIRECT_URI;
-const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${encodeURIComponent(KAKAO_REDIRECT_URI)}&response_type=code`;
 
 const API_BASE_URL = "https://kdt.frontend.5th.programmers.co.kr:5003";
 
@@ -26,18 +21,7 @@ const Login = () => {
 
   useEffect(() => {
     checkAuthStatus();
-    const code = new URLSearchParams(location.search).get("code");
-    if (code) {
-      console.log("Kakao auth code detected:", code);
-      handleKakaoCallback(code);
-    }
-  }, [location]);
-
-
-
-
-
-  
+  }, []);
 
   const checkAuthStatus = async () => {
     try {
@@ -50,7 +34,6 @@ const Login = () => {
       console.error("Auth check error:", error);
     }
   };
-  
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -73,55 +56,6 @@ const Login = () => {
     }
   };
 
-  const handleKakaoLogin = () => {
-    console.log("Initiating Kakao login, redirecting to:", KAKAO_AUTH_URL);
-    window.location.href = KAKAO_AUTH_URL;
-  };
-
-  const handleKakaoCallback = async (code) => {
-    setIsLoading(true);
-    try {
-      console.log("Received Kakao auth code:", code);
-
-      const response = await axios.post(`${API_BASE_URL}/auth/kakao/callback`, { code });
-
-      console.log("Server login response:", response.data);
-
-      if (response.data && response.data.token) {
-        localStorage.setItem("Token", response.data.token);
-        setIsLoggedIn(true);
-        setFullName(response.data.user.fullName);
-        navigate("/");
-      } else {
-        throw new Error("Login response does not contain a token");
-      }
-    } catch (error) {
-      console.error("Kakao login error:", error);
-      console.error("Error details:", error.response?.data);
-      setMessage("카카오 로그인에 실패했습니다. 다시 시도해주세요.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleLogout = async () => {
-    setIsLoading(true);
-    try {
-      await axios.post(`${API_BASE_URL}/logout`, {}, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` }
-      });
-      localStorage.removeItem("Token");
-      setIsLoggedIn(false);
-      setFullName("");
-      setMessage("로그아웃 되었습니다.");
-    } catch (error) {
-      console.error("Logout error:", error);
-      setMessage("로그아웃 중 오류가 발생했습니다.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const handleGoogleLogin = () => {
     console.log("Google login not implemented yet");
   };
@@ -129,18 +63,6 @@ const Login = () => {
   const handleNaverLogin = () => {
     console.log("Naver login not implemented yet");
   };
-
-  if (isLoggedIn) {
-    return (
-      <div className="login-container">
-        <h2>나누리빙에 방문해주셔서 감사합니다.</h2>
-        <button onClick={handleLogout} disabled={isLoading}>
-          {isLoading ? "처리 중..." : "로그아웃"}
-        </button>
-        {message && <p className="info-message">{message}</p>}
-      </div>
-    );
-  }
 
   return (
     <div className="login-container">
@@ -172,9 +94,7 @@ const Login = () => {
             <Link to="/signup">회원가입</Link>
           </div>
           <div className="social-login">
-            <a onClick={handleKakaoLogin} className="kakao-login-button">
-              <img src={kakao} alt="Kakao" className="kakao-icon" />
-            </a>
+            <Kakao />
             <a onClick={handleGoogleLogin} className="google-login-button">
               <img src={Google} alt="Google" className="google-icon" />
             </a>

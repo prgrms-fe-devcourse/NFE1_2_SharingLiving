@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { signup } from "../utils/service/apiUtil";
 import "../scss/Signup.scss";
 
@@ -8,6 +8,7 @@ const SignUp = () => {
 
   const [formData, setFormData] = useState({
     email: "",
+    emailDomain: "",
     fullName: "",
     password: "",
     passwordConfirm: "",
@@ -31,15 +32,21 @@ const SignUp = () => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  const handlePhoneNumberChange = (e) => {
+    const { value } = e.target;
+    const formattedNumber = value
+      .replace(/\D/g, '')
+      .replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+    setFormData((prevData) => ({ ...prevData, phoneNumber: formattedNumber }));
+  };
+
   const handleTermsChange = (e) => {
     const { name, checked } = e.target;
     setTerms((prevTerms) => ({ ...prevTerms, [name]: checked }));
 
-    // If any individual checkbox is unchecked, uncheck the "전체 동의" box
     if (!checked) {
       setIsAllChecked(false);
     } else {
-      // Check if all checkboxes are now checked to mark "전체 동의" as true
       const allChecked = Object.values({ ...terms, [name]: checked }).every(
         (value) => value
       );
@@ -51,7 +58,6 @@ const SignUp = () => {
     const newCheckState = !isAllChecked;
     setIsAllChecked(newCheckState);
 
-    // Set all terms checkboxes to the state of "전체 동의"
     setTerms({
       age: newCheckState,
       service: newCheckState,
@@ -80,7 +86,8 @@ const SignUp = () => {
     setIsLoading(true);
     setMessage("");
 
-    const { email, fullName, password, ...additionalFields } = formData;
+    const { email, emailDomain, fullName, password, ...additionalFields } = formData;
+    const fullEmail = `${email}@${emailDomain}`;
     const customFieldsJson = JSON.stringify({
       ...additionalFields,
       terms: terms,
@@ -88,7 +95,7 @@ const SignUp = () => {
 
     try {
       const signupData = {
-        email,
+        email: fullEmail,
         fullName,
         password,
         customFields: customFieldsJson,
@@ -98,8 +105,13 @@ const SignUp = () => {
       const response = await signup(signupData);
       console.log("Server response:", response);
 
-      alert("회원가입 성공");
-      navigate("/mylogin");
+      if (response.token) {
+        localStorage.setItem("Token", response.token);
+        alert("회원가입 성공");
+        navigate("/");  // 메인 페이지로 리다이렉션
+      } else {
+        throw new Error("Token not received");
+      }
     } catch (err) {
       console.error("Registration error:", err);
       setMessage(`회원가입 실패: ${err.response?.data?.message || err.message}`);
@@ -112,14 +124,40 @@ const SignUp = () => {
     <div className="signup-container">
       <h2>회원가입</h2>
       <form className="signup-form" onSubmit={registerUser}>
-        <input
-          type="email"
-          name="email"
-          placeholder="이메일 입력"
-          value={formData.email}
-          onChange={handleInputChange}
-          required
-        />
+        <div className="email-input">
+          <input
+            type="text"
+            name="email"
+            placeholder="이메일 입력"
+            value={formData.email}
+            onChange={handleInputChange}
+            required
+          />
+          <span>@</span>
+          <select
+            name="emailDomain"
+            value={formData.emailDomain}
+            onChange={handleInputChange}
+            required
+          >
+            <option value="">이메일선택</option>
+            <option value="gmail.com">gmail.com</option>
+            <option value="naver.com">naver.com</option>
+            <option value="daum.net">daum.net</option>
+            <option value="kakao.com">daum.net</option>
+            <option value="custom">직접 입력</option>
+          </select>
+          {formData.emailDomain === "custom" && (
+            <input
+              type="text"
+              name="customEmailDomain"
+              placeholder="도메인 입력"
+              value={formData.customEmailDomain}
+              onChange={handleInputChange}
+              required
+            />
+          )}
+        </div>
         <input
           type="password"
           name="password"
@@ -151,9 +189,10 @@ const SignUp = () => {
         <input
           type="tel"
           name="phoneNumber"
-          placeholder="휴대전화 입력"
+          placeholder="휴대전화 입력 (000-0000-0000)"
           value={formData.phoneNumber}
-          onChange={handleInputChange}
+          onChange={handlePhoneNumberChange}
+          pattern="\d{3}-\d{4}-\d{4}"
           required
         />
         <input
@@ -188,9 +227,15 @@ const SignUp = () => {
               />
               <label htmlFor={key}>
                 {key === "age" && "만 14세 이상입니다. (필수)"}
-                {key === "service" && "서비스 이용약관 동의 (필수)"}
-                {key === "privacy" && "개인정보 수집 및 이용 동의 (필수)"}
-                {key === "marketing" && "마케팅 수신 동의 (선택)"}
+                {key === "service" && (
+                  <Link to="/terms-of-service" target="_blank">서비스 이용약관 동의 (필수)</Link>
+                )}
+                {key === "privacy" && (
+                  <Link to="/privacy-policy" target="_blank">개인정보 수집 및 이용 동의 (필수)</Link>
+                )}
+                {key === "marketing" && (
+                  <Link to="/marketing-terms" target="_blank">마케팅 수신 동의 (선택)</Link>
+                )}
               </label>
             </div>
           ))}
@@ -201,7 +246,6 @@ const SignUp = () => {
         </button>
       </form>
       {message && <p className="error-message">{message}</p>}
-      
     </div>
   );
 };
