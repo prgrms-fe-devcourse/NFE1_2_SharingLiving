@@ -87,18 +87,25 @@ const CardProducts = ({ type, itemObject }) => {
         <div className="card-description-container">
           <dl className="card-descriptions">
             <dt className="card-title">
-              [{itemObject.type}] {itemObject.title}
+              <div className="card-category-tag">
+                {itemObject.type}
+              </div>
+
+              <h4 className="card-title-text">{itemObject.title}</h4>
             </dt>
             <dd className="card-text">{itemObject.description}</dd>
           </dl>
 
           <div className="card-info-container">
             <div className="user-nametag">
-              <img
-                className="user-img"
-                src={itemObject.author.image}
-                alt="사용자 프로필 사진"
-              />
+              <div className="user-nametag-picture">
+                <img
+                  className="user-img"
+                  src={itemObject.author.image}
+                  alt="사용자 프로필 사진"
+                />
+              </div>
+
               <p className="user-name">{itemObject.author.username}</p>
             </div>
           </div>

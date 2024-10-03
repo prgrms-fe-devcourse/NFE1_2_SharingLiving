@@ -2,18 +2,17 @@ import LandingSectionTitle from './LandingSectionTitle';
 import ProductSlider from './ProductSlider';
 import ReviewSlider from './ReviewSlider';
 import CardProducts from './items/CardProducts';
-import CardReview from './items/CardReview';
 
 const LandingPage = () => {
-  const getTotalSaved = async () => { // 전체 보호한 나무 그루 수
-    const response = await fetch('url', {
-      method: 'GET'
-    })
-      .then()
-      .finally();
+  // const getTotalSaved = async () => { // 전체 보호한 나무 그루 수
+  //   const response = await fetch('url', {
+  //     method: 'GET'
+  //   })
+  //     .then()
+  //     .finally();
 
-    return response;
-  }
+  //   return response;
+  // }
 
   return (
     <>
