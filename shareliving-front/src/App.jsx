@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { AppProvider } from './context/AppContext'; // Context import
 
 import './assets/css/style.css';
@@ -18,6 +19,8 @@ import NoticeDetail from './components/NoticeDetail';
 import ShareHistory from './pages/ShareHistory';
 import ProductDetail from './pages/ProductDetail';
 import KnowledgeDetail from './pages/KnowledgeDetail';
+import ProductList from './pages/ProductList';
+import KnowledgeList from './pages/KnowledgeList';
 
 import Login from './components/authentication/component/Login';
 import Signup from './components/authentication/component/Signup';
@@ -145,16 +148,31 @@ const baseRouter = createBrowserRouter([
         element: <FindAccountInfo />,
         errorElement: <div>회원가입에 실패했습니다.</div>,
       },
+      {
+        path: '/product',
+        element: <ProductList />,
+        errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
+      },
+      {
+        path: '/knowledge',
+        element: <KnowledgeList />,
+        errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
+      },
+
       // 필요한 경로를 추가
     ],
   },
 ]);
 
+const queryClient = new QueryClient();
+
 const App = () => {
   return (
-    <AppProvider>
-      <RouterProvider router={baseRouter} />
-    </AppProvider>
+    <QueryClientProvider client={queryClient}>
+      <AppProvider>
+        <RouterProvider router={baseRouter} />
+      </AppProvider>
+    </QueryClientProvider>
   );
 };
 

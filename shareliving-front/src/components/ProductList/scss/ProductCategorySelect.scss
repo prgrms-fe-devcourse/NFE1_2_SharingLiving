@@ -1,0 +1,33 @@
+.category {
+  padding: 0px 12px 24px 12px;
+}
+
+.list-category {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.category-icon {
+  margin-right: 12px;
+  position: relative;
+  top: -1px;
+}
+
+.category-title {
+  margin: 0 12px 0 0;
+  color: #4e4545;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.category-list {
+  width: 80px;
+  height: 30px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #4e4545;
+  padding: 3px;
+  border-color: rgb(52, 114, 53, 0.5);
+  border-radius: 4px;
+}
