@@ -80,4 +80,44 @@ export const createChannel = async (channelData) => {
   }
 };
 
+export const getChannelList = async () => {
+  try {
+    const response = await api.get('/channels');
+    return response.data;
+  } catch (error) {
+    console.error('Get channel list error:', error);
+    throw error;
+  }
+};
+
+export const getProductChannel = async (channelId) => {
+  try {
+    const response = await api.get(`/posts/channel/${channelId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Get channel list error:', error);
+    throw error;
+  }
+};
+
+export const getKnowledgeChannel = async (channelId) => {
+  try {
+    const response = await api.get(`/posts/channel/${channelId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Get channel list error:', error);
+    throw error;
+  }
+};
+
+export const getAllSearchResult = async (keyword) => {
+  try {
+    const response = await api.get(`/search/all/${keyword}`);
+    return response.data;
+  } catch (error) {
+    console.error('Get All Search Result:', error);
+    throw error;
+  }
+};
+
 export default api;
