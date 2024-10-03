@@ -37,6 +37,25 @@ export default defineConfig({
           });
         },
       },
+      '/google-api': {
+        target: 'https://accounts.google.com',
+        changeOrigin: true,
+        secure: true,
+        rewrite: (path) => path.replace(/^\/google-api/, ''),
+        configure: (proxy, _options) => {
+          proxy.on('error', (err, _req, _res) => {
+            console.log('Google proxy error', err);
+          });
+          proxy.on('proxyReq', (proxyReq, req, _res) => {
+            console.log('Sending Google Request:', req.method, req.url);
+            console.log('Request Headers:', proxyReq.getHeaders());
+          });
+          proxy.on('proxyRes', (proxyRes, req, _res) => {
+            console.log('Received Google Response:', proxyRes.statusCode, req.url);
+            console.log('Response Headers:', proxyRes.headers);
+          });
+        },
+      },
     },
   },
 });
