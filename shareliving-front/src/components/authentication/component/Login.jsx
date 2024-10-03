@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { login, getAuthUser } from "../utils/service/apiUtil";
-import Kakao from "../utils/service/Kakao";  
 import "../scss/Login.scss";
-import Google from "../../../public/img/Google.png"
-import MainLogo from "../../../public/img/MainLogo.png"
-import naver from "../../../public/img/naver.png"
-import kakaoIcon from "../../../public/img/kakaoIcon.png"
-import axios from "axios";
-
-const API_BASE_URL = "https://kdt.frontend.5th.programmers.co.kr:5003";
+import Google from "../../../public/img/Google.png";
+import MainLogo from "../../../public/img/MainLogo.png";
+import naver from "../../../public/img/naver.png";
+import kakaoIcon from "../../../public/img/kakaoIcon.png";
 
 const KAKAO_CLIENT_ID = import.meta.env.VITE_APP_KAKAO_CLIENT_ID;
 const KAKAO_REDIRECT_URI = import.meta.env.VITE_APP_KAKAO_REDIRECT_URI;
-const link = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${encodeURIComponent(KAKAO_REDIRECT_URI)}&response_type=code`;
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_APP_GOOGLE_CLIENT_ID;
+const GOOGLE_REDIRECT_URI = import.meta.env.VITE_APP_GOOGLE_REDIRECT_URI;
 
 const Login = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -62,6 +58,11 @@ const Login = () => {
     }
   };
 
+  const handleGoogleLogin = () => {
+    const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${encodeURIComponent(GOOGLE_REDIRECT_URI)}&response_type=code&scope=email profile`;
+    window.location.href = googleAuthUrl;
+  };
+
   const handleNaverLogin = () => {
     console.log("Naver login not implemented yet");
   };
@@ -103,7 +104,9 @@ const Login = () => {
             <a onClick={handleKakaoLogin} className="kakao-login-button">
               <img src={kakaoIcon} alt="Kakao" className="kakao-icon" />
             </a>
-            <GoogleLogin />
+            <a onClick={handleGoogleLogin} className="google-login-button">
+              <img src={Google} alt="Google" className="google-icon" />
+            </a>
             <a onClick={handleNaverLogin} className="naver-login-button">
               <img src={naver} alt="Naver" className="naver-icon" />
             </a>

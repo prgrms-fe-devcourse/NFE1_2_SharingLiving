@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html lang="ko">
     <head>
         <meta charset="UTF-8" />
@@ -9,16 +8,14 @@
 
         <link rel="preload" as="font" type="font/woff2" crossorigin="" href="./assets/fonts/SUIT-Variable.woff2">
         <link rel="stylesheet" href="./assets/css/style.css">
-        <script
-        type="text/javascript"
-        src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"
-        charset="utf-8"
-      ></script>
+        
+        <!-- 네이버 로그인 SDK -->
+        <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
     </head>
-
     <body>
         <div id="root"></div>
 
+        <!-- React 앱 진입점 -->
         <script type="module" src="/src/main.jsx"></script>
     </body>
 </html>

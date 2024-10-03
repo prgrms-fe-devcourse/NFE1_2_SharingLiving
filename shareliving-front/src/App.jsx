@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import React from 'react';
 import './assets/css/style.css';
-
 import Layout from './components/layouts/Layout';
 import LandingPage from './components/LandingPage';
 import ProductWrite from './pages/ProductWrite';
@@ -21,7 +20,7 @@ import Login from './components/authentication/component/Login';
 import Signup from './components/authentication/component/Signup'; 
 import FindAccountInfo from './components/authentication/component/FindAccountInfoPopup';
 import KakaoCallback from './components/authentication/utils/service/kakaoCallback';
-import GoogleCallback from './components/authentication/utils/service/GoolgleCallback';
+import GoogleCallback from './components/authentication/utils/service/GoogleCallback';
 
 /*  
   주석 규칙
@@ -45,6 +44,11 @@ import GoogleCallback from './components/authentication/utils/service/GoolgleCal
 */
 
 const baseRouter = createBrowserRouter([
+  {
+    path: '/auth/google/callback',
+    element: <GoogleCallback />,
+    errorElement: <div>Google 로그인에 실패했습니다.</div>,
+  },
   {
     path: '/',
     element: <Layout />,
@@ -134,11 +138,6 @@ const baseRouter = createBrowserRouter([
         path: '/find-account-info',
         element: <FindAccountInfo />,
         errorElement: <div>회원가입에 실패했습니다.</div>,
-      },
-      {
-        path: '/auth/google/callback',
-        element: <GoogleCallback />,
-        errorElement: <div>Google 로그인에 실패했습니다.</div>,
       },
       // 필요한 경로를 추가
     ],

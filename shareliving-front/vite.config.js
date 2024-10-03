@@ -5,6 +5,8 @@ export default defineConfig({
   plugins: [react()],
   publicDir: 'public',
   server: {
+    port: 5174, // 포트를 고정
+    historyApiFallback: true,
     proxy: {
       '/api': {
         target: 'https://kdt.frontend.5th.programmers.co.kr:5003',
