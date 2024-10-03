@@ -94,8 +94,12 @@ const CardProducts = ({ type, itemObject }) => {
 
           <div className="card-info-container">
             <div className="user-nametag">
-              <div>사진</div>
-              사용자명
+              <img
+                className="user-img"
+                src={itemObject.author.image}
+                alt="사용자 프로필 사진"
+              />
+              <p className="user-name">{itemObject.author.username}</p>
             </div>
           </div>
         </div>
