@@ -139,6 +139,16 @@ const baseRouter = createBrowserRouter([
         element: <FindAccountInfo />,
         errorElement: <div>회원가입에 실패했습니다.</div>,
       },
+      {
+        path: '/',
+        element: <NaverLogin />,
+        errorElement: <div>Naver 로그인에 실패했습니다.</div>,
+      },
+      {
+        path: '/callback',
+        element: <NaverCallback />,
+        errorElement: <div>Naver 로그인에 실패했습니다.</div>,
+      },
       // 필요한 경로를 추가
     ],
   },
