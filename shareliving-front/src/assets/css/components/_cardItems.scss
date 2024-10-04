@@ -1,12 +1,15 @@
 /* _cardItems.scss */
 
+/* 제품, 지식 글 목록 아이템 */
+
 .card-item {
     border-radius: .8rem;
     background-color: rgb(var(--clr-min));
     overflow: hidden;
 
     &.products {
-
+        flex: 1;
+        max-width: 16rem;
     }
 
     &.knowledge {
@@ -31,12 +34,13 @@
     height: 12.25rem;
     background-color: rgb(var(--clr-max) / .75);
 
-    > .card-image {
+    .card-image {
         position: absolute;
         inset: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
+        user-select: none;
     }
 
     > .card-tags-container {
@@ -49,7 +53,7 @@
         margin-block-start: auto;
         padding: .4rem;
         height: fit-content;
-        color: white;
+        color: rgb(255 255 255);
     }
 }
 
@@ -105,25 +109,60 @@
     padding: .6rem .8rem;
 
     > .card-title {
-        font-size: var(--fnt-title-md);
-        font-weight: 900;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+
+        &:not(:has(.card-category-tag)) {
+            font-size: var(--fnt-title-md);
+            font-weight: 900;
+        }
+
+        &:has(.card-category-tag) {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+
+            > .card-title-text {
+                font-size: var(--fnt-title-md);
+                font-weight: 900;
+            }
+        }
     }
 
     > .card-type {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
         opacity: .75;
+        height: 3.5rem;
+        line-clamp: 5;
+        -webkit-line-clamp: 5;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     > .card-text {
         flex: 1;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 4;
+        position: relative;
+        font-size: var(fnt-sm);
         line-height: 1.4;
+        line-clamp: 3;
+        -webkit-line-clamp: 3;
         text-overflow: ellipsis;
         overflow: hidden;
+        opacity: .5;
+
+        &::after {
+            display: block;
+            position: absolute;
+            inset: 0;
+            margin-block-start: auto;
+            height: 1.8rem;
+            background-image: linear-gradient(to top, rgb(var(--clr-min)), transparent);
+            content: '';
+        }
     }
 
     > .card-price {
@@ -139,12 +178,175 @@
     }
 }
 
+.card-category-tag {
+    --tag-background-color: var(--clr-theme);
+    --tag-text-color: var(--clr-min);
+
+    padding: .2rem .6rem;
+    border-radius: 25rem;
+    background-color: rgb(var(--tag-background-color));
+    color: rgb(var(--tag-text-color));
+    font-size: var(--fnt-sm);
+    font-weight: 900;
+}
+
 .card-info-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: .6rem .8rem;
     border-block-start: 1px solid rgb(var(--clr-text) / .15);
+}
+
+.user-nametag {
+    display: flex;
+    align-items: center;
+    gap: .2rem;
+}
+
+.user-nametag-picture {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 25rem;
+    overflow: hidden;
+
+    > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.user-nametag-name {
+    font-size: var(--fnt-sm);
+    font-weight: 600;
+
+    &::after {
+        content: ' 님';
+    }
+}
+
+/* 지식 나눔 글 모바일 미디어 쿼리 */
+
+@media screen and (max-width: 840px) { // 태블릿 (840px) - 이미지 사이즈 축소
+    .card-item.knowledge {
+        > .card-image-container {
+            width: auto;
+            height: 100%;
+            aspect-ratio: .6 / 1;
+        }
+    }
+}
+
+@media screen and (max-width: 540px) { // 모바일 (640px) - 이미지 축소 및 글 영역 확대
+    .card-item.knowledge {
+        > .card-image-container {
+            margin: .4rem;
+            height: 5rem;
+            aspect-ratio: 1 / 1;
+            border-radius: .4rem;
+            overflow: hidden;
+        }
+    }
+}
+
+/* 나눔 후기 글 아이템 */
+
+.review-item {
+    flex: 1;
+    border-radius: .8rem;
+    background-color: rgb(var(--clr-min));
+    overflow: hidden;
+}
+
+.review-image-container {
+    position: relative;
+    height: 12rem;
+    background-color: rgb(var(--clr-max) / .75);
+
+    > .review-image {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        user-select: none;
+        pointer-events: none;
+    }
+}
+
+.review-title-area {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .4rem .8rem;
+}
+
+.review-user-picture {
+    margin-block-start: -.8rem;
+    width: 3.2rem;
+    height: 3.2rem;
+    border: .2rem solid rgb(var(--clr-min));
+    border-radius: 25rem;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.review-title {
+    margin-block-end: .2rem;
+    font-size: var(--fnt-lg);
+    font-weight: 900;
+}
+
+.review-author {
+    font-size: var(--fnt-sm);
+    font-weight: 600;
+}
+
+.review-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    position: relative;
+    padding: 0 .8rem .6rem;
+    height: 5.2rem;
+    font-size: var(--fnt-sm);
+    font-weight: 600;
+    line-height: 1.4;
+    line-clamp: 5;
+    -webkit-line-clamp: 5;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    opacity: .5;
+
+    &::after {
+        display: block;
+        position: absolute;
+        inset: 0;
+        margin-block-start: auto;
+        height: 1.8rem;
+        background-image: linear-gradient(to top, rgb(var(--clr-min)), transparent);
+        content: '';
+    }
+}
+
+.review-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .6rem .8rem;
+    border-block-start: 1px solid rgb(var(--clr-text) / .15);
+
+    > .review-written-date {
+        margin-inline-start: auto;
+        font-size: var(--fnt-sm);
+        opacity: .5;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .card-item.products {
+        max-width: auto;
+    }
 }
 
 /* _cardItems.scss */

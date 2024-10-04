@@ -100,6 +100,25 @@
     }
 }
 
+#btnHeaderLogout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .2rem;
+    padding-inline: .8rem;
+    height: 1.6rem;
+    border: 1px solid rgb(var(--clr-theme) / .5);
+    border-radius: .2rem;
+    background-color: rgb(var(--clr-theme));
+    color: rgb(var(--clr-text-on-tint));
+    font-size: var(--fnt-sm);
+    font-weight: 900;
+
+    > .icons {
+        width: .8rem;
+    }
+}
+
 .togglers {
     display: flex;
     justify-content: center;
@@ -117,8 +136,82 @@
 
 /* 모바일 반응형 */
 
-.mobile-burger {
+#toggleMenuTitlebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .8rem;
+}
+
+#btnBurger {
+    --burger-lines-color: var(--clr-text);
+
     display: none;
+    position: relative;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 25rem;
+
+    &.on {
+        --burger-lines-color: var(--clr-min);
+        background-color: rgb(var(--clr-max));
+
+        .burger-stripe {
+            &.top,
+            &.bottom {
+                margin-inline-start: auto;
+                margin-inline-end: auto;
+            }
+
+            &.top {
+                rotate: 45deg;
+            }
+
+            &.bottom {
+                rotate: -45deg;
+            }
+
+            &.middle {
+                opacity: 0;
+            }
+        }
+    }
+}
+
+.burger-stripe {
+    display: block;
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: .1rem;
+    height: .8rem;
+    background-color: rgb(var(--burger-lines-color));
+    transition: .25s;
+
+    &.top {
+        margin-inline-start: .6rem;
+    }
+
+    &.bottom {
+        margin-inline-end: .6rem;
+    }
+}
+
+#navToggle {
+    position: fixed;
+    inset-block: 0;
+    inset-inline-start: 0;
+    margin: auto;
+    width: 75vw;
+    background-color: rgb(0 0 0 / .75);
+    translate: -100%;
+    transition: translate .25s;
+    z-index: 50000;
+
+    &.on {
+        translate: 0;
+
+    }
 }
 
 /* 하단 네비 바 */
@@ -126,28 +219,78 @@
 #navMobile {
     display: none;
     position: sticky;
+    inset-inline: 0;
     inset-block-end: 0;
+    width: 100%;
+    height: 3.6rem;
+    background-color: rgb(var(--clr-min));
+    box-shadow: 0 0 1.8rem -1.2rem rgb(var(--clr-text));
+    z-index: 50000;
+}
+
+.bottom-nav-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.bottom-nav-item {
+    flex: 1;
+    position: relative;
+    height: 100%;
+    font-size: var(--fnt-sm);
+
+    > a {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        gap: .4rem;
+        padding-inline: .4rem;
+        height: 100%;
+    }
+
+    &:has(.active) {
+        background-image:
+            linear-gradient(to bottom, rgb(var(--clr-tint-50)), rgb(var(--clr-tint-50)) .2rem, transparent .2rem),
+            linear-gradient(to bottom, rgb(var(--clr-tint-50) / .25), transparent 50%);
+        color: rgb(var(--clr-theme));
+        font-weight: 900;
+    }
 }
 
 /* 미디어 쿼리 */
 
-@media screen and (max-width: 42rem) { // 태블릿 (840px) - 네비게이션 축소 및 버거 버튼 표시
+@media screen and (max-width: 1100px) { // 작은 화면 (1100px) - 사용자 컨트롤 축소
+    .header-nav-area {
+        order: 1;
+        align-self: flex-start;
+    }
+
+    .header-user-area {
+        order: 0;
+        align-self: flex-end;
+    }
+}
+
+@media screen and (max-width: 840px) { // 태블릿 (840px) - 네비게이션 축소 및 버거 버튼 표시
     #navPrimary {
         display: none;
     }
 
-    .mobile-burger {
-        display: initial;
+    #btnBurger {
+        display: block;
     }
 }
 
-@media screen and (max-width: 24rem) { // 모바일 (480px) - 상단 네비게이션 완전 축소, 하단 네비게이션 표시
+@media screen and (max-width: 600px) { // 모바일 (480px) - 상단 네비게이션 완전 축소, 하단 네비게이션 표시
     #headPrimary {
-
+        position: static;
     }
 
     #navMobile {
-        display: initial;
+        display: block;
     }
 }
 

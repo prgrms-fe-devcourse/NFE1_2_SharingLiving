@@ -123,4 +123,16 @@ export const getAllSearchResult = async (keyword) => {
   }
 };
 
+export const getCurrentArticle = async (articleID) => {
+  try {
+    const response = await api.get(`/post/${ articleID }`);
+
+    return response.data;
+  } catch (error) {
+    console.error(`Error get load article id: ${ articleID }.`);
+
+    throw error;
+  }
+}
+
 export default api;

@@ -1,0 +1,101 @@
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+.signup-container h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+.signup-container .signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.signup-container .signup-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+.signup-container .signup-form input:focus {
+  border-color: #3d6e36;
+  outline: none;
+}
+.signup-container .signup-form .terms-container {
+  width: 100%;
+  margin: 20px 0;
+  border-top: 1px solid #ccc;
+  padding-top: 15px;
+}
+.signup-container .signup-form .terms-container .all-terms {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.signup-container .signup-form .terms-container .all-terms label {
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+.signup-container .signup-form .terms-container .all-terms input[type=checkbox] {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+}
+.signup-container .signup-form .terms-container div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.signup-container .signup-form .terms-container div label {
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+.signup-container .signup-form .terms-container div input[type=checkbox] {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+}
+.signup-container .signup-form .terms-container div a {
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
+  cursor: pointer;
+}
+.signup-container .signup-form .terms-container div a:hover {
+  text-decoration: underline;
+}
+.signup-container .signup-form .submit-button {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #3d6e36;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.signup-container .signup-form .submit-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.signup-container .signup-form .submit-button:hover:not(:disabled) {
+  background-color: #2f542a;
+}
