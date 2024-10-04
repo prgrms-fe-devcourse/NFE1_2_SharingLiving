@@ -8,7 +8,7 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('Token');
+    const token = localStorage.getItem('token');
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }
@@ -22,7 +22,6 @@ api.interceptors.request.use(
 export const login = async (email, password) => {
   try {
     const response = await api.post('/login', { email, password });
-    localStorage.setItem('Token', response.data.token);
     return response.data;
   } catch (error) {
     console.error('Login error:', error);
@@ -33,7 +32,8 @@ export const login = async (email, password) => {
 export const signup = async (userData) => {
   try {
     const response = await api.post('/signup', userData);
-    localStorage.setItem('Token', response.data.token);
+    localStorage.setItem('token', response.data.token);
+    localStorage.setItem('userInfo', JSON.stringify(response.data));
     return response.data;
   } catch (error) {
     console.error('Signup error:', error);
@@ -44,7 +44,7 @@ export const signup = async (userData) => {
 export const logout = async () => {
   try {
     await api.post('/logout');
-    localStorage.removeItem('Token');
+    localStorage.removeItem('token');
   } catch (error) {
     console.error('Logout error:', error);
     throw error;
@@ -52,7 +52,10 @@ export const logout = async () => {
 };
 
 export const getAuthUser = async () => {
-  const token = localStorage.getItem('Token');
+  const token = localStorage.getItem('token');
+  const userInfo = localStorage.getItem('userInfo');
+  console.log('token: ', token)
+  console.log('userInfo: ', userInfo)
   if (!token) {
     throw new Error('No auth token found');
   }
@@ -65,7 +68,7 @@ export const getAuthUser = async () => {
     return response.data;
   } catch (error) {
     console.error('Get auth user error:', error);
-    localStorage.removeItem('Token');
+    localStorage.removeItem('token');
     throw error;
   }
 };

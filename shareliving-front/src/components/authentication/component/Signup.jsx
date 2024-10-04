@@ -99,7 +99,7 @@ const SignUp = () => {
       console.log("Server response:", response);
 
       alert("회원가입 성공");
-      navigate("/mylogin");
+      navigate("/mypage");
     } catch (err) {
       console.error("Registration error:", err);
       setMessage(`회원가입 실패: ${err.response?.data?.message || err.message}`);

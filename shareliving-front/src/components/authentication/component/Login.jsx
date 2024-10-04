@@ -39,17 +39,23 @@ const Login = () => {
 
   
 
-  const checkAuthStatus = async () => {
-    try {
-      const userData = await getAuthUser();
-      if (userData && userData.fullName) {
-        setIsLoggedIn(true);
-        setFullName(userData.fullName);
-      }
-    } catch (error) {
-      console.error("Auth check error:", error);
+const checkAuthStatus = async () => {
+  const token = localStorage.getItem("token");
+  const userInfo = localStorage.getItem('userInfo');
+  if (!token && !userInfo) {
+    console.log("No token found, user needs to log in.");
+    return;
+  }
+  try {
+    const userData = await getAuthUser();
+    if (userData && userData.fullName) {
+      setIsLoggedIn(true);
+      setFullName(userData.fullName);
     }
-  };
+  } catch (error) {
+    console.error("Auth check error:", error);
+  }
+};
   
 
   const handleEmailChange = (e) => setEmail(e.target.value);
@@ -88,7 +94,7 @@ const Login = () => {
       console.log("Server login response:", response.data);
 
       if (response.data && response.data.token) {
-        localStorage.setItem("Token", response.data.token);
+        localStorage.setItem("token", response.data.token);
         setIsLoggedIn(true);
         setFullName(response.data.user.fullName);
         navigate("/");
@@ -108,9 +114,9 @@ const Login = () => {
     setIsLoading(true);
     try {
       await axios.post(`${API_BASE_URL}/logout`, {}, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("Token")}` }
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
       });
-      localStorage.removeItem("Token");
+      localStorage.removeItem("token");
       setIsLoggedIn(false);
       setFullName("");
       setMessage("로그아웃 되었습니다.");

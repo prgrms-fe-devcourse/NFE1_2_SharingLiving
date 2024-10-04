@@ -1,55 +1,68 @@
-// src/components/MessageDetail.jsx
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useAppContext } from '../context/AppContext'; // Context import
-import './MessageDetail.scss'; // SCSS 파일 import
+import { useAppContext } from '../context/AppContext';
+import './MessageDetail.scss';
 
 const MessageDetail = () => {
-  const { receivedMessages, sentMessages } = useAppContext(); // Context에서 메시지 가져오기
   const { messageId } = useParams();
+  const { activeTab } = useAppContext(); // activeTab 사용
+  const sentMessagesString = localStorage.getItem('newSentMessages');
+  const receivedMessagesString = localStorage.getItem('receivedMessages');
+  const sentMessages = sentMessagesString ? JSON.parse(sentMessagesString) : [];
+  const receivedMessages = receivedMessagesString
+    ? JSON.parse(receivedMessagesString)
+    : [];
 
-  // 메시지가 보낸 메시지 리스트에 있는지, 받은 메시지 리스트에 있는지 구분
-  const messageIndex = receivedMessages.findIndex(
-    (msg) => msg.id === Number(messageId)
-  );
-  const sentMessageIndex = sentMessages.findIndex(
-    (msg) => msg.id === Number(messageId)
-  );
+  // 메시지 확인 로직 수정
+  const sentMessage = sentMessages.find((msg) => msg._id === messageId);
+  const receivedMessage = receivedMessages.find((msg) => msg._id === messageId);
 
-  // 보낸 메시지인지 여부 확인
-  const isSentMessage = sentMessageIndex !== -1;
+  const currentMessage = sentMessage || receivedMessage;
+  const isSentMessage = Boolean(sentMessage);
+  const isReceivedMessage = Boolean(receivedMessage);
 
-  // 현재 메시지 구하기 (보낸 메시지 or 받은 메시지)
-  const currentMessage = isSentMessage
-    ? sentMessages[sentMessageIndex]
-    : receivedMessages[messageIndex];
-
-  // 이전, 다음 메시지 구하기 (각각 리스트 내에서만)
+  // 이전 및 다음 메시지 구하기
   const previousMessage = isSentMessage
-    ? sentMessages[sentMessageIndex - 1] || null
-    : receivedMessages[messageIndex - 1] || null;
+    ? sentMessages[
+        sentMessages.findIndex((msg) => msg._id === messageId) - 1
+      ] || null
+    : isReceivedMessage
+    ? receivedMessages[
+        receivedMessages.findIndex((msg) => msg._id === messageId) - 1
+      ] || null
+    : null;
+
   const nextMessage = isSentMessage
-    ? sentMessages[sentMessageIndex + 1] || null
-    : receivedMessages[messageIndex + 1] || null;
+    ? sentMessages[
+        sentMessages.findIndex((msg) => msg._id === messageId) + 1
+      ] || null
+    : isReceivedMessage
+    ? receivedMessages[
+        receivedMessages.findIndex((msg) => msg._id === messageId) + 1
+      ] || null
+    : null;
 
   return (
     <div className="message-detail">
       <h2>메시지 상세 내용</h2>
       {currentMessage ? (
         <div className="message-detail__content">
-          <h3>{currentMessage.subject}</h3>
-          <p>{currentMessage.body}</p>
+          <h3>{sentMessage ? '보낸 메시지' : '받은 메시지'}</h3>
+          <p>{currentMessage.message}</p>
           <p>
-            {isSentMessage
-              ? `받는 사람: ${currentMessage.recipient}`
-              : `보낸 사람: ${currentMessage.sender}`}
+            {sentMessage
+              ? `받는 사람: ${currentMessage.receiver.fullName}`
+              : `보낸 사람: ${currentMessage.sender.fullName}`}
           </p>
-
-          {/* 이전/다음 메시지 링크: 각각의 리스트 내에서만 탐색 */}
+          <p>
+            전송 날짜: {new Date(currentMessage.createdAt).toLocaleString()}
+          </p>
           <div className="message-detail__navigation">
             {previousMessage && (
               <Link
-                to={`/messages/${previousMessage.id}`}
+                to={`/messages/${activeTab === 'sent' ? 'sent' : 'received'}/${
+                  previousMessage._id
+                }`}
                 className="message-detail__link"
               >
                 이전 메시지
@@ -57,17 +70,17 @@ const MessageDetail = () => {
             )}
             {nextMessage && (
               <Link
-                to={`/messages/${nextMessage.id}`}
+                to={`/messages/${activeTab === 'sent' ? 'sent' : 'received'}/${
+                  nextMessage._id
+                }`}
                 className="message-detail__link"
               >
                 다음 메시지
               </Link>
             )}
           </div>
-
-          {/* 답장 버튼은 받은 메시지에만 표시 */}
-          {!isSentMessage && (
-            <Link to={`/messages/${messageId}/reply`}>
+          {receivedMessage && (
+            <Link to={`/messages/received/${messageId}/reply`}>
               <button className="message-detail__reply-button">
                 답장 작성
               </button>

@@ -1,60 +1,30 @@
-/* components/MessageList.scss */
+/* MessageList.scss */
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
 
-.message-list {
-  margin: 20px;
+  button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: #f0f0f0;
 
-  &__tabs {
-    display: flex;
-    margin-bottom: 20px;
-    gap: 20px;
-
-    &__tab {
-      flex: 1;
-      padding: 10px;
-      cursor: pointer;
-      border: 1px solid #ccc;
-      background-color: #f9f9f9;
-      text-align: center;
-      transition: background-color 0.3s;
-
-      &.active {
-        background-color: #007bff;
-        color: white;
-      }
-
-      &:hover {
-        background-color: #e0e0e0;
-      }
+    &.active {
+      background-color: #007bff;
+      color: white;
     }
   }
+}
 
-  &__content {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 15px;
+.message-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+
+  &:hover {
     background-color: #f9f9f9;
-
-    h2 {
-      margin-top: 0;
-    }
-
-    ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    li {
-      margin-bottom: 10px;
-
-      a {
-        text-decoration: none;
-        color: #007bff;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
   }
 }
