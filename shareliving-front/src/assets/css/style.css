@@ -659,6 +659,7 @@ a:hover, a:focus, a:active {
   padding: 0.8rem;
   font-size: var(--fnt-lg);
   font-weight: 700;
+  cursor: pointer;
 }
 .nav-item:hover {
   background-image: linear-gradient(to top, rgb(var(--clr-theme)), rgb(var(--clr-theme)) 0.2rem, transparent 0.2rem);

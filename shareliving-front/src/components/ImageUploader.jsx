@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './ImageUploader.scss';
 
-const ImageUploader = () => {
-  const [images, setImages] = useState([]); 
+const ImageUploader = ({images, setImages}) => {
+  
   const maxImages = 5; 
 
   const handleImageUpload = (e) => {
