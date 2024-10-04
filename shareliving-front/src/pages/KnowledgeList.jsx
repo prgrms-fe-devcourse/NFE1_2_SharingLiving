@@ -28,16 +28,12 @@ const KnowledgeList = () => {
     }
   );
 
-  const sortedByLates = allKnowledgeList?.sort(
-    (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
-  );
-
-  const sortedByLikes = allKnowledgeList?.sort(
-    (a, b) => b.likes.length - a.likes.length
-  );
+  const sortedByLikes = allKnowledgeList
+    ? [...allKnowledgeList].sort((a, b) => b.likes.length - a.likes.length)
+    : '';
 
   const knowledgeList =
-    selectedCategory === 'likes' ? sortedByLikes : sortedByLates;
+    selectedCategory === 'likes' ? sortedByLikes : allKnowledgeList;
 
   return (
     <div>
