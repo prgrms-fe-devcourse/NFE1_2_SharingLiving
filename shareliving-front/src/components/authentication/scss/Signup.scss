@@ -20,29 +20,36 @@
       display: flex;
       gap: 10px;
       margin-bottom: 19px;
-
+    
       input[type="text"] {
         flex: 1;
       }
-
+    
       span {
         display: flex;
         align-items: center;
+        justify-content: center;
+        height: 100%; 
+        padding: 0 1px; 
+        font-size: 19px; 
+        transform: translateY(8px); 
       }
-
+    
       select {
-        width: 120px;
+        width: 130px;
       }
     }
 
     input, select {
       width: 100%;
-      padding: 12px;
+      padding: 6px;
       margin-bottom: 28px;
       border: 1px solid #ccc;
       border-radius: 5px;
       font-size: 16px;
-      
+      line-height: 1.5;
+      box-sizing: border-box; 
+
       &:focus {
         border-color: #3d6e36;
         outline: none;
