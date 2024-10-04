@@ -30,6 +30,7 @@ const ReplyMessage = () => {
       : [];
     setSentMessage(sentMessages);
   }, [messageId]);
+
   console.log('받은 메시지: ', originalMessage);
   console.log('보낸 메시지: ', sentMessage);
 
@@ -70,7 +71,7 @@ const ReplyMessage = () => {
         receiver: {
           _id: originalMessage.sender._id, // 수신자의 ID 추가
           email: originalMessage.sender.email,
-          fullName: originalMessage.sender.fullName, // 현재 사용자 이름
+          fullName: originalMessage.sender.fullName, // 수신자 이름
         }, // 수신자 정보
       };
 
@@ -82,7 +83,7 @@ const ReplyMessage = () => {
       );
       setSentMessage(updatedSentMessages); // 상태 업데이트
 
-      navigate(`/messages/conversations`); // 메시지 목록 페이지로 이동
+      navigate(`/messages`); // 메시지 목록 페이지로 이동
     } catch (error) {
       console.error(
         '메시지 전송 중 에러 발생:',
@@ -94,10 +95,15 @@ const ReplyMessage = () => {
     }
   };
 
+  // 답장 전송 전 확인 팝업
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleSendReply(replyContent);
-    setReplyContent(''); // 입력 필드 초기화
+
+    // 사용자가 확인을 눌렀을 때만 답장 전송
+    if (window.confirm('이 메시지를 전송하시겠습니까?')) {
+      handleSendReply(replyContent);
+      setReplyContent(''); // 입력 필드 초기화
+    }
   };
 
   return (
@@ -106,7 +112,6 @@ const ReplyMessage = () => {
       {originalMessage ? (
         <>
           <p>받는 사람: {originalMessage.sender.email}</p>
-          {/* <p>보내는 사람: {currentUser.email}</p> */}
           <form onSubmit={handleSubmit} className="reply-message__form">
             <div className="reply-message__input-group">
               <label htmlFor="replyContent" className="reply-message__label">

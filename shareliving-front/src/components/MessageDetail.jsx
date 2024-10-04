@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import './MessageDetail.scss';
 
@@ -12,6 +12,8 @@ const MessageDetail = () => {
   const receivedMessages = receivedMessagesString
     ? JSON.parse(receivedMessagesString)
     : [];
+
+  const navigate = useNavigate();
 
   // 메시지 확인 로직 수정
   const sentMessage = sentMessages.find((msg) => msg._id === messageId);
@@ -41,6 +43,18 @@ const MessageDetail = () => {
         receivedMessages.findIndex((msg) => msg._id === messageId) + 1
       ] || null
     : null;
+
+  // 나눔 확정 핸들러
+  const handleConfirmPick = () => {
+    const userConfirmed = window.confirm('정말로 나눔을 확정하시겠습니까?');
+
+    if (userConfirmed) {
+      // 나눔 확정 로직
+      // 예시로 메시지 목록 페이지로 이동
+      alert('나눔이 확정되었습니다.');
+      navigate(`/messages`);
+    }
+  };
 
   return (
     <div className="message-detail">
@@ -79,13 +93,31 @@ const MessageDetail = () => {
               </Link>
             )}
           </div>
-          {receivedMessage && (
-            <Link to={`/messages/received/${messageId}/reply`}>
-              <button className="message-detail__reply-button">
-                답장 작성
-              </button>
+          <div className="message-detail__actions">
+            <Link
+              to={`/messages`}
+              className="message-detail__reply-button message-detail__list-button"
+            >
+              메시지 목록
             </Link>
-          )}
+            {/* 받은 메시지일 때만 답장 및 나눔 확정 버튼 표시 */}
+            {isReceivedMessage && (
+              <>
+                <button
+                  className="message-detail__reply-button message-detail__reply-button--secondary"
+                  onClick={handleConfirmPick}
+                >
+                  나눔 확정
+                </button>
+                <Link
+                  to={`/messages/received/${messageId}/reply`}
+                  className="message-detail__reply-button message-detail__reply-button--primary"
+                >
+                  답장 작성
+                </Link>
+              </>
+            )}
+          </div>
         </div>
       ) : (
         <p>메시지를 찾을 수 없습니다.</p>

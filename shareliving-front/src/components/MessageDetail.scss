@@ -1,28 +1,44 @@
-/* components/MessageDetail.scss */
-
+// MessageDetail.scss
 .message-detail {
-  margin: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 20px auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-  &__content {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 15px;
-    background-color: #f9f9f9;
+  h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
 
+  .message-detail__content {
     h3 {
-      margin-top: 0;
+      font-size: 20px;
+      color: #007bff;
+      margin-bottom: 15px;
     }
 
     p {
+      font-size: 16px;
+      color: #555;
       margin: 10px 0;
+
+      &:last-of-type {
+        margin-bottom: 20px;
+      }
     }
   }
 
-  &__navigation {
-    margin-top: 15px;
+  .message-detail__navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
 
     .message-detail__link {
-      margin-right: 10px;
+      font-size: 14px;
       color: #007bff;
       text-decoration: none;
 
@@ -32,18 +48,98 @@
     }
   }
 
-  &__reply-button {
-    margin-top: 10px;
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  .message-detail__actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
 
-    &:hover {
-      background-color: #0056b3;
+    a {
+      text-decoration: none;
+    }
+
+    .message-detail__reply-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      width: 48%;
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      }
+    }
+
+    .message-detail__list-button {
+      background-color: #6c757d; // 회색
+      color: #fff;
+      border: none;
+
+      &:hover {
+        background-color: #5a6268; // 더 어두운 회색
+      }
+    }
+
+    .message-detail__reply-button--primary {
+      background-color: #007bff; // 파란색
+      color: #fff;
+      border: none;
+
+      &:hover {
+        background-color: #0056b3; // 더 어두운 파란색
+      }
+    }
+    .message-detail__reply-button--secondary {
+      background-color: green; // 파란색
+      color: #fff;
+      border: none;
+
+      &:hover {
+        background-color: rgb(6, 48, 6); // 더 어두운 파란색
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .message-detail {
+    padding: 15px;
+    margin: 10px;
+
+    h2 {
+      font-size: 20px;
+    }
+
+    .message-detail__content {
+      h3 {
+        font-size: 18px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+
+    .message-detail__reply-button {
+      font-size: 14px;
+    }
+  }
+
+  .message-item {
+    padding: 8px;
+    margin: 8px 0;
+
+    p {
+      font-size: 12px;
+    }
+  }
+  .message-detail__actions {
+    flex-direction: column;
+    align-items: center;
+
+    .message-detail__reply-button {
+      width: 100%;
+      margin-bottom: 10px;
     }
   }
 }

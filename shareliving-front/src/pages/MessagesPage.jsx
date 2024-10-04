@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { fetchMessagesWithUser } from '../utils/api';
 import { useAppContext } from '../context/AppContext';
 import MessageList from '../components/MessageList';
+import './MessagesPage.scss';
 
 const MessagesPage = () => {
   const {
@@ -157,7 +158,7 @@ const MessagesPage = () => {
   }, [currentUser?.token, isTokenLoading]);
 
   return (
-    <div>
+    <div className="messages-container">
       <h1>메시지함</h1>
       {loading && <p>메시지 불러오는 중...</p>}
       {error && <p className="error-message">{error}</p>}

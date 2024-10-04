@@ -1,30 +1,154 @@
-/* MessageList.scss */
+// MessageList.scss
+.message-item {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #e9ecef;
+  }
+
+  p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .message-time {
+    font-size: 12px;
+    color: #777;
+  }
+}
+
 .tabs {
   display: flex;
+  justify-content: center;
   margin-bottom: 20px;
 
   button {
-    flex: 1;
-    padding: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
     border: none;
     cursor: pointer;
-    background-color: #f0f0f0;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    margin: 0 10px;
+    transition: background-color 0.2s ease;
 
     &.active {
       background-color: #007bff;
-      color: white;
+      color: #fff;
+    }
+
+    &:hover {
+      background-color: #e9ecef;
     }
   }
 }
 
-.message-item {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 4px;
-  transition: background-color 0.2s;
+// MessageDetail.scss
+.message-detail {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 20px auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-  &:hover {
-    background-color: #f9f9f9;
+  h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .message-detail__content {
+    h3 {
+      font-size: 20px;
+      color: #007bff;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #555;
+      margin: 10px 0;
+
+      &:last-of-type {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  .message-detail__navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    .message-detail__link {
+      font-size: 14px;
+      color: #007bff;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .message-detail__reply-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}
+
+// 반응형 디자인
+@media (max-width: 768px) {
+  .message-detail {
+    padding: 15px;
+    margin: 10px;
+
+    h2 {
+      font-size: 20px;
+    }
+
+    .message-detail__content {
+      h3 {
+        font-size: 18px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+
+    .message-detail__reply-button {
+      font-size: 14px;
+    }
+  }
+
+  .message-item {
+    padding: 8px;
+    margin: 8px 0;
+
+    p {
+      font-size: 12px;
+    }
   }
 }
