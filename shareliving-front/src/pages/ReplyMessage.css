@@ -1,50 +1,77 @@
-/* pages/ReplyMessage.scss */
 .reply-message {
-  margin: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .reply-message__title {
   font-size: 24px;
+  font-weight: bold;
   margin-bottom: 20px;
   text-align: center;
 }
-.reply-message__form {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 15px;
-  background-color: #f9f9f9;
+.reply-message__input-group {
+  margin-bottom: 20px;
 }
-.reply-message__form__input-group {
-  margin-bottom: 15px;
-}
-.reply-message__form__input-group__label {
+.reply-message__input-group label {
   display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 10px;
+  font-weight: 600;
 }
-.reply-message__form__textarea {
+.reply-message__input-group textarea {
   width: 100%;
   padding: 10px;
+  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
   resize: vertical;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
+}
+.reply-message__input-group textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 .reply-message__submit-button {
-  margin-top: 15px;
-  padding: 10px 15px;
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
   background-color: #007bff;
-  color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s ease;
 }
 .reply-message__submit-button:hover {
   background-color: #0056b3;
 }
-.reply-message__input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.reply-message__submit-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.reply-message__error {
+  color: #d9534f;
+  font-size: 14px;
+  margin-top: 10px;
+}
+.reply-message p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .reply-message {
+    padding: 15px;
+  }
+  .reply-message__title {
+    font-size: 20px;
+  }
+  .reply-message__submit-button {
+    font-size: 16px;
+  }
 }

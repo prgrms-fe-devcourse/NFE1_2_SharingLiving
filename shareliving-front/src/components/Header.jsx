@@ -22,11 +22,11 @@ const Header = () => {
     <>
       <header id="headPrimary">
         <div className="header-nav-area fullscreen">
-          <NavLink to="/">
-            <h1 id="logoMain">
+          <h1 id="logoMain">
+            <NavLink to="/">
               <img src={ LogoImage } alt="로고" />
-            </h1>
-          </NavLink>
+            </NavLink>
+          </h1>
 
           <nav id="navPrimary">
             <ul className="nav-list">

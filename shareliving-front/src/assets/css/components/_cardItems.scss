@@ -196,6 +196,8 @@
     align-items: center;
     padding: .6rem .8rem;
     border-block-start: 1px solid rgb(var(--clr-text) / .15);
+    font-size: var(--fnt-sm);
+    opacity: .5;
 }
 
 .user-nametag {
