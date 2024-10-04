@@ -1,0 +1,88 @@
+.knowledge-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px 100px;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px 0;
+  background-color: #e0e0e0;
+  margin-bottom: 20px;
+  color: #333;
+  border-radius: 8px;
+}
+
+.knowledge-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+.knowledge-form .form-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.knowledge-form .form-group--textarea {
+  align-items: flex-start;
+  flex-direction: column;
+  width: 100%;
+}
+.knowledge-form .form-label {
+  min-width: 120px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.knowledge-form .input-title {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.knowledge-form .input-type,
+.knowledge-form .dropdown {
+  width: 200px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 40px;
+}
+.knowledge-form .input-description {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+}
+.knowledge-form .form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.knowledge-form .cancel-button,
+.knowledge-form .submit-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.knowledge-form .cancel-button {
+  background-color: transparent;
+  color: #337235;
+  border: 2px solid #337235;
+}
+.knowledge-form .submit-button {
+  background-color: #337235;
+  color: #fff;
+  border: 2px solid #337235;
+}

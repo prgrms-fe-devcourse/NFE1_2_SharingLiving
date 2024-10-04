@@ -1,0 +1,59 @@
+/* pages/ReplyMessage.scss */
+
+.reply-message {
+  margin: 20px;
+
+  &__title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  &__form {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #f9f9f9;
+
+    &__input-group {
+      margin-bottom: 15px;
+
+      &__label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+    }
+
+    &__textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+  }
+
+  &__submit-button {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  &__input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

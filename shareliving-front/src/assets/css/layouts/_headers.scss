@@ -5,7 +5,150 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    inset-block-start: 0;
     padding-inline: .8rem;
+    height: 3.6rem;
+    background-color: rgb(var(--clr-background) / .75);
+    backdrop-filter: blur(.8rem);
+    z-index: 50000;
+}
+
+.header-nav-area {
+    display: flex;
+    align-items: center;
+    gap: 2.4rem;
+}
+
+#logoMain {
+    width: 6rem;
+    height: 2.7rem;
+
+    > img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
+#navPrimary {
+
+}
+
+.nav-list {
+    display: flex;
+    gap: 1.2rem;
+}
+
+.nav-item {
+    padding: .8rem;
+    font-size: var(--fnt-lg);
+    font-weight: 700;
+
+    &:hover {
+        background-image: linear-gradient(to top, rgb(var(--clr-theme)), rgb(var(--clr-theme)) .2rem, transparent .2rem);
+    }
+
+    &.current { // 현재 라우트일 때
+        color: rgb(var(--clr-theme));
+    }
+}
+
+.header-user-area {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+}
+
+.total-search-container {
+    display: flex;
+    gap: .2rem;
+}
+
+.user-info-container {
+    display: flex;
+    align-items: center;
+    gap: .2rem;
+}
+
+.header-notification-container,
+.header-message-container {
+    position: relative;
+
+    &:not([data-current-items="0"]) {
+        &::after {
+            display: block;
+            position: absolute;
+            inset-block-start: -.2rem;
+            inset-inline-start: calc(100% - .75rem);
+            padding: .2rem .4rem;
+            width: fit-content;
+            border-radius: 25rem;
+            background-color: rgb(var(--clr-alert));
+            font-size: var(--fnt-xs);
+            color: rgb(var(--clr-text-on-tint));
+            content: attr(data-current-items);
+        }
+
+        .togglers {
+            opacity: 1;
+
+            &:hover {
+                background-color: rgb(var(--clr-tint-50) / .5);
+            }
+        }
+    }
+}
+
+.togglers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1.6rem;
+    aspect-ratio: 1 / 1;
+    border-radius: 25rem;
+    color: rgb(var(--clr-theme));
+    opacity: .5;
+
+    > .icons {
+        width: 1rem;
+    }
+}
+
+/* 모바일 반응형 */
+
+.mobile-burger {
+    display: none;
+}
+
+/* 하단 네비 바 */
+
+#navMobile {
+    display: none;
+    position: sticky;
+    inset-block-end: 0;
+}
+
+/* 미디어 쿼리 */
+
+@media screen and (max-width: 42rem) { // 태블릿 (840px) - 네비게이션 축소 및 버거 버튼 표시
+    #navPrimary {
+        display: none;
+    }
+
+    .mobile-burger {
+        display: initial;
+    }
+}
+
+@media screen and (max-width: 24rem) { // 모바일 (480px) - 상단 네비게이션 완전 축소, 하단 네비게이션 표시
+    #headPrimary {
+
+    }
+
+    #navMobile {
+        display: initial;
+    }
 }
 
 /* _headers.scss */

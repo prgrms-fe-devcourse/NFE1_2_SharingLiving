@@ -1,0 +1,17 @@
+.footer {
+  margin-top: auto;
+  background: #f6f8fa;
+  padding: 20px 0 1rem;
+  transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  -webkit-transition: all 0.25s ease;
+  -ms-transition: all 0.25s ease;
+  width: 100%;
+  border-top: 1px solid #f3f3f3;
+  font-size: calc(0.875rem - 0.05rem);
+  font-family: "roboto-light", sans-serif;
+  color: #8d9498;
+  &__text {
+    font-size: 1.5rem;
+  }
+}
