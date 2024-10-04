@@ -2,43 +2,41 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const NAVER_CLIENT_ID = import.meta.env.VITE_APP_NAVER_CLIENT_ID;
-const NAVER_CLIENT_SECRET = import.meta.env.VITE_APP_NAVER_CLIENT_SECRET;
-const NAVER_REDIRECT_URI = import.meta.env.VITE_APP_NAVER_REDIRECT_URI;
+const KAKAO_CLIENT_ID = import.meta.env.VITE_APP_KAKAO_CLIENT_ID;
+const KAKAO_REDIRECT_URI = import.meta.env.VITE_APP_KAKAO_REDIRECT_URI;
 
-const NaverCallback = () => {
+const KakaoCallback = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [status, setStatus] = useState('Processing Naver login...');
+  const [status, setStatus] = useState('Processing Kakao login...');
 
   useEffect(() => {
     const code = new URLSearchParams(location.search).get('code');
-    const state = new URLSearchParams(location.search).get('state');
-    if (code && state) {
-      handleNaverCallback(code, state);
+    if (code) {
+      handleKakaoCallback(code);
     } else {
-      setStatus('No authorization code or state found in the URL.');
+      setStatus('No authorization code found in the URL.');
     }
   }, [location.search]);
 
-  const handleNaverCallback = async (code, state) => {
+  const handleKakaoCallback = async (code) => {
     try {
       setStatus('Requesting access token...');
       console.log('Code:', code);
-      console.log('State:', state);
-      console.log('Client ID:', NAVER_CLIENT_ID);
-      console.log('Redirect URI:', NAVER_REDIRECT_URI);
+      console.log('Client ID:', KAKAO_CLIENT_ID);
+      console.log('Redirect URI:', KAKAO_REDIRECT_URI);
 
       const tokenResponse = await axios.post(
-        'https://nid.naver.com/oauth2.0/token',
-        null,
+        '/kakao-api/oauth/token',
+        new URLSearchParams({
+          grant_type: 'authorization_code',
+          client_id: KAKAO_CLIENT_ID,
+          redirect_uri: KAKAO_REDIRECT_URI,
+          code: code,
+        }).toString(),
         {
-          params: {
-            grant_type: 'authorization_code',
-            client_id: NAVER_CLIENT_ID,
-            client_secret: NAVER_CLIENT_SECRET,
-            code: code,
-            state: state,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
         }
       );
@@ -47,7 +45,7 @@ const NaverCallback = () => {
       
       if (tokenResponse.data.access_token) {
         setStatus('Access token received. Getting user info...');
-        const userInfoResponse = await axios.get('https://openapi.naver.com/v1/nid/me', {
+        const userInfoResponse = await axios.get('https://kapi.kakao.com/v2/user/me', {
           headers: {
             Authorization: `Bearer ${tokenResponse.data.access_token}`,
           },
@@ -56,13 +54,13 @@ const NaverCallback = () => {
         console.log('User Info:', userInfoResponse.data);
         setStatus('Login successful! Redirecting...');
         
-        localStorage.setItem('userInfo', JSON.stringify(userInfoResponse.data.response));
+        localStorage.setItem('userInfo', JSON.stringify(userInfoResponse.data));
         setTimeout(() => navigate('/'), 2000);
       } else {
         throw new Error('No access token received');
       }
     } catch (error) {
-      console.error('Naver login failed:', error);
+      console.error('Kakao login failed:', error);
       let errorMessage = error.message;
       if (error.response) {
         console.error('Error response:', error.response.data);
@@ -76,11 +74,11 @@ const NaverCallback = () => {
 
   return (
     <div>
-      <h2>Naver Login Status</h2>
+      <h2>Kakao Login Status</h2>
       <p>{status}</p>
       <button onClick={() => navigate('/')}>Return to Home</button>
     </div>
   );
 };
 
-export default NaverCallback;
+export default KakaoCallback;

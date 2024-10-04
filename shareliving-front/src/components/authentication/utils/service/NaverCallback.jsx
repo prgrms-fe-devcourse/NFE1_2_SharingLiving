@@ -12,10 +12,8 @@ const NaverCallback = () => {
   const [status, setStatus] = useState('Processing Naver login...');
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const code = params.get('code');
-    const state = params.get('state');
-    
+    const code = new URLSearchParams(location.search).get('code');
+    const state = new URLSearchParams(location.search).get('state');
     if (code && state) {
       handleNaverCallback(code, state);
     } else {
@@ -26,7 +24,11 @@ const NaverCallback = () => {
   const handleNaverCallback = async (code, state) => {
     try {
       setStatus('Requesting access token...');
-      
+      console.log('Code:', code);
+      console.log('State:', state);
+      console.log('Client ID:', NAVER_CLIENT_ID);
+      console.log('Redirect URI:', NAVER_REDIRECT_URI);
+
       const tokenResponse = await axios.post(
         'https://nid.naver.com/oauth2.0/token',
         null,
@@ -35,12 +37,14 @@ const NaverCallback = () => {
             grant_type: 'authorization_code',
             client_id: NAVER_CLIENT_ID,
             client_secret: NAVER_CLIENT_SECRET,
-            code,
-            state,
+            code: code,
+            state: state,
           },
         }
       );
 
+      console.log('Token Response:', tokenResponse.data);
+      
       if (tokenResponse.data.access_token) {
         setStatus('Access token received. Getting user info...');
         const userInfoResponse = await axios.get('https://openapi.naver.com/v1/nid/me', {
@@ -49,6 +53,7 @@ const NaverCallback = () => {
           },
         });
 
+        console.log('User Info:', userInfoResponse.data);
         setStatus('Login successful! Redirecting...');
         
         localStorage.setItem('userInfo', JSON.stringify(userInfoResponse.data.response));
@@ -58,7 +63,14 @@ const NaverCallback = () => {
       }
     } catch (error) {
       console.error('Naver login failed:', error);
-      setStatus(`Login failed: ${error.message}. Please try again.`);
+      let errorMessage = error.message;
+      if (error.response) {
+        console.error('Error response:', error.response.data);
+        console.error('Error status:', error.response.status);
+        console.error('Error headers:', error.response.headers);
+        errorMessage = `${error.response.status}: ${JSON.stringify(error.response.data)}`;
+      }
+      setStatus(`Login failed: ${errorMessage}. Please try again.`);
     }
   };
 
