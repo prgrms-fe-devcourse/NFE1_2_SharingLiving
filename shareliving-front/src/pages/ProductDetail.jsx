@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 
 const ProductDetail = () => {
-  const thisLocation = useLocation().pathname;
+  const thisLocation = useLocation().pathname.split('/').pop(); // 현재 접근한 문서의 id
   const currentContext = useAppContext();
 
   currentContext.setShowBreadcrumbs(true);

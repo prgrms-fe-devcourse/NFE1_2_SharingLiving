@@ -34,14 +34,13 @@
     height: 12.25rem;
     background-color: rgb(var(--clr-max) / .75);
 
-    > .card-image {
+    .card-image {
         position: absolute;
         inset: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
         user-select: none;
-        pointer-events: none;
     }
 
     > .card-tags-container {

@@ -1247,7 +1247,7 @@ select:focus {
   height: 12.25rem;
   background-color: rgb(var(--clr-max)/0.75);
 }
-.card-image-container > .card-image {
+.card-image-container .card-image {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -1257,7 +1257,6 @@ select:focus {
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
-  pointer-events: none;
 }
 .card-image-container > .card-tags-container {
   display: flex;

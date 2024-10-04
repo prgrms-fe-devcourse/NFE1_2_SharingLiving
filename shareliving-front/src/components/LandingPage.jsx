@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
 import { getChannelList, getKnowledgeChannel } from '../components/authentication/utils/service/apiUtil';
+import { useAppContext } from '../context/AppContext';
 
 import LandingSectionTitle from './LandingSectionTitle';
 import ProductSlider from './ProductSlider';
@@ -24,6 +25,10 @@ const LandingPage = () => {
   );
 
   /** 최근 지식 나눔 글 가지고 오기 끝 */
+
+  const currentContext = useAppContext();
+
+  currentContext.setShowBreadcrumbs(false);
 
   return (
     <>
