@@ -22,8 +22,9 @@ const UserControlls = () => {
                 headers: { Authorization: `Bearer ${token}` }
             });
             localStorage.removeItem('Token');
-            setMessage("");
-            // 로그아웃 후 상태 업데이트 또는 리다이렉션
+            localStorage.removeItem('userData'); // 카카오 사용자 정보 삭제
+            console.clear(); // 콘솔 내용 지우기
+            setMessage("로그아웃 되었습니다.");
             navigate('/'); // 홈페이지로 리다이렉트
         } catch (error) {
             console.error("Logout error:", error);

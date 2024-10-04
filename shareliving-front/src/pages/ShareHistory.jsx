@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const ShareHistory = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [productShares, setProductShares] = useState([
@@ -199,23 +198,23 @@ const ShareHistory = () => {
                   textAlign: 'center',
                 }}
               >
-                {knowledge.imageUrl && (
-                  <img
-                    src={knowledge.imageUrl}
-                    alt={knowledge.title}
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                      marginBottom: '5px',
-                    }}
-                  />
-                )}
-                <span
+                <div
                   onClick={() => handleKnowledgeClick(knowledge)}
                   style={{ cursor: 'pointer' }}
                 >
-                  {knowledge.title}
-                </span>
+                  {knowledge.imageUrl && (
+                    <img
+                      src={knowledge.imageUrl}
+                      alt={knowledge.title}
+                      style={{
+                        width: '100%',
+                        height: 'auto',
+                        marginBottom: '5px',
+                      }}
+                    />
+                  )}
+                  <span>{knowledge.title}</span>
+                </div>
                 <div
                   onClick={() => handleDeleteKnowledge(knowledge.id)}
                   style={{ cursor: 'pointer', marginTop: '5px' }}

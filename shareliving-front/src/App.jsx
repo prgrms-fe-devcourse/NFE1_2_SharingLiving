@@ -1,5 +1,8 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import React from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { AppProvider } from './context/AppContext'; // Context import
+
 import './assets/css/style.css';
 import Layout from './components/layouts/Layout';
 import LandingPage from './components/LandingPage';
@@ -15,31 +18,33 @@ import NoticeDetail from './components/NoticeDetail';
 import ShareHistory from './pages/ShareHistory';
 import ProductDetail from './pages/ProductDetail';
 import KnowledgeDetail from './pages/KnowledgeDetail';
-import { AppProvider } from './context/AppContext'; // Context import
-import Login from './components/authentication/component/Login'; 
-import Signup from './components/authentication/component/Signup'; 
+import ProductList from './pages/ProductList';
+import KnowledgeList from './pages/KnowledgeList';
+
+import Login from './components/authentication/component/Login';
+import Signup from './components/authentication/component/Signup';
 import FindAccountInfo from './components/authentication/component/FindAccountInfoPopup';
 import KakaoCallback from './components/authentication/utils/service/kakaoCallback';
 import GoogleCallback from './components/authentication/utils/service/GoogleCallback';
 
 /*  
   주석 규칙
-  
-  - 404 오류 처리: 
-    모든 페이지에서 발생할 수 있는 404 오류는 
+
+  - 404 오류 처리:
+    모든 페이지에서 발생할 수 있는 404 오류는
     errorElement로 처리하여 사용자에게 안내합니다.
-  
+
   - CRUD 관련 오류 메시지 (상황에 따라 커스텀):
-    - R (조회 실패): 
+    - R (조회 실패):
       데이터를 불러오는 데 실패했습니다.
-      
-    - U (업데이트 실패): 
+
+    - U (업데이트 실패):
       업데이트에 실패했습니다.
-      
-    - C (생성 실패): 
+
+    - C (생성 실패):
       추가에 실패했습니다.
-      
-    - D (삭제 실패): 
+
+    - D (삭제 실패):
       삭제에 실패했습니다.
 */
 
@@ -75,14 +80,19 @@ const baseRouter = createBrowserRouter([
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
-        path: '/messages/:messageId',
+        path: '/messages/received/:messageId',
         element: <MessageDetail />,
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
-        path: '/messages/:messageId/reply',
+        path: '/messages/received/:messageId/reply',
         element: <ReplyMessage />,
         errorElement: <div>메시지 전송에 실패했습니다.</div>,
+      },
+      {
+        path: '/messages/sent/:messageId',
+        element: <MessageDetail />,
+        errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
         path: '/notices',
@@ -100,8 +110,18 @@ const baseRouter = createBrowserRouter([
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
+        path: '/product',
+        element: <ProductList />,
+        errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
+      },
+      {
         path: '/product/:id',
         element: <ProductDetail />,
+        errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
+      },
+      {
+        path: '/knowledge',
+        element: <KnowledgeList />,
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
@@ -139,16 +159,31 @@ const baseRouter = createBrowserRouter([
         element: <FindAccountInfo />,
         errorElement: <div>회원가입에 실패했습니다.</div>,
       },
+      {
+        path: '/product',
+        element: <ProductList />,
+        errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
+      },
+      {
+        path: '/knowledge',
+        element: <KnowledgeList />,
+        errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
+      },
+
       // 필요한 경로를 추가
     ],
   },
 ]);
 
+const queryClient = new QueryClient();
+
 const App = () => {
   return (
-    <AppProvider>
-      <RouterProvider router={baseRouter} />
-    </AppProvider>
+    <QueryClientProvider client={queryClient}>
+      <AppProvider>
+        <RouterProvider router={baseRouter} />
+      </AppProvider>
+    </QueryClientProvider>
   );
 };
 

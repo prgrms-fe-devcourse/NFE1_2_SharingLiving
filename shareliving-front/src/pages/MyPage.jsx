@@ -5,22 +5,17 @@ import { Link } from 'react-router-dom';
 import './MyPage.scss';
 
 const MyPage = () => {
-  const { setHideSidebar } = useAppContext();
+  const { setHideSidebar, currentUser } = useAppContext();
 
-  const userInfo = {
-    nickname: '현재 닉네임',
-    stamps: 5, // 예시: 나무 스탬프 개수
-  };
+  // useEffect(() => {
+  //   // 페이지가 렌더링될 때 Sidebar 숨김
+  //   setHideSidebar(true);
 
-  useEffect(() => {
-    // 페이지가 렌더링될 때 Sidebar 숨김
-    setHideSidebar(true);
-
-    // 페이지가 언마운트되면(이탈할 때) Sidebar 기본값으로 되돌림
-    return () => {
-      setHideSidebar(false);
-    };
-  }, [setHideSidebar]);
+  //   // 페이지가 언마운트되면(이탈할 때) Sidebar 기본값으로 되돌림
+  //   return () => {
+  //     setHideSidebar(false);
+  //   };
+  // }, [setHideSidebar]);
 
   return (
     <div className="mypage">
@@ -31,11 +26,15 @@ const MyPage = () => {
         <h2 className="mypage__dashboard-title">대시보드</h2>
         <div className="mypage__user-info">
           <h3 className="mypage__user-info-title">내 정보</h3>
-          <p className="mypage__user-nickname">닉네임: {userInfo.nickname}</p>
+          <p className="mypage__user-nickname">이름: {currentUser.name}</p>
+          <p className="mypage__user-nickname">
+            계정 아이디: {currentUser.email}
+          </p>
           <div className="mypage__user-stamps">
             <h3 className="mypage__user-stamps-title">내 나무 스탬프</h3>
+            {/* 스탬프 개수를 currentUser와 연동 */}
             <p className="mypage__stamps-count">
-              현재 나무 스탬프: {userInfo.stamps}개
+              현재 나무 스탬프: {currentUser.stamps || 0}개
             </p>
           </div>
         </div>
