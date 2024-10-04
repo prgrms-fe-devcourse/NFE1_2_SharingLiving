@@ -1,9 +1,8 @@
 /* pages/MyPage.scss */
 
 .mypage {
-  padding: 20px;
-  max-width: 600px;
-  margin: 0 auto;
+  flex: 1;
+  min-height: 100vh;
 
   &__title {
     text-align: center;
