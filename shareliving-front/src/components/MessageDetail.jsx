@@ -1,9 +1,11 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import './MessageDetail.scss'; // SCSS 파일 import
+import { useAppContext } from '../context/AppContext';
+import './MessageDetail.scss';
 
 const MessageDetail = () => {
   const { messageId } = useParams();
+  const { activeTab } = useAppContext(); // activeTab 사용
   const sentMessagesString = localStorage.getItem('newSentMessages');
   const receivedMessagesString = localStorage.getItem('receivedMessages');
   const sentMessages = sentMessagesString ? JSON.parse(sentMessagesString) : [];
@@ -45,12 +47,12 @@ const MessageDetail = () => {
       <h2>메시지 상세 내용</h2>
       {currentMessage ? (
         <div className="message-detail__content">
-          <h3>{isSentMessage ? `보낸 메시지` : `받은 메시지`}</h3>
+          <h3>{sentMessage ? '보낸 메시지' : '받은 메시지'}</h3>
           <p>{currentMessage.message}</p>
           <p>
-            {isSentMessage
-              ? `받는 사람: ${currentMessage.receiver.email}`
-              : `보낸 사람: ${currentMessage.sender.email}`}
+            {sentMessage
+              ? `받는 사람: ${currentMessage.receiver.fullName}`
+              : `보낸 사람: ${currentMessage.sender.fullName}`}
           </p>
           <p>
             전송 날짜: {new Date(currentMessage.createdAt).toLocaleString()}
@@ -58,7 +60,7 @@ const MessageDetail = () => {
           <div className="message-detail__navigation">
             {previousMessage && (
               <Link
-                to={`/messages/${isSentMessage ? 'sent' : 'received'}/${
+                to={`/messages/${activeTab === 'sent' ? 'sent' : 'received'}/${
                   previousMessage._id
                 }`}
                 className="message-detail__link"
@@ -68,7 +70,7 @@ const MessageDetail = () => {
             )}
             {nextMessage && (
               <Link
-                to={`/messages/${isSentMessage ? 'sent' : 'received'}/${
+                to={`/messages/${activeTab === 'sent' ? 'sent' : 'received'}/${
                   nextMessage._id
                 }`}
                 className="message-detail__link"
@@ -77,7 +79,7 @@ const MessageDetail = () => {
               </Link>
             )}
           </div>
-          {isReceivedMessage && (
+          {receivedMessage && (
             <Link to={`/messages/received/${messageId}/reply`}>
               <button className="message-detail__reply-button">
                 답장 작성

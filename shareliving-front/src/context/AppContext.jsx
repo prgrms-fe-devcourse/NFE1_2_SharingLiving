@@ -31,7 +31,7 @@ export const AppProvider = ({ children }) => {
         ...JSON.parse(userInfo),
       }));
     }
-    
+
     const token = localStorage.getItem('token');
     if (token) {
       setCurrentUser((prevUser) => ({
@@ -66,6 +66,9 @@ export const AppProvider = ({ children }) => {
     }
   };
 
+  // 탭 메뉴 활성화 상태
+  const [activeTab, setActiveTab] = useState('received');
+
   return (
     <AppContext.Provider
       value={{
@@ -79,7 +82,11 @@ export const AppProvider = ({ children }) => {
         sentMessages,
         handleSendReply,
         currentUser,
+        setCurrentUser,
         isTokenLoading, // 추가: 로딩 상태 전달
+        // 탭 활성화 관련 상태
+        activeTab,
+        setActiveTab,
       }}
     >
       {children}
