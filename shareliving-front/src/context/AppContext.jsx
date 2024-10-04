@@ -18,6 +18,7 @@ export const AppProvider = ({ children }) => {
     name: '현재 사용자',
     email: 'currentuser@example.com',
     token: null, // 초기값을 null로 설정
+    stamps: 5,
   });
 
   // 토큰 로딩 상태 추가
