@@ -44,7 +44,7 @@ const LandingPage = () => {
         </section>
 
         <section id="secShareProducts">
-          <LandingSectionTitle secDesc="사용한 물건에 새로운 가치를 부여해 보세요." secTitle="물품 나눔" secGoto="/" />
+          <LandingSectionTitle secDesc="사용한 물건에 새로운 가치를 부여해 보세요." secTitle="물품 나눔" secGoto="/product" />
 
           <div className="section-content product-list">
             <ProductSlider />
@@ -52,7 +52,7 @@ const LandingPage = () => {
         </section>
 
         <section id="secShareKnowledge">
-          <LandingSectionTitle secDesc="나만 알고 있는 생활의 지식을 나누어 보세요." secTitle="생활 지식 나눔" secGoto="/" />
+          <LandingSectionTitle secDesc="나만 알고 있는 생활의 지식을 나누어 보세요." secTitle="생활 지식 나눔" secGoto="/knowledge" />
 
           <div className="section-content knowledge-list">
             {

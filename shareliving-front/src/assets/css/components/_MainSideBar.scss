@@ -4,6 +4,8 @@
     display: flex;
     flex-flow: column nowrap;
     gap: .6rem;
+    position: sticky;
+    top: 4rem;
     width: 16rem;
 }
 

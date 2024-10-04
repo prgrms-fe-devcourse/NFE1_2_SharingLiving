@@ -46,7 +46,7 @@ const CardProducts = ({ type, itemObject }) => {
             <dt className="card-title">{itemObject.title}</dt>
             <dd className="card-type">{itemObject.description}</dd>
             <dd className="card-price">
-              수거비용 <span>{itemObject.pickupCost}</span> 원
+              수거비용 <span>{Number(itemObject.pickupCost).toLocaleString('ko-KR')}</span> 원
             </dd>
           </dl>
 

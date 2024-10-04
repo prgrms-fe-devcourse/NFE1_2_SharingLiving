@@ -1135,6 +1135,8 @@ select:focus {
   display: flex;
   flex-flow: column nowrap;
   gap: 0.6rem;
+  position: sticky;
+  top: 4rem;
   width: 16rem;
 }
 

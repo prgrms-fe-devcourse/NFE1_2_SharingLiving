@@ -71,15 +71,19 @@ const Header = () => {
           <li className="toggle-menu-item">
             <NavLink to="/">홈</NavLink>
           </li>
+
           <li className="toggle-menu-item">
             <NavLink to="product">제품 나눔</NavLink>
           </li>
+
           <li className="toggle-menu-item">
             <NavLink to="knowledge">지식 나눔</NavLink>
           </li>
+
           <li className="toggle-menu-item">
             <NavLink to="/">나눔하기</NavLink>
           </li>
+
           <li className="toggle-menu-item">
             <NavLink to="mypage">마이 페이지</NavLink>
           </li>

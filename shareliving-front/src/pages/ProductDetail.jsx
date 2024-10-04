@@ -1,7 +1,11 @@
 import { useLocation } from 'react-router-dom';
+import { useAppContext } from '../context/AppContext';
 
 const ProductDetail = () => {
-  const thisLocation = useLocation();
+  const thisLocation = useLocation().pathname;
+  const currentContext = useAppContext();
+
+  currentContext.setShowBreadcrumbs(true);
 
   // 팀 요청 API URL : https://kdt.frontend.5th.programmers.co.kr:5003/
 
@@ -25,7 +29,7 @@ const ProductDetail = () => {
   }
 
   return (
-    <div>
+    <div id="detailContainer" className="rounded">
       <h1>제품 나눔 상세 페이지</h1>
       <p>제품명: {product.name}</p>
       <p>나무 그루 수: {product.treeCount}</p>
