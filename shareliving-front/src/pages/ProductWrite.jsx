@@ -14,7 +14,7 @@ const ProductWrite = () => {
   const [product, setProduct] = useState('Desk');
   const [tree, setTree] = useState(0);
   const [region, setRegion] = useState('');
-  const [collection, setCollection] = useState('');
+  const [pickupMethod, setPickupMethod] = useState('');
   const [pickupCompany, setPickupCompany] = useState('');
   const [pickupCost, setPickupCost] = useState('');
   const [description, setDescription] = useState('');
@@ -97,7 +97,7 @@ const ProductWrite = () => {
         product,
         tree,
         region,
-        collection,
+        pickupMethod,
         pickupCompany,
         pickupCost,
         description,
@@ -110,7 +110,7 @@ const ProductWrite = () => {
       formData.append('image', null);
     }
 
-    formData.append('channelId', '66fb6b7fa43c32148e509529');
+    formData.append('channelId', '66fc9a346c571835b6423ad7');
 
     try {
       const response = await axios.post(
@@ -228,8 +228,8 @@ const ProductWrite = () => {
           <select
             id="dropdown"
             className="dropdown"
-            value={collection}
-            onChange={(e) => setCollection(e.target.value)}
+            value={pickupMethod}
+            onChange={(e) => setPickupMethod(e.target.value)}
           >
             <option value="direct">직접 수거</option>
             <option value="company">수거 업체 이용</option>

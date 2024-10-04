@@ -43,7 +43,7 @@ const KnowledgeWrite = () => {
       formData.append('image', null);
     }
 
-    formData.append('channelId', '66fb6b7fa43c32148e509529');
+    formData.append('channelId', '66fca1eb6c571835b6423ae5');
 
     try {
       const response = await axios.post(
