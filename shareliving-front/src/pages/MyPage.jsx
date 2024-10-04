@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { Link } from 'react-router-dom';
 import './MyPage.scss';
+import TreeSlider from '../components/TreeSlider';
 
 const MyPage = () => {
   const { setHideSidebar, currentUser } = useAppContext();
@@ -31,11 +32,8 @@ const MyPage = () => {
             계정 아이디: {currentUser.email}
           </p>
           <div className="mypage__user-stamps">
-            <h3 className="mypage__user-stamps-title">내 나무 스탬프</h3>
-            {/* 스탬프 개수를 currentUser와 연동 */}
-            <p className="mypage__stamps-count">
-              현재 나무 스탬프: {currentUser.stamps || 0}개
-            </p>
+            <h1>나무 보호 서비스</h1>
+            <TreeSlider />
           </div>
         </div>
       </section>
