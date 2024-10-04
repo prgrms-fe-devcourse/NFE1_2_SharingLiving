@@ -712,6 +712,24 @@ a:hover, a:focus, a:active {
   background-color: rgb(var(--clr-tint-50)/0.5);
 }
 
+#btnHeaderLogout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+  padding-inline: 0.8rem;
+  height: 1.6rem;
+  border: 1px solid rgb(var(--clr-theme)/0.5);
+  border-radius: 0.2rem;
+  background-color: rgb(var(--clr-theme));
+  color: rgb(var(--clr-text-on-tint));
+  font-size: var(--fnt-sm);
+  font-weight: 900;
+}
+#btnHeaderLogout > .icons {
+  width: 0.8rem;
+}
+
 .togglers {
   display: flex;
   justify-content: center;
@@ -727,15 +745,37 @@ a:hover, a:focus, a:active {
 }
 
 /* 모바일 반응형 */
-.mobile-burger {
+#toggleMenuTitlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem;
+}
+
+#btnBurger {
+  --burger-lines-color: var(--clr-text);
   display: none;
   position: relative;
   width: 1.8rem;
   height: 1.8rem;
   border-radius: 25rem;
 }
-.mobile-burger:focus {
-  background-color: red;
+#btnBurger.on {
+  --burger-lines-color: var(--clr-min);
+  background-color: rgb(var(--clr-max));
+}
+#btnBurger.on .burger-stripe.top, #btnBurger.on .burger-stripe.bottom {
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}
+#btnBurger.on .burger-stripe.top {
+  rotate: 45deg;
+}
+#btnBurger.on .burger-stripe.bottom {
+  rotate: -45deg;
+}
+#btnBurger.on .burger-stripe.middle {
+  opacity: 0;
 }
 
 .burger-stripe {
@@ -745,7 +785,8 @@ a:hover, a:focus, a:active {
   margin: auto;
   width: 0.1rem;
   height: 0.8rem;
-  background-color: rgb(var(--clr-text));
+  background-color: rgb(var(--burger-lines-color));
+  transition: 0.25s;
 }
 .burger-stripe.top {
   margin-inline-start: 0.6rem;
@@ -812,19 +853,27 @@ a:hover, a:focus, a:active {
 
 /* 미디어 쿼리 */
 @media screen and (max-width: 1100px) {
+  .header-nav-area {
+    order: 1;
+    align-self: flex-start;
+  }
   .header-user-area {
-    display: none;
+    order: 0;
+    align-self: flex-end;
   }
 }
 @media screen and (max-width: 840px) {
   #navPrimary {
     display: none;
   }
-  .mobile-burger {
+  #btnBurger {
     display: block;
   }
 }
 @media screen and (max-width: 600px) {
+  #headPrimary {
+    position: static;
+  }
   #navMobile {
     display: block;
   }
@@ -975,7 +1024,7 @@ a:hover, a:focus, a:active {
 /* 섹션별 특수 요소 */
 .product-list {
   position: relative;
-  height: 20rem;
+  height: 24rem;
 }
 
 .knowledge-list {

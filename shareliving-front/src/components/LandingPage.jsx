@@ -1,18 +1,29 @@
+import { useQuery } from 'react-query';
+import { getChannelList, getKnowledgeChannel } from '../components/authentication/utils/service/apiUtil';
+
 import LandingSectionTitle from './LandingSectionTitle';
 import ProductSlider from './ProductSlider';
 import ReviewSlider from './ReviewSlider';
 import CardProducts from './items/CardProducts';
 
 const LandingPage = () => {
-  // const getTotalSaved = async () => { // 전체 보호한 나무 그루 수
-  //   const response = await fetch('url', {
-  //     method: 'GET'
-  //   })
-  //     .then()
-  //     .finally();
+  /** 최근 지식 나눔 글 가지고 오기 */
 
-  //   return response;
-  // }
+  const { data: channels } = useQuery('channels', getChannelList);
+  const channelId = channels?.find(({ name }) => name === 'knowledge')?._id;
+
+  const { data: allKnowledgeList } = useQuery('allKnowledgeList', () => getKnowledgeChannel(channelId),
+    {
+      enabled: !!channelId,
+      select: (res) => {
+        const toTheLength = res.slice(0, res.length); // 임시 길이 - 최종적으로는 최근 글 3개가 적당할 것
+
+        return toTheLength.map((knowledge) => ({ ...knowledge, ...JSON.parse(knowledge.title) }));
+      },
+    }
+  );
+
+  /** 최근 지식 나눔 글 가지고 오기 끝 */
 
   return (
     <>
@@ -44,9 +55,13 @@ const LandingPage = () => {
           <LandingSectionTitle secDesc="나만 알고 있는 생활의 지식을 나누어 보세요." secTitle="생활 지식 나눔" secGoto="/" />
 
           <div className="section-content knowledge-list">
-            <CardProducts type="knowledge" />
-            <CardProducts type="knowledge" />
-            <CardProducts type="knowledge" />
+            {
+              allKnowledgeList?.map((knowledge, index) => (
+                <div key={index}>
+                  <CardProducts type="knowledge" itemObject={ knowledge } />
+                </div>
+              ))
+            }
           </div>
         </section>
 

@@ -100,6 +100,25 @@
     }
 }
 
+#btnHeaderLogout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .2rem;
+    padding-inline: .8rem;
+    height: 1.6rem;
+    border: 1px solid rgb(var(--clr-theme) / .5);
+    border-radius: .2rem;
+    background-color: rgb(var(--clr-theme));
+    color: rgb(var(--clr-text-on-tint));
+    font-size: var(--fnt-sm);
+    font-weight: 900;
+
+    > .icons {
+        width: .8rem;
+    }
+}
+
 .togglers {
     display: flex;
     justify-content: center;
@@ -117,15 +136,45 @@
 
 /* 모바일 반응형 */
 
-.mobile-burger {
+#toggleMenuTitlebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .8rem;
+}
+
+#btnBurger {
+    --burger-lines-color: var(--clr-text);
+
     display: none;
     position: relative;
     width: 1.8rem;
     height: 1.8rem;
     border-radius: 25rem;
 
-    &:focus {
-        background-color: red;
+    &.on {
+        --burger-lines-color: var(--clr-min);
+        background-color: rgb(var(--clr-max));
+
+        .burger-stripe {
+            &.top,
+            &.bottom {
+                margin-inline-start: auto;
+                margin-inline-end: auto;
+            }
+
+            &.top {
+                rotate: 45deg;
+            }
+
+            &.bottom {
+                rotate: -45deg;
+            }
+
+            &.middle {
+                opacity: 0;
+            }
+        }
     }
 }
 
@@ -136,7 +185,8 @@
     margin: auto;
     width: .1rem;
     height: .8rem;
-    background-color: rgb(var(--clr-text));
+    background-color: rgb(var(--burger-lines-color));
+    transition: .25s;
 
     &.top {
         margin-inline-start: .6rem;
@@ -213,8 +263,14 @@
 /* 미디어 쿼리 */
 
 @media screen and (max-width: 1100px) { // 작은 화면 (1100px) - 사용자 컨트롤 축소
+    .header-nav-area {
+        order: 1;
+        align-self: flex-start;
+    }
+
     .header-user-area {
-        display: none;
+        order: 0;
+        align-self: flex-end;
     }
 }
 
@@ -223,14 +279,14 @@
         display: none;
     }
 
-    .mobile-burger {
+    #btnBurger {
         display: block;
     }
 }
 
 @media screen and (max-width: 600px) { // 모바일 (480px) - 상단 네비게이션 완전 축소, 하단 네비게이션 표시
     #headPrimary {
-
+        position: static;
     }
 
     #navMobile {
