@@ -69,19 +69,24 @@ const baseRouter = createBrowserRouter([
         errorElement: <div>업데이트에 실패했습니다.</div>,
       },
       {
-        path: '/messages',
+        path: '/messages/conversations',
         element: <MessagesPage />,
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
-        path: '/messages/:messageId',
+        path: '/messages/received/:messageId',
         element: <MessageDetail />,
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
-        path: '/messages/:messageId/reply',
+        path: '/messages/received/:messageId/reply',
         element: <ReplyMessage />,
         errorElement: <div>메시지 전송에 실패했습니다.</div>,
+      },
+      {
+        path: '/messages/sent/:messageId',
+        element: <MessageDetail />,
+        errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
         path: '/notices',
