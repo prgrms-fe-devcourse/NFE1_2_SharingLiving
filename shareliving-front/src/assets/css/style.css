@@ -738,6 +738,12 @@ a:hover, a:focus, a:active {
 }
 
 /* 모바일 반응형 */
+.header-mobile-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
 #toggleMenuTitlebar {
   display: flex;
   justify-content: space-between;
@@ -786,6 +792,24 @@ a:hover, a:focus, a:active {
 }
 .burger-stripe.bottom {
   margin-inline-end: 0.6rem;
+}
+
+#btnUserControl {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 25rem;
+  color: rgb(var(--clr-text));
+}
+#btnUserControl .icons {
+  width: 1rem;
+}
+#btnUserControl.on {
+  background-color: rgb(var(--clr-max));
+  color: rgb(var(--clr-min));
 }
 
 #navToggle {
@@ -846,13 +870,25 @@ a:hover, a:focus, a:active {
 
 /* 미디어 쿼리 */
 @media screen and (max-width: 1100px) {
-  .header-nav-area {
-    order: 1;
-    align-self: flex-start;
+  .nav-list {
+    gap: 0.4rem;
+  }
+  #btnUserControl {
+    display: flex;
   }
   .header-user-area {
-    order: 0;
-    align-self: flex-end;
+    display: none;
+    position: absolute;
+    inset-block-start: calc(100% - 0.4rem);
+    inset-inline-end: 1.2rem;
+    padding: 0.8rem;
+    border-radius: 0.8rem;
+    background-color: rgb(var(--clr-min));
+    box-shadow: 0 0.8rem 1.2rem -0.4rem rgba(0, 0, 0, 0.25);
+    z-index: 50001;
+  }
+  .header-user-area.on {
+    display: flex;
   }
 }
 @media screen and (max-width: 840px) {
@@ -864,9 +900,6 @@ a:hover, a:focus, a:active {
   }
 }
 @media screen and (max-width: 600px) {
-  #headPrimary {
-    position: static;
-  }
   #navMobile {
     display: block;
   }
@@ -895,10 +928,22 @@ a:hover, a:focus, a:active {
   align-items: center;
   gap: 0.2rem;
   padding: 0.4rem 0.8rem;
+  font-size: var(--fnt-sm);
+  font-weight: 700;
+}
+#navBreadCrumbs .icons {
+  width: 0.6rem;
+}
+#navBreadCrumbs .icons:last-of-type {
+  display: none;
 }
 
 .breadcrumb-item {
   padding: 0.4rem;
+}
+.breadcrumb-item:last-of-type {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 /* _subPages.scss */
@@ -1038,6 +1083,17 @@ a:hover, a:focus, a:active {
 }
 
 /* _landingPages.scss */
+/* _detailPage.scss */
+#detailContainer {
+  overflow: hidden;
+}
+
+#detailImageContainer {
+  height: 16rem;
+  background-color: black;
+}
+
+/* _detailPage.scss */
 /* _buttons.scss */
 button {
   padding: 0;

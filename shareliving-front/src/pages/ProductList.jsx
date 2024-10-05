@@ -26,7 +26,6 @@ const ProductList = () => {
         })),
     }
   );
-  console.log(allProductsList);
 
   const [searchParams] = useSearchParams();
   const selectedCategory = searchParams.get('category');

@@ -129,6 +129,12 @@
 
 /* 모바일 반응형 */
 
+.header-mobile-buttons {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+}
+
 #toggleMenuTitlebar {
     display: flex;
     justify-content: space-between;
@@ -187,6 +193,26 @@
 
     &.bottom {
         margin-inline-end: .6rem;
+    }
+}
+
+#btnUserControl {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 25rem;
+    color: rgb(var(--clr-text));
+
+    .icons {
+        width: 1rem;
+    }
+
+    &.on {
+        background-color: rgb(var(--clr-max));
+        color: rgb(var(--clr-min));
     }
 }
 
@@ -256,14 +282,28 @@
 /* 미디어 쿼리 */
 
 @media screen and (max-width: 1100px) { // 작은 화면 (1100px) - 사용자 컨트롤 축소
-    .header-nav-area {
-        order: 1;
-        align-self: flex-start;
+    .nav-list {
+        gap: .4rem;
+    }
+
+    #btnUserControl {
+        display: flex;
     }
 
     .header-user-area {
-        order: 0;
-        align-self: flex-end;
+        display: none;
+        position: absolute;
+        inset-block-start: calc(100% - .4rem);
+        inset-inline-end: 1.2rem;
+        padding: .8rem;
+        border-radius: .8rem;
+        background-color: rgb(var(--clr-min));
+        box-shadow: 0 .8rem 1.2rem -.4rem rgb(0 0 0 / .25);
+        z-index: 50001;
+
+        &.on {
+            display: flex;
+        }
     }
 }
 
@@ -279,7 +319,7 @@
 
 @media screen and (max-width: 600px) { // 모바일 (480px) - 상단 네비게이션 완전 축소, 하단 네비게이션 표시
     #headPrimary {
-        position: static;
+
     }
 
     #navMobile {

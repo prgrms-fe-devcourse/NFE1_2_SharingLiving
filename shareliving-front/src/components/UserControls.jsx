@@ -39,9 +39,9 @@ const HasUserLoggedIn = () => {
   )
 }
 
-const UserControlls = () => {
+const UserControls = ({ isMobile }) => {
   return (
-    <div className="header-user-area">
+    <div className={ `header-user-area ${ isMobile ? 'on' : null }` }>
       <div className="total-search-container"> { /** 종합 검색 */ }
         <input type="text" name="search-value" id="txtSearch" className="input-element" placeholder="검색어 입력..." />
 
@@ -55,4 +55,4 @@ const UserControlls = () => {
   );
 };
 
-export default UserControlls;
+export default UserControls;
