@@ -124,8 +124,12 @@
             gap: .4rem;
 
             > .card-title-text {
+                width: 100%;
                 font-size: var(--fnt-title-md);
                 font-weight: 900;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
     }

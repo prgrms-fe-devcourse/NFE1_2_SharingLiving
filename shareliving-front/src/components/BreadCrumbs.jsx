@@ -3,8 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 const BreadCrumbs = ({ showBreadcrumbs }) => {
   const thisLocation = useLocation().pathname.split('/');
 
-  console.log(thisLocation)
-
   // showBreadcrumbs가 false일 경우 null을 반환하여 UI를 숨김
 
   if (!showBreadcrumbs) {

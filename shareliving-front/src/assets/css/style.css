@@ -918,6 +918,7 @@ a:hover, a:focus, a:active {
 
 #mainContainer {
   flex: 1;
+  margin-inline: auto;
   min-height: 100vh;
 }
 
@@ -992,7 +993,6 @@ a:hover, a:focus, a:active {
   display: flex;
   flex-flow: column nowrap;
   gap: 1.2rem;
-  max-width: 63.2rem;
 }
 
 #secHero {
@@ -1385,8 +1385,12 @@ select:focus {
   gap: 0.4rem;
 }
 .card-descriptions > .card-title:has(.card-category-tag) > .card-title-text {
+  width: 100%;
   font-size: var(--fnt-title-md);
   font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .card-descriptions > .card-type {
   display: -webkit-box;
