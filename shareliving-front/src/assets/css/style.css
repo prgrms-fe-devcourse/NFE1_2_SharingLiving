@@ -744,13 +744,6 @@ a:hover, a:focus, a:active {
   gap: 0.8rem;
 }
 
-#toggleMenuTitlebar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.8rem;
-}
-
 #btnBurger {
   --burger-lines-color: var(--clr-text);
   display: none;
@@ -819,12 +812,40 @@ a:hover, a:focus, a:active {
   margin: auto;
   width: 75vw;
   background-color: rgba(0, 0, 0, 0.75);
+  color: rgb(255, 255, 255);
   translate: -100%;
   transition: translate 0.25s;
   z-index: 50000;
 }
 #navToggle.on {
   translate: 0;
+}
+
+#toggleMenuTitlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem;
+  font-size: var(--fnt-title-md);
+  font-weight: 100;
+}
+
+#btnNavClose {
+  padding: 0.8rem;
+  color: inherit;
+}
+
+#toggleMenuList {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.4rem;
+  padding: 0.8rem;
+  font-size: 5vmax;
+}
+
+.toggle-menu-item > a {
+  display: block;
+  padding: 0.4rem;
 }
 
 /* 하단 네비 바 */

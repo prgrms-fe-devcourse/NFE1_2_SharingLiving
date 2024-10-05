@@ -55,7 +55,6 @@ const baseRouter = createBrowserRouter([
     children: [
       {
         path: '/',
-        name: '홈',
         element: <LandingPage />,
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
@@ -111,7 +110,6 @@ const baseRouter = createBrowserRouter([
       },
       {
         path: '/product/:id',
-        name: '게시물 상세보기',
         element: <ProductDetail />,
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
