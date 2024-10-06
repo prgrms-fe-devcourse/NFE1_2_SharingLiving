@@ -1,5 +1,8 @@
 import { useQuery } from 'react-query';
-import { getChannelList, getKnowledgeChannel } from '../components/authentication/utils/service/apiUtil';
+import {
+  getChannelList,
+  getKnowledgeChannel,
+} from '../components/authentication/utils/service/apiUtil';
 import { useAppContext } from '../context/AppContext';
 
 import LandingSectionTitle from './LandingSectionTitle';
@@ -13,22 +16,23 @@ const LandingPage = () => {
   const { data: channels } = useQuery('channels', getChannelList);
   const channelId = channels?.find(({ name }) => name === 'knowledge')?._id;
 
-  const { data: allKnowledgeList } = useQuery('allKnowledgeList', () => getKnowledgeChannel(channelId),
+  const { data: allKnowledgeList } = useQuery(
+    'allKnowledgeList',
+    () => getKnowledgeChannel(channelId),
     {
       enabled: !!channelId,
       select: (res) => {
         const toTheLength = res.slice(res.length - 6, res.length - 1);
 
-        return toTheLength.map((knowledge) => ({ ...knowledge, ...JSON.parse(knowledge.title) }));
+        return toTheLength.map((knowledge) => ({
+          ...knowledge,
+          ...JSON.parse(knowledge.title),
+        }));
       },
     }
   );
 
   /** 최근 지식 나눔 글 가지고 오기 끝 */
-
-  const currentContext = useAppContext();
-
-  currentContext.setShowBreadcrumbs(false);
 
   return (
     <>
@@ -49,7 +53,11 @@ const LandingPage = () => {
         </section>
 
         <section id="secShareProducts">
-          <LandingSectionTitle secDesc="사용한 물건에 새로운 가치를 부여해 보세요." secTitle="물품 나눔" secGoto="/product" />
+          <LandingSectionTitle
+            secDesc="사용한 물건에 새로운 가치를 부여해 보세요."
+            secTitle="물품 나눔"
+            secGoto="/product"
+          />
 
           <div className="section-content product-list">
             <ProductSlider />
@@ -57,25 +65,29 @@ const LandingPage = () => {
         </section>
 
         <section id="secShareKnowledge">
-          <LandingSectionTitle secDesc="나만 알고 있는 생활의 지식을 나누어 보세요." secTitle="생활 지식 나눔" secGoto="/knowledge" />
+          <LandingSectionTitle
+            secDesc="나만 알고 있는 생활의 지식을 나누어 보세요."
+            secTitle="생활 지식 나눔"
+            secGoto="/knowledge"
+          />
 
           <div className="section-content knowledge-list">
-            {
-              allKnowledgeList?.map((knowledge, index) => (
-                <div key={index}>
-                  <CardProducts type="knowledge" itemObject={ knowledge } />
-                </div>
-              ))
-            }
+            {allKnowledgeList?.map((knowledge, index) => (
+              <div key={index}>
+                <CardProducts type="knowledge" itemObject={knowledge} />
+              </div>
+            ))}
           </div>
         </section>
 
-        <section id="secInfoBanner">
-          이용 안내글로 이동하는 배너
-        </section>
+        <section id="secInfoBanner">이용 안내글로 이동하는 배너</section>
 
         <section id="secReviews">
-          <LandingSectionTitle secDesc="나누어 주신 분들께 감사의 마음을 표현해 보세요." secTitle="나눔 이용 후기" secGoto="/" />
+          <LandingSectionTitle
+            secDesc="나누어 주신 분들께 감사의 마음을 표현해 보세요."
+            secTitle="나눔 이용 후기"
+            secGoto="/"
+          />
 
           <div className="section-content review-list">
             <ReviewSlider />
@@ -83,8 +95,11 @@ const LandingPage = () => {
         </section>
 
         <section id="secNews">
-          <LandingSectionTitle secDesc="나누리빙의 최근 소식입니다." secTitle="나누리빙 News" secGoto="/" />
-
+          <LandingSectionTitle
+            secDesc="나누리빙의 최근 소식입니다."
+            secTitle="나누리빙 News"
+            secGoto="/"
+          />
           최신 소식이나 소셜 업데이트 등
         </section>
       </div>
