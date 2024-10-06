@@ -1,0 +1,27 @@
+.productCard-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.productCard {
+  width: calc(25% - 9px);
+}
+
+@media (max-width: 1400px) {
+  .productCard {
+    width: calc(33% - 6px);
+  }
+}
+
+@media (max-width: 730px) {
+  .productCard {
+    width: calc(50% - 6px);
+  }
+}
+
+@media (max-width: 480px) {
+  .productCard {
+    width: 100%;
+  }
+}

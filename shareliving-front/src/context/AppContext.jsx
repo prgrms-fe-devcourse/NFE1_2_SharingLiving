@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 // Context 생성
 const AppContext = createContext();
@@ -10,28 +10,40 @@ export const AppProvider = ({ children }) => {
   const [hideSidebar, setHideSidebar] = useState(false);
 
   // 메시지 상태 관리
-  const [receivedMessages, setReceivedMessages] = useState([
-    {
-      id: 1,
-      subject: '첫 번째 메시지',
-      body: '안녕하세요! 첫 번째 메시지입니다.',
-      sender: '사용자A',
-    },
-    {
-      id: 2,
-      subject: '두 번째 메시지',
-      body: '안녕하세요! 두 번째 메시지입니다.',
-      sender: '사용자B',
-    },
-  ]);
-
+  const [receivedMessages, setReceivedMessages] = useState([]);
   const [sentMessages, setSentMessages] = useState([]);
 
-  // 임시 현재 사용자 정보
+  // 초기 현재 사용자 정보 상태 (토큰을 null로 초기화)
   const [currentUser, setCurrentUser] = useState({
     name: '현재 사용자',
     email: 'currentuser@example.com',
+    token: null, // 초기값을 null로 설정
+    stamps: 5,
   });
+
+  // 토큰 로딩 상태 추가
+  const [isTokenLoading, setIsTokenLoading] = useState(true);
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem('userInfo');
+    if (userInfo) {
+      setCurrentUser((prevUser) => ({
+        ...prevUser,
+        ...JSON.parse(userInfo),
+      }));
+    }
+
+    const token = localStorage.getItem('token');
+    if (token) {
+      setCurrentUser((prevUser) => ({
+        ...prevUser,
+        token,
+      }));
+    }
+
+    // 토큰 로딩 완료
+    setIsTokenLoading(false);
+  }, []); // 빈 배열로 설정하여 한 번만 실행
 
   // 답장 메시지 추가 함수
   const handleSendReply = (originalMessageId, replyContent) => {
@@ -55,6 +67,9 @@ export const AppProvider = ({ children }) => {
     }
   };
 
+  // 탭 메뉴 활성화 상태
+  const [activeTab, setActiveTab] = useState('received');
+
   return (
     <AppContext.Provider
       value={{
@@ -68,6 +83,11 @@ export const AppProvider = ({ children }) => {
         sentMessages,
         handleSendReply,
         currentUser,
+        setCurrentUser,
+        isTokenLoading, // 추가: 로딩 상태 전달
+        // 탭 활성화 관련 상태
+        activeTab,
+        setActiveTab,
       }}
     >
       {children}

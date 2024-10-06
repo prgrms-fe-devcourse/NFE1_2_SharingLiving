@@ -1,9 +1,11 @@
+import { Outlet } from 'react-router-dom';
+import { useAppContext } from '../../context/AppContext'; // Context 불러오기
+
 import Header from '../Header';
 import Footer from '../Footer';
 import MainSidebar from '../MainSidebar';
 import BreadCrumbs from '../BreadCrumbs';
-import { Outlet } from 'react-router-dom';
-import { useAppContext } from '../../context/AppContext'; // Context 불러오기
+import BottomNavBar from '../BottomNavBar';
 
 const Layout = () => {
   const { showBreadcrumbs, hideSidebar } = useAppContext();
@@ -22,7 +24,10 @@ const Layout = () => {
 
         <MainSidebar isLogged={isLogged} hideSidebar={hideSidebar} />
       </main>
+
       <Footer />
+
+      <BottomNavBar />
     </>
   );
 };

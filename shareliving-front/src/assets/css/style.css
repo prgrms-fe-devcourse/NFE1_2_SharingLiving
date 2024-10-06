@@ -512,7 +512,7 @@ a:hover, a:focus, a:active {
   --clr-surface-10: ;
   --clr-surface-5: ;
   --clr-tint-100: 52 114 53;
-  --clr-tint-75: ;
+  --clr-tint-75: 55 107 67;
   --clr-tint-50: 76 175 79;
   --clr-tint-25: ;
   --clr-tint-10: ;
@@ -659,6 +659,7 @@ a:hover, a:focus, a:active {
   padding: 0.8rem;
   font-size: var(--fnt-lg);
   font-weight: 700;
+  cursor: pointer;
 }
 .nav-item:hover {
   background-image: linear-gradient(to top, rgb(var(--clr-theme)), rgb(var(--clr-theme)) 0.2rem, transparent 0.2rem);
@@ -712,6 +713,24 @@ a:hover, a:focus, a:active {
   background-color: rgb(var(--clr-tint-50)/0.5);
 }
 
+#btnHeaderLogout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+  padding-inline: 0.8rem;
+  height: 1.6rem;
+  border: 1px solid rgb(var(--clr-theme)/0.5);
+  border-radius: 0.2rem;
+  background-color: rgb(var(--clr-theme));
+  color: rgb(var(--clr-text-on-tint));
+  font-size: var(--fnt-sm);
+  font-weight: 900;
+}
+#btnHeaderLogout > .icons {
+  width: 0.8rem;
+}
+
 .togglers {
   display: flex;
   justify-content: center;
@@ -727,29 +746,137 @@ a:hover, a:focus, a:active {
 }
 
 /* 모바일 반응형 */
-.mobile-burger {
+#toggleMenuTitlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem;
+}
+
+#btnBurger {
+  --burger-lines-color: var(--clr-text);
   display: none;
+  position: relative;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 25rem;
+}
+#btnBurger.on {
+  --burger-lines-color: var(--clr-min);
+  background-color: rgb(var(--clr-max));
+}
+#btnBurger.on .burger-stripe.top, #btnBurger.on .burger-stripe.bottom {
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}
+#btnBurger.on .burger-stripe.top {
+  rotate: 45deg;
+}
+#btnBurger.on .burger-stripe.bottom {
+  rotate: -45deg;
+}
+#btnBurger.on .burger-stripe.middle {
+  opacity: 0;
+}
+
+.burger-stripe {
+  display: block;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 0.1rem;
+  height: 0.8rem;
+  background-color: rgb(var(--burger-lines-color));
+  transition: 0.25s;
+}
+.burger-stripe.top {
+  margin-inline-start: 0.6rem;
+}
+.burger-stripe.bottom {
+  margin-inline-end: 0.6rem;
+}
+
+#navToggle {
+  position: fixed;
+  inset-block: 0;
+  inset-inline-start: 0;
+  margin: auto;
+  width: 75vw;
+  background-color: rgba(0, 0, 0, 0.75);
+  translate: -100%;
+  transition: translate 0.25s;
+  z-index: 50000;
+}
+#navToggle.on {
+  translate: 0;
 }
 
 /* 하단 네비 바 */
 #navMobile {
   display: none;
   position: sticky;
+  inset-inline: 0;
   inset-block-end: 0;
+  width: 100%;
+  height: 3.6rem;
+  background-color: rgb(var(--clr-min));
+  box-shadow: 0 0 1.8rem -1.2rem rgb(var(--clr-text));
+  z-index: 50000;
+}
+
+.bottom-nav-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.bottom-nav-item {
+  flex: 1;
+  position: relative;
+  height: 100%;
+  font-size: var(--fnt-sm);
+}
+.bottom-nav-item > a {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  padding-inline: 0.4rem;
+  height: 100%;
+}
+.bottom-nav-item:has(.active) {
+  background-image: linear-gradient(to bottom, rgb(var(--clr-tint-50)), rgb(var(--clr-tint-50)) 0.2rem, transparent 0.2rem), linear-gradient(to bottom, rgb(var(--clr-tint-50)/0.25), transparent 50%);
+  color: rgb(var(--clr-theme));
+  font-weight: 900;
 }
 
 /* 미디어 쿼리 */
-@media screen and (max-width: 42rem) {
+@media screen and (max-width: 1100px) {
+  .header-nav-area {
+    order: 1;
+    align-self: flex-start;
+  }
+  .header-user-area {
+    order: 0;
+    align-self: flex-end;
+  }
+}
+@media screen and (max-width: 840px) {
   #navPrimary {
     display: none;
   }
-  .mobile-burger {
-    display: initial;
+  #btnBurger {
+    display: block;
   }
 }
-@media screen and (max-width: 24rem) {
+@media screen and (max-width: 600px) {
+  #headPrimary {
+    position: static;
+  }
   #navMobile {
-    display: initial;
+    display: block;
   }
 }
 /* _headers.scss */
@@ -766,6 +893,7 @@ a:hover, a:focus, a:active {
 
 #mainContainer {
   flex: 1;
+  min-height: 100vh;
 }
 
 /* _mainPage.scss */
@@ -822,32 +950,99 @@ a:hover, a:focus, a:active {
 
 /* _footers.scss */
 /* _landingPages.scss */
+/* 히어로 섹션 */
+.landing-page-aligner {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1.2rem;
+  max-width: 63.2rem;
+}
+
 #secHero {
   height: 30vh;
 }
 
 .hero-slide-item {
-  --slide-background-color: 199 199 199;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 0.8rem;
-  background-color: rgb(var(--slide-background-color));
 }
 
 .slide-insert {
-  --slide-background-color: 199 199 199;
+  --slide-background-color: var(--clr-tint-75);
+  --slide-text-color: 255 255 255;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   position: relative;
+  padding: 1.6rem;
   width: 100%;
   height: 100%;
   border-radius: 0.8rem;
   background-color: rgb(var(--slide-background-color));
+  color: rgb(var(--slide-text-color));
+}
+
+/* 섹션 타이틀 */
+.section-titlebar {
+  margin-block-end: 0.6rem;
+}
+
+.section-description {
+  margin-block-end: 0.2rem;
+  font-size: var(--fnt-lg);
+  opacity: 0.5;
+}
+
+.section-name-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-name {
+  font-size: var(--fnt-title-lg);
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.button-section-more {
+  padding: 0.2rem 1rem;
+  border: 1px solid rgb(var(--clr-tint-75));
+  border-radius: 0.2rem;
+  color: rgb(var(--clr-tint-75));
+  font-size: var(--fnt-sm);
+  font-weight: 900;
+}
+.button-section-more:hover {
+  background-color: rgb(var(--clr-tint-75));
+  color: rgb(255, 255, 255);
+}
+.button-section-more a:hover {
+  color: inherit;
+}
+
+/* 섹션 공통 요소 */
+/* 섹션별 특수 요소 */
+.product-list {
+  position: relative;
+  height: 24rem;
+}
+
+.knowledge-list {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.6rem;
+}
+
+.review-list {
+  position: relative;
+  height: 24rem;
+}
+
+#secInfoBanner {
+  height: 7.5rem;
+  border-radius: 0.8rem;
+  background-color: orange;
 }
 
 /* _landingPages.scss */
@@ -941,6 +1136,8 @@ select:focus {
   display: flex;
   flex-flow: column nowrap;
   gap: 0.6rem;
+  position: sticky;
+  top: 4rem;
   width: 16rem;
 }
 
@@ -986,7 +1183,7 @@ select:focus {
   margin-inline-start: auto;
 }
 
-@media screen and (max-width: 70rem) {
+@media screen and (max-width: 1400px) {
   #sideBarMain {
     display: none;
     position: fixed;
@@ -999,11 +1196,38 @@ select:focus {
   }
 }
 /* _MainSideBar.scss */
+/* _mainSliders.scss */
+.swiper {
+  position: absolute !important;
+  inset: 0;
+}
+.swiper .card-item {
+  width: 16rem;
+}
+.swiper .review-item {
+  width: 20rem;
+}
+
+.swiper-wrapper {
+  width: 100%;
+}
+
+.swiper-slide {
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+}
+
+/* _mainSliders.scss */
 /* _cardItems.scss */
+/* 제품, 지식 글 목록 아이템 */
 .card-item {
   border-radius: 0.8rem;
   background-color: rgb(var(--clr-min));
   overflow: hidden;
+}
+.card-item.products {
+  flex: 1;
+  max-width: 16rem;
 }
 .card-item.knowledge {
   display: flex;
@@ -1024,13 +1248,16 @@ select:focus {
   height: 12.25rem;
   background-color: rgb(var(--clr-max)/0.75);
 }
-.card-image-container > .card-image {
+.card-image-container .card-image {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .card-image-container > .card-tags-container {
   display: flex;
@@ -1043,7 +1270,7 @@ select:focus {
   padding: 0.4rem;
   height: -moz-fit-content;
   height: fit-content;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 .card-tag-item {
@@ -1093,23 +1320,54 @@ select:focus {
   padding: 0.6rem 0.8rem;
 }
 .card-descriptions > .card-title {
-  font-size: var(--fnt-title-md);
-  font-weight: 900;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
+.card-descriptions > .card-title:not(:has(.card-category-tag)) {
+  font-size: var(--fnt-title-md);
+  font-weight: 900;
+}
+.card-descriptions > .card-title:has(.card-category-tag) {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.card-descriptions > .card-title:has(.card-category-tag) > .card-title-text {
+  font-size: var(--fnt-title-md);
+  font-weight: 900;
+}
 .card-descriptions > .card-type {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
   opacity: 0.75;
+  height: 3.5rem;
+  line-clamp: 5;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .card-descriptions > .card-text {
   flex: 1;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
+  position: relative;
+  font-size: var(fnt-sm);
   line-height: 1.4;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
   text-overflow: ellipsis;
   overflow: hidden;
+  opacity: 0.5;
+}
+.card-descriptions > .card-text::after {
+  display: block;
+  position: absolute;
+  inset: 0;
+  margin-block-start: auto;
+  height: 1.8rem;
+  background-image: linear-gradient(to top, rgb(var(--clr-min)), transparent);
+  content: "";
 }
 .card-descriptions > .card-price {
   color: rgb(var(--clr-text)/0.5);
@@ -1122,6 +1380,17 @@ select:focus {
   font-weight: 900;
 }
 
+.card-category-tag {
+  --tag-background-color: var(--clr-theme);
+  --tag-text-color: var(--clr-min);
+  padding: 0.2rem 0.6rem;
+  border-radius: 25rem;
+  background-color: rgb(var(--tag-background-color));
+  color: rgb(var(--tag-text-color));
+  font-size: var(--fnt-sm);
+  font-weight: 900;
+}
+
 .card-info-container {
   display: flex;
   justify-content: space-between;
@@ -1130,4 +1399,145 @@ select:focus {
   border-block-start: 1px solid rgb(var(--clr-text)/0.15);
 }
 
+.user-nametag {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.user-nametag-picture {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 25rem;
+  overflow: hidden;
+}
+.user-nametag-picture > img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.user-nametag-name {
+  font-size: var(--fnt-sm);
+  font-weight: 600;
+}
+.user-nametag-name::after {
+  content: " 님";
+}
+
+/* 지식 나눔 글 모바일 미디어 쿼리 */
+@media screen and (max-width: 840px) {
+  .card-item.knowledge > .card-image-container {
+    width: auto;
+    height: 100%;
+    aspect-ratio: 0.6/1;
+  }
+}
+@media screen and (max-width: 540px) {
+  .card-item.knowledge > .card-image-container {
+    margin: 0.4rem;
+    height: 5rem;
+    aspect-ratio: 1/1;
+    border-radius: 0.4rem;
+    overflow: hidden;
+  }
+}
+/* 나눔 후기 글 아이템 */
+.review-item {
+  flex: 1;
+  border-radius: 0.8rem;
+  background-color: rgb(var(--clr-min));
+  overflow: hidden;
+}
+
+.review-image-container {
+  position: relative;
+  height: 12rem;
+  background-color: rgb(var(--clr-max)/0.75);
+}
+.review-image-container > .review-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  pointer-events: none;
+}
+
+.review-title-area {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.8rem;
+}
+
+.review-user-picture {
+  margin-block-start: -0.8rem;
+  width: 3.2rem;
+  height: 3.2rem;
+  border: 0.2rem solid rgb(var(--clr-min));
+  border-radius: 25rem;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.review-title {
+  margin-block-end: 0.2rem;
+  font-size: var(--fnt-lg);
+  font-weight: 900;
+}
+
+.review-author {
+  font-size: var(--fnt-sm);
+  font-weight: 600;
+}
+
+.review-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  position: relative;
+  padding: 0 0.8rem 0.6rem;
+  height: 5.2rem;
+  font-size: var(--fnt-sm);
+  font-weight: 600;
+  line-height: 1.4;
+  line-clamp: 5;
+  -webkit-line-clamp: 5;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  opacity: 0.5;
+}
+.review-text::after {
+  display: block;
+  position: absolute;
+  inset: 0;
+  margin-block-start: auto;
+  height: 1.8rem;
+  background-image: linear-gradient(to top, rgb(var(--clr-min)), transparent);
+  content: "";
+}
+
+.review-info-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0.8rem;
+  border-block-start: 1px solid rgb(var(--clr-text)/0.15);
+}
+.review-info-container > .review-written-date {
+  margin-inline-start: auto;
+  font-size: var(--fnt-sm);
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 480px) {
+  .card-item.products {
+    max-width: auto;
+  }
+}
 /* _cardItems.scss */
