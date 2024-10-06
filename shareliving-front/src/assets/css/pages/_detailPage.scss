@@ -5,8 +5,21 @@
 }
 
 #detailImageContainer {
+    position: relative;
     height: 16rem;
     background-color: black;
+    overflow: hidden;
+}
+
+.detail-image {
+    position: absolute;
+    inset: -10%;
+    margin: auto;
+    width: 120%;
+    height: 120%;
+    filter: blur(.4rem);
+    user-select: none;
+    pointer-events: none;
 }
 
 #detailSummary {

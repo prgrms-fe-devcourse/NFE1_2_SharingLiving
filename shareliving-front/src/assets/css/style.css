@@ -940,8 +940,8 @@ a:hover, a:focus, a:active {
 
 #mainContainer {
   flex: 1;
-  margin-inline: auto;
   min-height: 100vh;
+  width: 100%;
 }
 
 /* _mainPage.scss */
@@ -962,6 +962,9 @@ a:hover, a:focus, a:active {
 }
 
 .breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
   padding: 0.4rem;
 }
 .breadcrumb-item:last-of-type {
@@ -1111,8 +1114,23 @@ a:hover, a:focus, a:active {
 }
 
 #detailImageContainer {
+  position: relative;
   height: 16rem;
   background-color: black;
+  overflow: hidden;
+}
+
+.detail-image {
+  position: absolute;
+  inset: -10%;
+  margin: auto;
+  width: 120%;
+  height: 120%;
+  filter: blur(0.4rem);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  pointer-events: none;
 }
 
 #detailSummary {

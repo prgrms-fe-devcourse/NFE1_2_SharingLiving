@@ -1,70 +1,76 @@
 .tree-slider {
-  text-align: center;
-  background-color: #f0f8f0;
-  border: 2px solid #d2e8d2;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 20px 0;
+  width: 100%;
+  max-width: 1200px;
 }
-.tree-slider button {
+.tree-slider .slick-initialized .slick-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  height: 250px;
+}
+.tree-slider .slick-initialized .slick-slide img {
+  max-width: 50% !important;
+  margin: 0 auto;
+}
+.tree-slider__button {
+  padding: 10px 20px;
   background-color: #4caf50;
   color: white;
   border: none;
-  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
 }
-.tree-slider button:hover {
-  background-color: #45a049;
-}
-.tree-slider button:disabled {
-  background-color: #a5d6a7;
+.tree-slider__button:disabled {
+  background-color: #ccc;
   cursor: not-allowed;
 }
-.tree-slider h2 {
+.tree-slider__level {
   font-size: 24px;
-  color: #2e7d32;
-  margin-bottom: 15px;
+  margin: 20px 0;
 }
-.tree-slider .progress-bar {
+.tree-slider__progress-bar {
   background-color: #e0e0e0;
   border-radius: 5px;
-  height: 20px;
-  margin-bottom: 15px;
+  height: 10px;
+  margin-bottom: 20px;
+  position: relative;
 }
-.tree-slider .progress-bar .progress {
-  background-color: #76c7c0;
+.tree-slider__progress {
+  background-color: #4caf50;
   height: 100%;
   border-radius: 5px;
-  transition: width 0.3s;
 }
-.tree-slider .stickers {
+.tree-slider__card {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+  align-items: center;
+  margin: 0 !important;
 }
-.tree-slider .stickers .sticker-image {
-  width: 60px;
-  height: 60px;
-  margin: 5px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-.tree-slider .card {
-  position: relative;
-  margin: 0 10px;
-}
-.tree-slider .card img {
-  width: 100%;
-  border-radius: 10px;
-  transition: transform 0.3s;
-}
-.tree-slider .card img:hover {
-  transform: scale(1.05);
-}
-.tree-slider .card.hidden {
+.tree-slider__card--hidden {
+  opacity: 0.5;
   display: none;
+}
+.tree-slider__card-image {
+  height: auto;
+}
+.tree-slider__status {
+  margin-top: 20px;
+}
+.tree-slider__current-trees, .tree-slider__total-trees {
+  font-size: 16px;
+}
+.tree-slider__stickers {
+  margin-top: 10px;
+}
+.tree-slider__stickers-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.tree-slider__sticker-image {
+  width: calc(8.3333333333% - 10px);
+  height: auto;
+  gap: 10px;
 }
