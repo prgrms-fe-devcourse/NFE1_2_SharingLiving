@@ -7,19 +7,19 @@ const ShareModal = ({ closeModal }) => {
     return (
         <div className="modal-overlay">
             <div className="modal-content">
-                <h2>나눔하기</h2>
+                {/* <h2>나눔하기</h2> */}
                 <div className="modal-buttons">
                     <button className="modal-button" onClick={() => { 
                         closeModal();
                         navigate('/add-knowledge');
                     }}>
-                        나눔지식등록하기
+                        나눔지식 등록하기
                     </button>
                     <button className="modal-button" onClick={() => {
                         closeModal();
                         navigate('/add-product');
                     }}>
-                        나눔제품등록하기
+                        나눔제품 등록하기
                     </button>
                 </div>
                 <button className="modal-close" onClick={closeModal}>닫기</button>
