@@ -4,7 +4,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { AppProvider } from './context/AppContext'; // Context import
 
 import './assets/css/style.css';
-
 import Layout from './components/layouts/Layout';
 import LandingPage from './components/LandingPage';
 import ProductWrite from './pages/ProductWrite';
@@ -25,8 +24,10 @@ import KnowledgeList from './pages/KnowledgeList';
 import Login from './components/authentication/component/Login';
 import Signup from './components/authentication/component/Signup';
 import FindAccountInfo from './components/authentication/component/FindAccountInfoPopup';
+import KakaoCallback from './components/authentication/utils/service/kakaoCallback';
+import GoogleCallback from './components/authentication/utils/service/GoogleCallback';
 
-/*
+/*  
   주석 규칙
 
   - 404 오류 처리:
@@ -48,6 +49,11 @@ import FindAccountInfo from './components/authentication/component/FindAccountIn
 */
 
 const baseRouter = createBrowserRouter([
+  {
+    path: '/auth/google/callback',
+    element: <GoogleCallback />,
+    errorElement: <div>Google 로그인에 실패했습니다.</div>,
+  },
   {
     path: '/',
     element: <Layout />,
@@ -140,8 +146,8 @@ const baseRouter = createBrowserRouter([
       },
       {
         path: '/auth/kakao/callback',
-        element: <Login />,
-        errorElement: <div>로그인에 실패했습니다.</div>,
+        element: <KakaoCallback />,
+        errorElement: <div>Kakao 로그인에 실패했습니다.</div>,
       },
       {
         path: '/signup',
