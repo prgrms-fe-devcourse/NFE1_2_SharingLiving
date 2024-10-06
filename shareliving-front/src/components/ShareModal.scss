@@ -13,9 +13,9 @@
 
 .modal-content {
   background-color: #fff; 
-  padding: 20px;
+  padding: 70px 40px;
   border-radius: 8px;
-  width: 300px; 
+  width: 400px; 
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
@@ -23,19 +23,21 @@
 .modal-buttons {
   display: flex;
   flex-direction: column;
-  gap: 10px; 
+  gap: 12px; 
   margin-bottom: 20px;
 
   .modal-button {
-      padding: 10px 20px;
+      padding: 15px;
       border: none;
       border-radius: 4px;
-      background-color: #007bff;
+      background-color: #337235;
       color: white;
       cursor: pointer;
 
       &:hover {
-          background-color: #0056b3;
+          background-color: #ffffff;
+          color:#337235;
+          border: solid 1px #337235;
       }
   }
 }

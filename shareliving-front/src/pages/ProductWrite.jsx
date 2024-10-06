@@ -123,7 +123,7 @@ const ProductWrite = () => {
         }
       );
       console.log(response.data);
-      // navigate('/');
+      navigate('/product');
     } catch (error) {
       console.error('데이터 전송 중 오류 발생:', error);
     }
