@@ -26,18 +26,21 @@ const SignUp = () => {
   const [isAllChecked, setIsAllChecked] = useState(false);
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+    // Clear error when user starts typing
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
 
   const handlePhoneNumberChange = (e) => {
     const { value } = e.target;
-    const formattedNumber = value
-      .replace(/\D/g, '')
-      .replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+    const numericValue = value.replace(/\D/g, '');
+    const formattedNumber = numericValue.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
     setFormData((prevData) => ({ ...prevData, phoneNumber: formattedNumber }));
+    setErrors((prevErrors) => ({ ...prevErrors, phoneNumber: "" }));
   };
 
   const handleTermsChange = (e) => {
@@ -67,15 +70,30 @@ const SignUp = () => {
   };
 
   const validateForm = () => {
+    let newErrors = {};
+
+    if (formData.fullName.length < 2) {
+      newErrors.fullName = "이름은 2글자 이상이어야 합니다.";
+    }
+
+    if (formData.nickname.length < 2) {
+      newErrors.nickname = "닉네임은 2글자 이상이어야 합니다.";
+    }
+
+    if (formData.phoneNumber.replace(/\D/g, '').length !== 11) {
+      newErrors.phoneNumber = "전화번호는 11자리여야 합니다.";
+    }
+
     if (formData.password !== formData.passwordConfirm) {
-      setMessage("비밀번호가 일치하지 않습니다.");
-      return false;
+      newErrors.passwordConfirm = "비밀번호가 일치하지 않습니다.";
     }
+
     if (!terms.age || !terms.service || !terms.privacy) {
-      setMessage("필수 약관에 동의해주세요.");
-      return false;
+      newErrors.terms = "필수 약관에 동의해주세요.";
     }
-    return true;
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const registerUser = async (e) => {
@@ -144,7 +162,7 @@ const SignUp = () => {
             <option value="gmail.com">gmail.com</option>
             <option value="naver.com">naver.com</option>
             <option value="daum.net">daum.net</option>
-            <option value="kakao.com">daum.net</option>
+            <option value="kakao.com">kakao.com</option>
             <option value="custom">직접 입력</option>
           </select>
           {formData.emailDomain === "custom" && (
@@ -178,14 +196,16 @@ const SignUp = () => {
           maxLength="16"
           required
         />
+        {errors.passwordConfirm && <p className="error-message">{errors.passwordConfirm}</p>}
         <input
           type="text"
           name="fullName"
-          placeholder="이름 입력"
+          placeholder="이름 입력 (2글자 이상)"
           value={formData.fullName}
           onChange={handleInputChange}
           required
         />
+        {errors.fullName && <p className="error-message">{errors.fullName}</p>}
         <input
           type="tel"
           name="phoneNumber"
@@ -195,14 +215,16 @@ const SignUp = () => {
           pattern="\d{3}-\d{4}-\d{4}"
           required
         />
+        {errors.phoneNumber && <p className="error-message">{errors.phoneNumber}</p>}
         <input
           type="text"
           name="nickname"
-          placeholder="닉네임 입력"
+          placeholder="닉네임 입력 (2글자 이상)"
           value={formData.nickname}
           onChange={handleInputChange}
           required
         />
+        {errors.nickname && <p className="error-message">{errors.nickname}</p>}
 
         <div className="terms-container">
           <div className="all-terms">
@@ -240,6 +262,7 @@ const SignUp = () => {
             </div>
           ))}
         </div>
+        {errors.terms && <p className="error-message">{errors.terms}</p>}
 
         <button type="submit" className="submit-button" disabled={isLoading}>
           {isLoading ? "처리 중..." : "회원가입"}
