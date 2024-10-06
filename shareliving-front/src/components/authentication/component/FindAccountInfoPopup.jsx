@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../scss/FindAccountInfo.scss';
+import "../scss/FindAccountInfo.scss";
 
-const API_BASE_URL = 'https://kdt.frontend.5th.programmers.co.kr:5003';
+const API_BASE_URL = "https://kdt.frontend.5th.programmers.co.kr:5003";
 
 const FindAccountInfo = () => {
   const navigate = useNavigate();
@@ -28,9 +28,7 @@ const FindAccountInfo = () => {
   const handleFindId = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get(
-        `${API_BASE_URL}/search/users/${fullName}`
-      );
+      const response = await axios.get(`${API_BASE_URL}/search/users/${fullName}`);
       if (response.data.length > 0) {
         setMessage(`찾은 아이디: ${response.data[0].email}`);
       } else {
@@ -38,34 +36,24 @@ const FindAccountInfo = () => {
       }
     } catch (error) {
       console.error('Find ID error:', error.response || error);
-      setMessage(
-        '아이디를 찾을 수 없습니다. 오류: ' +
-          (error.response?.data?.message || error.message)
-      );
+      setMessage('아이디를 찾을 수 없습니다. 오류: ' + (error.response?.data?.message || error.message));
     }
   };
 
   const handleVerifyUser = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get(
-        `${API_BASE_URL}/search/users/${fullName}`
-      );
-      const user = response.data.find((u) => u.email === email);
+      const response = await axios.get(`${API_BASE_URL}/search/users/${fullName}`);
+      const user = response.data.find(u => u.email === email);
       if (user) {
         setIsVerified(true);
-        setMessage(
-          '사용자 확인이 완료되었습니다. 현재 비밀번호와 새 비밀번호를 입력해주세요.'
-        );
+        setMessage('사용자 확인이 완료되었습니다. 현재 비밀번호와 새 비밀번호를 입력해주세요.');
       } else {
         setMessage('입력하신 정보와 일치하는 계정을 찾을 수 없습니다.');
       }
     } catch (error) {
       console.error('User verification error:', error.response || error);
-      setMessage(
-        '사용자 확인에 실패했습니다. 오류: ' +
-          (error.response?.data?.message || error.message)
-      );
+      setMessage('사용자 확인에 실패했습니다. 오류: ' + (error.response?.data?.message || error.message));
     }
   };
 
@@ -75,7 +63,7 @@ const FindAccountInfo = () => {
       // 먼저 현재 비밀번호로 로그인을 시도합니다.
       const loginResponse = await axios.post(`${API_BASE_URL}/login`, {
         email,
-        password: currentPassword,
+        password: currentPassword
       });
 
       if (loginResponse.data.token) {
@@ -83,18 +71,14 @@ const FindAccountInfo = () => {
         const resetResponse = await axios.put(
           `${API_BASE_URL}/settings/update-password`,
           { password: newPassword },
-          {
-            headers: {
-              Authorization: `Bearer ${loginResponse.data.token}`,
-              'Content-Type': 'application/json',
-            },
-          }
+          { headers: { 
+            'Authorization': `Bearer ${loginResponse.data.token}`,
+            'Content-Type': 'application/json'
+          }}
         );
 
         if (resetResponse.status === 200) {
-          setMessage(
-            '비밀번호가 성공적으로 변경되었습니다. 새 비밀번호로 로그인해주세요.'
-          );
+          setMessage('비밀번호가 성공적으로 변경되었습니다. 새 비밀번호로 로그인해주세요.');
           setTimeout(() => navigate('/login'), 3000);
         }
       } else {
@@ -102,10 +86,7 @@ const FindAccountInfo = () => {
       }
     } catch (error) {
       console.error('Password reset error:', error.response || error);
-      setMessage(
-        '비밀번호 변경에 실패했습니다. 오류: ' +
-          (error.response?.data?.message || error.message)
-      );
+      setMessage('비밀번호 변경에 실패했습니다. 오류: ' + (error.response?.data?.message || error.message));
     }
   };
 
@@ -113,18 +94,8 @@ const FindAccountInfo = () => {
     <div className="find-account-info">
       <h2>아이디/비밀번호 찾기</h2>
       <div className="mode-selector">
-        <button
-          onClick={() => handleModeChange('id')}
-          className={mode === 'id' ? 'active' : ''}
-        >
-          아이디 찾기
-        </button>
-        <button
-          onClick={() => handleModeChange('password')}
-          className={mode === 'password' ? 'active' : ''}
-        >
-          비밀번호 찾기
-        </button>
+        <button onClick={() => handleModeChange('id')} className={mode === 'id' ? 'active' : ''}>아이디 찾기</button>
+        <button onClick={() => handleModeChange('password')} className={mode === 'password' ? 'active' : ''}>비밀번호 찾기</button>
       </div>
 
       {mode === 'id' ? (
@@ -183,9 +154,7 @@ const FindAccountInfo = () => {
       )}
 
       {message && <p className="message">{message}</p>}
-      <button onClick={() => navigate('/login')}>
-        로그인 화면으로 돌아가기
-      </button>
+      <button onClick={() => navigate('/login')}>로그인 화면으로 돌아가기</button>
     </div>
   );
 };
