@@ -56,7 +56,7 @@ const KnowledgeWrite = () => {
         }
       );
       console.log(response.data);
-      // navigate('/');
+      navigate('/knowledge');
     } catch (error) {
       console.error('데이터 전송 중 오류 발생:', error);
     }
