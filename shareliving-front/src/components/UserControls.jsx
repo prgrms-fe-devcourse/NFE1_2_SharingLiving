@@ -11,7 +11,7 @@ const HasUserLoggedIn = () => {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useAppContext();
 
-  const isUserLog = currentUser.token === null ? false : true; // 임시 유저 값
+  const isUserLog = currentUser === null ? false : true; // 임시 유저 값
 
   const handleLogout = async () => {
       setIsLoading(true);

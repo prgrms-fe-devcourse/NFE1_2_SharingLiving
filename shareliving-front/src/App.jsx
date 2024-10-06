@@ -16,8 +16,7 @@ import ReplyMessage from './pages/ReplyMessage';
 import NoticeList from './components/NoticeList';
 import NoticeDetail from './components/NoticeDetail';
 import ShareHistory from './pages/ShareHistory';
-import ProductDetail from './pages/ProductDetail';
-import KnowledgeDetail from './pages/KnowledgeDetail';
+import DetailPage from './pages/DetailPage';
 import ProductList from './pages/ProductList';
 import KnowledgeList from './pages/KnowledgeList';
 
@@ -107,7 +106,7 @@ const baseRouter = createBrowserRouter([
       },
       {
         path: '/product/:id',
-        element: <ProductDetail />,
+        element: <DetailPage itemFrom="product" />,
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
@@ -117,7 +116,7 @@ const baseRouter = createBrowserRouter([
       },
       {
         path: '/knowledge/:id',
-        element: <KnowledgeDetail />,
+        element: <DetailPage itemFrom="knowledge" />,
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
