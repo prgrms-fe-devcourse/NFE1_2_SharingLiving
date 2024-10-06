@@ -1,7 +1,37 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+const API_BASE_URL = "https://kdt.frontend.5th.programmers.co.kr:5003"; // API 기본 URL 확인
+
 const UserControlls = () => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [message, setMessage] = useState('');
+    const navigate = useNavigate();
+
     const { notifications, messages } = {
         notifications: [1],
         messages: []
+    };
+
+    const handleLogout = async () => {
+        setIsLoading(true);
+        try {
+            const token = localStorage.getItem('Token');
+            await axios.post(`${API_BASE_URL}/logout`, {}, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            localStorage.removeItem('Token');
+            localStorage.removeItem('userData'); // 카카오 사용자 정보 삭제
+            console.clear(); // 콘솔 내용 지우기
+            setMessage("로그아웃 되었습니다.");
+            navigate('/'); // 홈페이지로 리다이렉트
+        } catch (error) {
+            console.error("Logout error:", error);
+            setMessage("로그아웃 중 오류가 발생했습니다.");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -27,13 +57,20 @@ const UserControlls = () => {
                     </button>
                 </div>
 
-                <button type="button" id="btnHeaderLogout" className="button-with-icon front" title="로그아웃">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="icons" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C15.2713 2 18.1757 3.57078 20.0002 5.99923L17.2909 5.99931C15.8807 4.75499 14.0285 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C14.029 20 15.8816 19.2446 17.2919 17.9998L20.0009 17.9998C18.1765 20.4288 15.2717 22 12 22ZM19 16V13H11V11H19V8L24 12L19 16Z"></path></svg>
-                    <span>로그아웃</span>
+      <button 
+                    type="button" 
+                    id="btnHeaderLogout" 
+                    className="button-with-icon front" 
+                    title="로그아웃"
+                    onClick={handleLogout}
+                    disabled={isLoading}
+                >
+                    {isLoading ? "처리 중..." : "로그아웃"}
                 </button>
             </div>
+            {message && <p className="info-message">{message}</p>}
         </div>
-    );
+    )
 };
 
 export default UserControlls;
