@@ -5,10 +5,25 @@
     align-items: center;
     gap: .2rem;
     padding: .4rem .8rem;
+    font-size: var(--fnt-sm);
+    font-weight: 700;
+
+    .icons {
+        width: .6rem;
+
+        &:last-of-type {
+            display: none;
+        }
+    }
 }
 
 .breadcrumb-item {
     padding: .4rem;
+
+    &:last-of-type {
+        opacity: .5;
+        pointer-events: none;
+    }
 }
 
 /* _subPages.scss */

@@ -21,6 +21,7 @@
 
     position: relative;
     margin-block: .5rem;
+    margin-inline: auto;
     width: min(100% - 1.6rem, 20rem);
     height: 1px;
     background-color: rgb(var(--border-color));

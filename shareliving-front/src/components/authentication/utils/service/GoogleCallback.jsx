@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useAppContext } from '../../../../context/AppContext'; // AppContext import 추가
 
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_APP_GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = import.meta.env.VITE_APP_GOOGLE_CLIENT_SECRET;
@@ -10,6 +11,7 @@ const GoogleCallback = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [status, setStatus] = useState('Processing Google login...');
+  const { updateSocialLoginInfo } = useAppContext(); // AppContext에서 함수 가져오기
 
   useEffect(() => {
     const code = new URLSearchParams(location.search).get('code');
@@ -57,10 +59,19 @@ const GoogleCallback = () => {
         });
 
         console.log('토큰 정보:', userInfoResponse.data);
-        setStatus('Login successful! Redirecting...');
+        setStatus('Login successful! Updating user info...');
 
-        localStorage.setItem('userInfo', JSON.stringify(userInfoResponse.data));
-        setTimeout(() => navigate('/'), 2000);
+        // AppContext를 사용하여 사용자 정보 업데이트
+        updateSocialLoginInfo({
+          id: userInfoResponse.data.id,
+          name: userInfoResponse.data.name,
+          email: userInfoResponse.data.email,
+          profileImage: userInfoResponse.data.picture,
+          provider: 'google',
+          token: tokenResponse.data.access_token
+        });
+
+        setTimeout(() => navigate('/mypage'), 2000);
       } else {
         throw new Error('No access token received');
       }

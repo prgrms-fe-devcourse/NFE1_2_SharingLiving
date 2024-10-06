@@ -10,9 +10,16 @@ const ReviewSlider = () => {
   return (
     <Swiper
       modules={[ FreeMode, Pagination ]}
-      slidesPerView={ 'auto' }
+      slidesPerView={ 1 }
       spaceBetween={ 12 }
       freeMode={ true }
+      breakpoints={
+        {
+          480: {
+            slidesPerView: 'auto'
+          }
+        }
+      }
     >
       <SwiperSlide>
         <CardReview />

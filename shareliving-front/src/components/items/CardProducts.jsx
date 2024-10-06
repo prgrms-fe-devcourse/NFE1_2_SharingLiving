@@ -100,7 +100,7 @@ const CardProducts = ({ type, itemObject }) => {
           <dl className="card-descriptions">
             <dt className="card-title">
               <div className="card-category-tag">
-                <Link to={ '/knowledge/' + itemObject._id }>{ itemObject.type }</Link>
+                <Link to={ '/knowledge/' + itemObject._id }>{ itemObject.type ? itemObject.type : '분류 없음' }</Link>
               </div>
 
               <h4 className="card-title-text">

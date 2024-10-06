@@ -1,0 +1,243 @@
+/* _detailPage.scss */
+
+#detailContainer {
+    overflow: hidden;
+}
+
+#detailImageContainer {
+    height: 16rem;
+    background-color: black;
+}
+
+#detailSummary {
+    margin-block-end: .8rem;
+}
+
+.detail-title-area {
+    padding: .8rem;
+}
+
+.detail-title {
+    position: relative;
+    margin-block-end: .8rem;
+    width: fit-content;
+    font-size: var(--fnt-title-md);
+    font-weight: 700;
+    z-index: 1;
+
+    &::before {
+        position: absolute;
+        inset: 0 -.2rem;
+        margin: auto auto -.2rem;
+        height: .8rem;
+        border-radius: .2rem;
+        background-color: rgb(var(--clr-theme) / .15);
+        z-index: -1;
+        content: '';
+    }
+}
+
+.detail-item-info {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: .4rem;
+    padding: .8rem;
+
+    > dt {
+        margin-block-end: .4rem;
+        font-size: var(--fnt-lg);
+    }
+
+    > dd {
+        display: flex;
+        align-items: center;
+        gap: .8rem;
+
+        &::before {
+            padding: .2rem .8rem;
+            width: 4.8rem;
+            border-radius: 25rem;
+            background-color: rgb(var(--clr-max));
+            color: rgb(var(--clr-text-on-tint));
+            font-size: var(--fnt-sm);
+            font-weight: 700;
+            text-align: end;
+            content: attr(data-item-info-label);
+        }
+    }
+}
+
+.detail-info-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: .8rem;
+}
+
+.detail-user-tag {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+}
+
+.detail-user-image {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 25rem;
+    overflow: hidden;
+    user-select: none;
+    pointer-events: none;
+
+    > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.detail-user-name {
+    font-weight: 700;
+
+    &::after {
+        content: ' 님';
+    }
+}
+
+.detail-article-info {
+    display: flex;
+    gap: .4rem;
+    align-items: center;
+
+    > p {
+        display: flex;
+        align-items: center;
+        gap: .4rem;
+    }
+
+    .icons {
+        width: .8rem;
+    }
+}
+
+.detail-info-date {
+
+}
+
+.detail-info-trees {
+
+}
+
+#detailText {
+    padding: 2.4rem .8rem;
+}
+
+#detailControls {
+    display: flex;
+    justify-content: center;
+    gap: .4rem;
+
+    > button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .2rem;
+        padding: .8rem;
+        border: 1px solid rgb(var(--clr-theme));
+        border-radius: .4rem;
+
+        .icons {
+            width: .8rem;
+        }
+    }
+}
+
+#btnLikeArticle {
+    border-color: palevioletred;
+    color: palevioletred;
+
+    &.liked {
+        border-color: transparent;
+        background-color: palevioletred;
+        color: rgb(var(--clr-text-on-tint));
+    }
+}
+
+#detailReply {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: .8rem;
+    padding: .8rem;
+}
+
+.detail-reply-counter {
+    display: flex;
+    align-items: center;
+    gap: .2rem;
+    padding-block-end: .8rem;
+    border-block-end: 1px solid rgb(var(--clr-text) / .15);
+
+    .icons {
+        width: 1.2rem;
+    }
+
+    span {
+        font-weight: 900;
+    }
+}
+
+#articleReplyContainer {
+    border-block-start: 1px solid rgb(var(--clr-text) / .25);
+}
+
+#articleReplyEditor {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: .2rem;
+}
+
+#txtReplyInput {
+    margin-block-end: .2rem;
+    padding: .4rem;
+    width: 100%;
+    min-height: 5.4rem;
+    resize: vertical;
+    border: 1px solid rgb(var(--clr-theme) / .5);
+    border-radius: .2rem;
+    background-color: rgb(var(--clr-min) / .25);
+    backdrop-filter: blur(.4rem);
+
+    &:hover {
+        border-color: rgb(var(--clr-theme) / .6);
+        background-color: rgb(var(--clr-min) / .5);
+    }
+
+    &:focus {
+        border-color: rgb(var(--clr-theme) / .75);
+        background-color: rgb(var(--clr-min));
+        outline: 3px solid rgb(var(--clr-tint-50) / .5);
+    }
+
+    &:valid {
+
+    }
+
+    &:invalid {
+
+    }
+
+    &:disabled {
+
+    }
+}
+
+#btnSubmitReply {
+    align-self: flex-end;
+    padding-inline: 2.4rem;
+    width: fit-content;
+    height: 2.4rem;
+    border-radius: .2rem;
+    background-color: rgb(var(--clr-theme));
+    color: rgb(var(--clr-text-on-tint));
+}
+
+/* _detailPage.scss */
