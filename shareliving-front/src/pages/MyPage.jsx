@@ -24,7 +24,6 @@ const MyPage = () => {
 
       {/* 대시보드 */}
       <section className="mypage__dashboard">
-        <h2 className="mypage__dashboard-title">대시보드</h2>
         <div className="mypage__user-info">
           <h3 className="mypage__user-info-title">내 정보</h3>
           <p className="mypage__user-nickname">이름: {currentUser.name}</p>

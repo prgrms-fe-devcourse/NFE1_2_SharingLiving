@@ -1,23 +1,25 @@
 /* _mainPage.scss */
 
-#root { // 최상위 컨테이너
-
+#root {
+  // 최상위 컨테이너
 }
 
-#contentView { // <main> 요소
-    padding-block: 1.8rem;
+#contentView {
+  // <main> 요소
+  padding-block: 1.8rem;
 
-    &:has(#sideBarMain) {
-        display: flex;
-        flex-flow: row nowrap;
-        align-items: flex-start;
-        gap: .8rem;
-    }
+  &:has(#sideBarMain) {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
 }
 
 #mainContainer {
-    flex: 1;
-    min-height: 100vh;
+  flex: 1;
+  min-height: 100vh;
+  width: 100%;
 }
 
 /* _mainPage.scss */

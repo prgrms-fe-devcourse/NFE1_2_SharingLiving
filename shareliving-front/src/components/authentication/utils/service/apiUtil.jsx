@@ -127,7 +127,7 @@ export const getAllSearchResult = async (keyword) => {
 
 export const getCurrentArticle = async (articleID) => {
   try {
-    const response = await api.get(`/post/${articleID}`);
+    const response = await api.get(`/posts/${ articleID }`);
 
     return response.data;
   } catch (error) {

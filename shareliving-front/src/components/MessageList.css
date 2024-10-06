@@ -1,49 +1,126 @@
-/* components/MessageList.scss */
-.message-list {
-  margin: 20px;
-}
-.message-list__tabs {
-  display: flex;
-  margin-bottom: 20px;
-  gap: 20px;
-}
-.message-list__tabs__tab {
-  flex: 1;
-  padding: 10px;
-  cursor: pointer;
-  border: 1px solid #ccc;
+.message-item {
   background-color: #f9f9f9;
-  text-align: center;
-  transition: background-color 0.3s;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
-.message-list__tabs__tab.active {
+.message-item:hover {
+  background-color: #e9ecef;
+}
+.message-item p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #333;
+}
+.message-item .message-time {
+  font-size: 12px;
+  color: #777;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.tabs button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  margin: 0 10px;
+  transition: background-color 0.2s ease;
+}
+.tabs button.active {
+  background-color: #007bff;
+  color: #fff;
+}
+.tabs button:hover {
+  background-color: #e9ecef;
+}
+
+.message-detail {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 20px auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.message-detail h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+.message-detail .message-detail__content h3 {
+  font-size: 20px;
+  color: #007bff;
+  margin-bottom: 15px;
+}
+.message-detail .message-detail__content p {
+  font-size: 16px;
+  color: #555;
+  margin: 10px 0;
+}
+.message-detail .message-detail__content p:last-of-type {
+  margin-bottom: 20px;
+}
+.message-detail .message-detail__navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.message-detail .message-detail__navigation .message-detail__link {
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
+}
+.message-detail .message-detail__navigation .message-detail__link:hover {
+  text-decoration: underline;
+}
+.message-detail .message-detail__reply-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
   background-color: #007bff;
   color: white;
-}
-.message-list__tabs__tab:hover {
-  background-color: #e0e0e0;
-}
-.message-list__content {
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 5px;
-  padding: 15px;
-  background-color: #f9f9f9;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s ease;
 }
-.message-list__content h2 {
-  margin-top: 0;
+.message-detail .message-detail__reply-button:hover {
+  background-color: #0056b3;
 }
-.message-list__content ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-.message-list__content li {
-  margin-bottom: 10px;
-}
-.message-list__content li a {
-  text-decoration: none;
-  color: #007bff;
-}
-.message-list__content li a:hover {
-  text-decoration: underline;
+
+@media (max-width: 768px) {
+  .message-detail {
+    padding: 15px;
+    margin: 10px;
+  }
+  .message-detail h2 {
+    font-size: 20px;
+  }
+  .message-detail .message-detail__content h3 {
+    font-size: 18px;
+  }
+  .message-detail .message-detail__content p {
+    font-size: 14px;
+  }
+  .message-detail .message-detail__reply-button {
+    font-size: 14px;
+  }
+  .message-item {
+    padding: 8px;
+    margin: 8px 0;
+  }
+  .message-item p {
+    font-size: 12px;
+  }
 }
