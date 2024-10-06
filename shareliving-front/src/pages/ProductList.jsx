@@ -15,8 +15,8 @@ import { useAppContext } from '../context/AppContext';
 const PAGE_LIMIT = 20;
 
 const ProductList = () => {
-  // const currentContext = useAppContext();
-  // currentContext.setShowBreadcrumbs(true);
+  const currentContext = useAppContext();
+  currentContext.setShowBreadcrumbs(true);
 
   const [ref, inView] = useInView();
 
