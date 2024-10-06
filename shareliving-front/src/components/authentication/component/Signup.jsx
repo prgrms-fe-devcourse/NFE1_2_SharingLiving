@@ -1,19 +1,26 @@
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { signup } from "../utils/service/apiUtil";
-import "../scss/Signup.scss";
+import React, { useState } from 'react';
+import { Navigate, useNavigate, Link } from 'react-router-dom';
+import { signup } from '../utils/service/apiUtil';
+import { useAppContext } from '../../../context/AppContext';
+import '../scss/Signup.scss';
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const { currentUser } = useAppContext();
+
+  // 로그인 상태라면 '/' 경로로 리다이렉트
+  if (currentUser) {
+    return <Navigate to="/" replace />;
+  }
 
   const [formData, setFormData] = useState({
-    email: "",
-    emailDomain: "",
-    fullName: "",
-    password: "",
-    passwordConfirm: "",
-    phoneNumber: "",
-    nickname: "",
+    email: '',
+    emailDomain: '',
+    fullName: '',
+    password: '',
+    passwordConfirm: '',
+    phoneNumber: '',
+    nickname: '',
   });
 
   const [terms, setTerms] = useState({
@@ -24,7 +31,7 @@ const SignUp = () => {
   });
 
   const [isAllChecked, setIsAllChecked] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (e) => {
@@ -68,11 +75,11 @@ const SignUp = () => {
 
   const validateForm = () => {
     if (formData.password !== formData.passwordConfirm) {
-      setMessage("비밀번호가 일치하지 않습니다.");
+      setMessage('비밀번호가 일치하지 않습니다.');
       return false;
     }
     if (!terms.age || !terms.service || !terms.privacy) {
-      setMessage("필수 약관에 동의해주세요.");
+      setMessage('필수 약관에 동의해주세요.');
       return false;
     }
     return true;
@@ -84,9 +91,10 @@ const SignUp = () => {
     if (!validateForm()) return;
 
     setIsLoading(true);
-    setMessage("");
+    setMessage('');
 
-    const { email, emailDomain, fullName, password, ...additionalFields } = formData;
+    const { email, emailDomain, fullName, password, ...additionalFields } =
+      formData;
     const fullEmail = `${email}@${emailDomain}`;
     const customFieldsJson = JSON.stringify({
       ...additionalFields,
@@ -101,20 +109,22 @@ const SignUp = () => {
         customFields: customFieldsJson,
       };
 
-      console.log("Sending registration data:", signupData);
+      console.log('Sending registration data:', signupData);
       const response = await signup(signupData);
-      console.log("Server response:", response);
+      console.log('Server response:', response);
 
       if (response.token) {
-        localStorage.setItem("Token", response.token);
-        alert("회원가입 성공");
-        navigate("/");  // 메인 페이지로 리다이렉션
+        // localStorage.setItem("token", response.token);
+        alert('회원가입 성공');
+        navigate('/login'); // 메인 페이지로 리다이렉션
       } else {
-        throw new Error("Token not received");
+        throw new Error('Token not received');
       }
     } catch (err) {
-      console.error("Registration error:", err);
-      setMessage(`회원가입 실패: ${err.response?.data?.message || err.message}`);
+      console.error('Registration error:', err);
+      setMessage(
+        `회원가입 실패: ${err.response?.data?.message || err.message}`
+      );
     } finally {
       setIsLoading(false);
     }
@@ -147,7 +157,7 @@ const SignUp = () => {
             <option value="kakao.com">daum.net</option>
             <option value="custom">직접 입력</option>
           </select>
-          {formData.emailDomain === "custom" && (
+          {formData.emailDomain === 'custom' && (
             <input
               type="text"
               name="customEmailDomain"
@@ -223,18 +233,24 @@ const SignUp = () => {
                 name={key}
                 checked={value}
                 onChange={handleTermsChange}
-                required={key !== "marketing"}
+                required={key !== 'marketing'}
               />
               <label htmlFor={key}>
-                {key === "age" && "만 14세 이상입니다. (필수)"}
-                {key === "service" && (
-                  <Link to="/terms-of-service" target="_blank">서비스 이용약관 동의 (필수)</Link>
+                {key === 'age' && '만 14세 이상입니다. (필수)'}
+                {key === 'service' && (
+                  <Link to="/terms-of-service" target="_blank">
+                    서비스 이용약관 동의 (필수)
+                  </Link>
                 )}
-                {key === "privacy" && (
-                  <Link to="/privacy-policy" target="_blank">개인정보 수집 및 이용 동의 (필수)</Link>
+                {key === 'privacy' && (
+                  <Link to="/privacy-policy" target="_blank">
+                    개인정보 수집 및 이용 동의 (필수)
+                  </Link>
                 )}
-                {key === "marketing" && (
-                  <Link to="/marketing-terms" target="_blank">마케팅 수신 동의 (선택)</Link>
+                {key === 'marketing' && (
+                  <Link to="/marketing-terms" target="_blank">
+                    마케팅 수신 동의 (선택)
+                  </Link>
                 )}
               </label>
             </div>
@@ -242,7 +258,7 @@ const SignUp = () => {
         </div>
 
         <button type="submit" className="submit-button" disabled={isLoading}>
-          {isLoading ? "처리 중..." : "회원가입"}
+          {isLoading ? '처리 중...' : '회원가입'}
         </button>
       </form>
       {message && <p className="error-message">{message}</p>}

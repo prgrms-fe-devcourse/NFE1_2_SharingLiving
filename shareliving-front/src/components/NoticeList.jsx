@@ -9,11 +9,11 @@ const NoticeList = () => {
   ];
 
   return (
-    <div>
-      <h1>공지사항 목록</h1>
-      <ul>
+    <div className="notice-wrapper">
+      <h1 className="title">공지사항 목록</h1>
+      <ul className="notice-form">
         {notices.map((notice) => (
-          <li key={notice.id}>
+          <li key={notice.id} className="form-group">
             <Link to={`/notices/${notice.id}`}>{notice.title}</Link>
           </li>
         ))}

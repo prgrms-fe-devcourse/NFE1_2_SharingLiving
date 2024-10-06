@@ -1,19 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useAppContext } from '../context/AppContext';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './TreeSlider.scss';
 
-const ProgressBar = ({ progress }) => {
-  return (
-    <div className="tree-slider__progress-bar">
-      <div
-        className="tree-slider__progress"
-        style={{ width: `${progress}%` }}
-      />
-    </div>
-  );
-};
+const ProgressBar = ({ progress }) => (
+  <div className="tree-slider__progress-bar">
+    <div className="tree-slider__progress" style={{ width: `${progress}%` }} />
+  </div>
+);
 
 const TREE_IMAGES = {
   PLACEHOLDER: '/images/grow-tree/placeholder-tree.png',
@@ -21,15 +17,15 @@ const TREE_IMAGES = {
   getCardImage: (level, index) => `/images/grow-tree/tree${index + 1}.png`,
 };
 
+const totalCards = 5;
+
 const TreeSlider = () => {
   const [treesPlanted, setTreesPlanted] = useState(0);
   const [totalTreesPlanted, setTotalTreesPlanted] = useState(0);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [stickers, setStickers] = useState([]);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const sliderRef = useRef(null);
-
-  const totalCards = 5;
+  const { currentUser, setStickers, stickers } = useAppContext();
   const treeLevel = Math.floor(totalTreesPlanted / 25);
 
   const settings = {
@@ -39,55 +35,6 @@ const TreeSlider = () => {
     slidesToShow: 3.5,
     slidesToScroll: 1,
     afterChange: setCurrentSlide,
-  };
-
-  const cards = Array.from({ length: totalCards }, (_, index) => ({
-    id: index + 1,
-    image: TREE_IMAGES.PLACEHOLDER,
-  }));
-
-  const handlePlantTree = () => {
-    const nextTreesPlanted = treesPlanted + 1;
-    setTreesPlanted(nextTreesPlanted);
-    updateTotalTreesPlanted();
-
-    if (nextTreesPlanted % 5 === 1 && nextTreesPlanted > 5) {
-      const nextSlide = Math.floor(nextTreesPlanted / 5);
-      sliderRef.current.slickGoTo(nextSlide);
-    }
-
-    if (nextTreesPlanted % 25 === 0) {
-      awardSticker();
-    }
-  };
-
-  const updateTotalTreesPlanted = () => {
-    setTotalTreesPlanted((prevTotal) => {
-      const newTotal = prevTotal + 1;
-      localStorage.setItem('totalTreesPlanted', newTotal);
-      return newTotal;
-    });
-  };
-
-  const awardSticker = () => {
-    setIsButtonDisabled(true);
-    const newSticker = TREE_IMAGES.getLevelImage(treeLevel + 1);
-
-    setStickers((prevStickers) => {
-      const updatedStickers = [...prevStickers, newSticker];
-      localStorage.setItem('stickers', JSON.stringify(updatedStickers));
-      return updatedStickers;
-    });
-
-    setTimeout(() => {
-      resetTreePlanting();
-    }, 2000);
-  };
-
-  const resetTreePlanting = () => {
-    setTreesPlanted(0);
-    sliderRef.current.slickGoTo(0);
-    setIsButtonDisabled(false);
   };
 
   useEffect(() => {
@@ -105,6 +52,56 @@ const TreeSlider = () => {
     }
   }, []);
 
+  const handlePlantTree = () => {
+    if (totalTreesPlanted >= currentUser.stamps) {
+      alert('더 이상 나무를 심을 수 없습니다. 총 보호한 나무 수를 확인하세요!');
+      setIsButtonDisabled(true);
+      return;
+    }
+
+    setTreesPlanted((prev) => {
+      const nextTreesPlanted = prev + 1;
+      if (nextTreesPlanted % 5 === 1 && nextTreesPlanted > 5) {
+        sliderRef.current.slickGoTo(Math.floor(nextTreesPlanted / 5));
+      }
+      if (nextTreesPlanted % 25 === 0) awardSticker(nextTreesPlanted);
+      return nextTreesPlanted;
+    });
+
+    setTotalTreesPlanted((prev) => {
+      const newTotal = prev + 1;
+      localStorage.setItem('totalTreesPlanted', newTotal);
+      return newTotal;
+    });
+  };
+
+  const awardSticker = (nextTreesPlanted) => {
+    setIsButtonDisabled(true);
+
+    const newSticker = TREE_IMAGES.getLevelImage(treeLevel + 1);
+
+    // 스티커 중복 저장 방지
+    setStickers((prevStickers) => {
+      const alreadyHasSticker = prevStickers.includes(newSticker);
+
+      if (!alreadyHasSticker) {
+        const updatedStickers = [...prevStickers, newSticker];
+        localStorage.setItem('stickers', JSON.stringify(updatedStickers));
+        return updatedStickers;
+      }
+
+      return prevStickers; // 이미 스티커가 있으면 그대로 반환
+    });
+
+    setTimeout(resetTreePlanting, 2000);
+  };
+
+  const resetTreePlanting = () => {
+    setTreesPlanted(0);
+    sliderRef.current.slickGoTo(0);
+    setIsButtonDisabled(false);
+  };
+
   const getCardClass = (index) => {
     if (treesPlanted >= 25) return '';
     if (treesPlanted >= 20 && index === 3) return '';
@@ -118,6 +115,10 @@ const TreeSlider = () => {
   };
 
   const progress = (treesPlanted % 25) * (100 / 25);
+  const cards = Array.from({ length: totalCards }, (_, index) => ({
+    id: index + 1,
+    image: TREE_IMAGES.PLACEHOLDER,
+  }));
 
   return (
     <div className="tree-slider">
@@ -128,6 +129,9 @@ const TreeSlider = () => {
       >
         나무 심기
       </button>
+      <p className="tree-slider__current-trees">
+        현재 심은 나무 수: {totalTreesPlanted}
+      </p>
       <h2 className="tree-slider__level">레벨 {treeLevel + 1}</h2>
       <ProgressBar progress={progress} />
       <Slider ref={sliderRef} {...settings}>
@@ -149,11 +153,8 @@ const TreeSlider = () => {
         ))}
       </Slider>
       <div className="tree-slider__status">
-        <p className="tree-slider__current-trees">
-          현재 심은 나무 수: {treesPlanted}
-        </p>
         <p className="tree-slider__total-trees">
-          총 보호한 나무 수: {totalTreesPlanted}
+          총 보호한 나무 수: {currentUser.stamps}
         </p>
         {stickers.length > 0 && (
           <div className="tree-slider__stickers">

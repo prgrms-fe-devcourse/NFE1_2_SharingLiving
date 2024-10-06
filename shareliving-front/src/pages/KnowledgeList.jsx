@@ -9,12 +9,8 @@ import {
 import { useQuery } from 'react-query';
 import { useSearchParams } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
-import { useAppContext } from '../context/AppContext';
 
 const KnowledgeList = () => {
-  const currentContext = useAppContext();
-  currentContext.setShowBreadcrumbs(true);
-
   const [searchParams] = useSearchParams();
   const selectedCategory = searchParams.get('category');
   const { data: channels } = useQuery('channels', getChannelList);

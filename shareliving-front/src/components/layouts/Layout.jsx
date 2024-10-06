@@ -9,11 +9,13 @@ import BottomNavBar from '../BottomNavBar';
 
 const Layout = () => {
   const { showBreadcrumbs, hideSidebar } = useAppContext();
-  const isLogged = true; // 로그인 상태
+  const { currentUser } = useAppContext(); // currentUser 가져오기
+  const isLogged = currentUser; // 로그인 상태
+  console.log('로그인상태', isLogged);
 
   return (
     <>
-      <Header />
+      <Header isLogged={isLogged} />
 
       <main id="contentView" className="inner-wrapper">
         <div id="mainContainer">

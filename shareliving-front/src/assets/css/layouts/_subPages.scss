@@ -1,32 +1,29 @@
 /* _subPages.scss */
 
-#navBreadCrumbs { // 서브 페이지 브레드크럼 네비게이션
-    display: flex;
-    align-items: center;
-    gap: .2rem;
-    padding: .4rem .8rem;
-    font-size: var(--fnt-sm);
-    font-weight: 700;
+#navBreadCrumbs {
+  // 서브 페이지 브레드크럼 네비게이션
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.4rem 0.8rem;
+  font-size: var(--fnt-sm);
+  font-weight: 700;
 
-    .icons {
-        width: .6rem;
-
-        &:last-of-type {
-            display: none;
-        }
-    }
+  .icons {
+    width: 0.6rem;
+  }
 }
 
 .breadcrumb-item {
-    display: flex;
-    align-items: center;
-    gap: .2rem;
-    padding: .4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.4rem;
 
-    &:last-of-type {
-        opacity: .5;
-        pointer-events: none;
-    }
+  + .breadcrumb-item {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 }
 
 /* _subPages.scss */

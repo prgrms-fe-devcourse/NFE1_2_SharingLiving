@@ -32,8 +32,6 @@ export const login = async (email, password) => {
 export const signup = async (userData) => {
   try {
     const response = await api.post('/signup', userData);
-    localStorage.setItem('token', response.data.token);
-    localStorage.setItem('userInfo', JSON.stringify(response.data));
     return response.data;
   } catch (error) {
     console.error('Signup error:', error);
@@ -53,9 +51,6 @@ export const logout = async () => {
 
 export const getAuthUser = async () => {
   const token = localStorage.getItem('token');
-  const userInfo = localStorage.getItem('userInfo');
-  console.log('token: ', token);
-  console.log('userInfo: ', userInfo);
   if (!token) {
     return null; // 토큰이 없으면 null 반환
   }
@@ -100,7 +95,7 @@ export const getProductChannel = async (channelId, offset, limit = 20) => {
     );
     return response.data;
   } catch (error) {
-    console.error('Get channel list error:', error);
+    console.error('Get product channel error:', error);
     throw error;
   }
 };
@@ -110,7 +105,7 @@ export const getKnowledgeChannel = async (channelId) => {
     const response = await api.get(`/posts/channel/${channelId}`);
     return response.data;
   } catch (error) {
-    console.error('Get channel list error:', error);
+    console.error('Get knowledge channel error:', error);
     throw error;
   }
 };
@@ -127,11 +122,11 @@ export const getAllSearchResult = async (keyword) => {
 
 export const getCurrentArticle = async (articleID) => {
   try {
-    const response = await api.get(`/posts/${ articleID }`);
+    const response = await api.get(`/posts/${articleID}`);
 
     return response.data;
   } catch (error) {
-    console.error(`Error get load article id: ${ articleID }.`);
+    console.error(`Error get load article id: ${articleID}.`);
 
     throw error;
   }

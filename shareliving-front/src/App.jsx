@@ -1,9 +1,14 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider, Navigate, useLocation } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+  useLocation,
+} from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { AppProvider, useAppContext } from './context/AppContext'; // useAppContext 추가
 
-import './assets/css/style.css';
+import './assets/css/style.scss';
 import Layout from './components/layouts/Layout';
 import LandingPage from './components/LandingPage';
 import ProductWrite from './pages/ProductWrite';
@@ -26,11 +31,12 @@ import FindAccountInfo from './components/authentication/component/FindAccountIn
 import KakaoCallback from './components/authentication/utils/service/kakaoCallback';
 import GoogleCallback from './components/authentication/utils/service/GoogleCallback';
 
-// ProtectedRoute 컴포넌트를 App.jsx 내에서 정의
+// ProtectedRoute 컴포넌트 정의
 const ProtectedRoute = ({ children }) => {
-  const { currentUser } = useAppContext();
+  const { currentUser } = useAppContext(); // 현재 로그인 상태를 확인
   const location = useLocation();
 
+  // 로그인되지 않은 경우 /login으로 리다이렉트
   if (!currentUser) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
@@ -56,32 +62,56 @@ const baseRouter = createBrowserRouter([
       },
       {
         path: '/mypage',
-        element: <ProtectedRoute><MyPage /></ProtectedRoute>,
+        element: (
+          <ProtectedRoute>
+            <MyPage />
+          </ProtectedRoute>
+        ),
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
         path: '/edit-profile',
-        element: <ProtectedRoute><EditProfile /></ProtectedRoute>,
+        element: (
+          <ProtectedRoute>
+            <EditProfile />
+          </ProtectedRoute>
+        ),
         errorElement: <div>업데이트에 실패했습니다.</div>,
       },
       {
         path: '/messages',
-        element: <ProtectedRoute><MessagesPage /></ProtectedRoute>,
+        element: (
+          <ProtectedRoute>
+            <MessagesPage />
+          </ProtectedRoute>
+        ),
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
         path: '/messages/received/:messageId',
-        element: <ProtectedRoute><MessageDetail /></ProtectedRoute>,
+        element: (
+          <ProtectedRoute>
+            <MessageDetail />
+          </ProtectedRoute>
+        ),
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
         path: '/messages/received/:messageId/reply',
-        element: <ProtectedRoute><ReplyMessage /></ProtectedRoute>,
+        element: (
+          <ProtectedRoute>
+            <ReplyMessage />
+          </ProtectedRoute>
+        ),
         errorElement: <div>메시지 전송에 실패했습니다.</div>,
       },
       {
         path: '/messages/sent/:messageId',
-        element: <ProtectedRoute><MessageDetail /></ProtectedRoute>,
+        element: (
+          <ProtectedRoute>
+            <MessageDetail />
+          </ProtectedRoute>
+        ),
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
@@ -96,7 +126,11 @@ const baseRouter = createBrowserRouter([
       },
       {
         path: '/share-history',
-        element: <ProtectedRoute><ShareHistory /></ProtectedRoute>,
+        element: (
+          <ProtectedRoute>
+            <ShareHistory />
+          </ProtectedRoute>
+        ),
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
@@ -121,12 +155,20 @@ const baseRouter = createBrowserRouter([
       },
       {
         path: '/add-product',
-        element: <ProtectedRoute><ProductWrite /></ProtectedRoute>,
+        element: (
+          <ProtectedRoute>
+            <ProductWrite />
+          </ProtectedRoute>
+        ),
         errorElement: <div>제품 등록에 실패했습니다.</div>,
       },
       {
         path: '/add-knowledge',
-        element: <ProtectedRoute><KnowledgeWrite /></ProtectedRoute>,
+        element: (
+          <ProtectedRoute>
+            <KnowledgeWrite />
+          </ProtectedRoute>
+        ),
         errorElement: <div>지식 등록에 실패했습니다.</div>,
       },
       {

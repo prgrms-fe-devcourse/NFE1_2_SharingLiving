@@ -58,7 +58,7 @@ const MessageDetail = () => {
 
   return (
     <div className="message-detail">
-      <h2>메시지 상세 내용</h2>
+      <h1 className="title">메시지 상세 내용</h1>
       {currentMessage ? (
         <div className="message-detail__content">
           <h3>{sentMessage ? '보낸 메시지' : '받은 메시지'}</h3>

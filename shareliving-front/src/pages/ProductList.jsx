@@ -10,14 +10,10 @@ import {
 import { useInfiniteQuery, useQuery } from 'react-query';
 import { useInView } from 'react-intersection-observer';
 import { useSearchParams } from 'react-router-dom';
-import { useAppContext } from '../context/AppContext';
 
 const PAGE_LIMIT = 20;
 
 const ProductList = () => {
-  const currentContext = useAppContext();
-  currentContext.setShowBreadcrumbs(true);
-
   const [ref, inView] = useInView();
 
   const { data: channels } = useQuery('channels', getChannelList);
