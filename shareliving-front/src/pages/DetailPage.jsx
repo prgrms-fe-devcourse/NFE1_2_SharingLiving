@@ -63,7 +63,7 @@ const articleObject = {
   ],
 }
 
-const ProductDetail = () => {
+const DetailPage = ({ itemFrom }) => {
   const thisLocation = useLocation().pathname.split('/').pop(); // 현재 접근한 문서의 id
   const [currentReplyTarget, setReplyTarget] = useState({ replyTarget: 'article', targetID: thisLocation }); // 최초 댓글 작성 대상 - 게시물
   const [didILikedThis, setLikedStatus] = useState(false);
@@ -92,19 +92,22 @@ const ProductDetail = () => {
         <dt className="detail-title-area">
           <h2 className="detail-title">{ articleObject.title }</h2>
 
-          <dl className="detail-item-info">
-            <dd className="detail-item-name" data-item-info-label="나눔 제품명">
-              { articleObject.shareItem.itemName }
-            </dd>
+          { itemFrom === 'product' ?
+            <dl className="detail-item-info">
+              <dd className="detail-item-name" data-item-info-label="나눔 제품명">
+                { articleObject.shareItem.itemName }
+              </dd>
 
-            <dd className="detail-item-shipping" data-item-info-label="수거 방식">
-              { articleObject.shareItem.shippingMethod }
-            </dd>
+              <dd className="detail-item-shipping" data-item-info-label="수거 방식">
+                { articleObject.shareItem.shippingMethod }
+              </dd>
 
-            <dd className="detail-item-price" data-item-info-label="수거 비용">
-              { articleObject.shareItem.shippingPrice.toLocaleString('ko-KR') } 원
-            </dd>
-          </dl>
+              <dd className="detail-item-price" data-item-info-label="수거 비용">
+                { articleObject.shareItem.shippingPrice.toLocaleString('ko-KR') } 원
+              </dd>
+            </dl>
+            : null
+          }
         </dt>
 
         <dd className="detail-info-area">
@@ -148,9 +151,12 @@ const ProductDetail = () => {
           <p>좋아요 <span>{ articleObject.likes }</span></p>
         </button>
 
-        <button id="btnSendMessage">
-          <p>나눔 신청</p>
-        </button>
+        { itemFrom === 'product' ?
+          <button id="btnSendMessage">
+            <p>나눔 신청</p>
+          </button>
+          : null
+        }
       </div>
 
       <div id="detailReply">
@@ -187,4 +193,4 @@ const ProductDetail = () => {
   );
 };
 
-export default ProductDetail;
+export default DetailPage;
