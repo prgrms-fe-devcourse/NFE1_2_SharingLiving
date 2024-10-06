@@ -41,7 +41,8 @@
 
 // 6. Pages
 @import
-    'pages/landingPage'
+    'pages/landingPage',
+    'pages/detailPage'
 ;
 
 // 7. Components
@@ -50,5 +51,6 @@
     'components/formElements',
     'components/MainSideBar',
     'components/mainSliders',
-    'components/cardItems'
+    'components/cardItems',
+    'components/articleReply'
 ;

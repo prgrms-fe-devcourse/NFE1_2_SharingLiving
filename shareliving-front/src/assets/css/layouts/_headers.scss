@@ -21,10 +21,17 @@
 }
 
 #logoMain {
+    margin-block-end: 0;
     width: 6rem;
     height: 2.7rem;
 
-    > img {
+    > a {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    img {
         width: 100%;
         height: 100%;
         object-fit: contain;
@@ -100,25 +107,6 @@
     }
 }
 
-#btnHeaderLogout {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: .2rem;
-    padding-inline: .8rem;
-    height: 1.6rem;
-    border: 1px solid rgb(var(--clr-theme) / .5);
-    border-radius: .2rem;
-    background-color: rgb(var(--clr-theme));
-    color: rgb(var(--clr-text-on-tint));
-    font-size: var(--fnt-sm);
-    font-weight: 900;
-
-    > .icons {
-        width: .8rem;
-    }
-}
-
 .togglers {
     display: flex;
     justify-content: center;
@@ -134,13 +122,17 @@
     }
 }
 
+#btnTotalSearch {
+    padding: 0;
+    aspect-ratio: 1 / 1;
+}
+
 /* 모바일 반응형 */
 
-#toggleMenuTitlebar {
+.header-mobile-buttons {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: .8rem;
+    gap: .8rem;
 }
 
 #btnBurger {
@@ -197,6 +189,26 @@
     }
 }
 
+#btnUserControl {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 25rem;
+    color: rgb(var(--clr-text));
+
+    .icons {
+        width: 1rem;
+    }
+
+    &.on {
+        background-color: rgb(var(--clr-max));
+        color: rgb(var(--clr-min));
+    }
+}
+
 #navToggle {
     position: fixed;
     inset-block: 0;
@@ -204,13 +216,42 @@
     margin: auto;
     width: 75vw;
     background-color: rgb(0 0 0 / .75);
+    color: rgb(255 255 255);
     translate: -100%;
     transition: translate .25s;
     z-index: 50000;
 
     &.on {
         translate: 0;
+    }
+}
 
+#toggleMenuTitlebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .8rem;
+    font-size: var(--fnt-title-md);
+    font-weight: 100;
+}
+
+#btnNavClose {
+    padding: .8rem;
+    color: inherit;
+}
+
+#toggleMenuList {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: .4rem;
+    padding: .8rem;
+    font-size: 5vmax;
+}
+
+.toggle-menu-item {
+    > a {
+        display: block;
+        padding: .4rem;
     }
 }
 
@@ -263,14 +304,28 @@
 /* 미디어 쿼리 */
 
 @media screen and (max-width: 1100px) { // 작은 화면 (1100px) - 사용자 컨트롤 축소
-    .header-nav-area {
-        order: 1;
-        align-self: flex-start;
+    .nav-list {
+        gap: .4rem;
+    }
+
+    #btnUserControl {
+        display: flex;
     }
 
     .header-user-area {
-        order: 0;
-        align-self: flex-end;
+        display: none;
+        position: absolute;
+        inset-block-start: calc(100% - .4rem);
+        inset-inline-end: 1.2rem;
+        padding: .8rem;
+        border-radius: .8rem;
+        background-color: rgb(var(--clr-min));
+        box-shadow: 0 .8rem 1.2rem -.4rem rgb(0 0 0 / .25);
+        z-index: 50001;
+
+        &.on {
+            display: flex;
+        }
     }
 }
 
@@ -286,7 +341,7 @@
 
 @media screen and (max-width: 600px) { // 모바일 (480px) - 상단 네비게이션 완전 축소, 하단 네비게이션 표시
     #headPrimary {
-        position: static;
+
     }
 
     #navMobile {

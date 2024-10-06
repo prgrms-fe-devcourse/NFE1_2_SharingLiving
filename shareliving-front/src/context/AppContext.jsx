@@ -6,7 +6,7 @@ const AppContext = createContext();
 // Provider 컴포넌트
 export const AppProvider = ({ children }) => {
   // 기존 상태 관리
-  const [showBreadcrumbs, setShowBreadcrumbs] = useState(false);
+  const [showBreadcrumbs, setShowBreadcrumbs] = useState(true);
   const [hideSidebar, setHideSidebar] = useState(false);
 
   // 메시지 상태 관리

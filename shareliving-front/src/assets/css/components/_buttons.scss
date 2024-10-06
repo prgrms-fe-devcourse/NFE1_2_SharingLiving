@@ -22,16 +22,19 @@ button {
     font-weight: 900;
 }
 
-#btnTotalSearch {
+.button-with-icon {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: .2rem;
+    padding-inline: .8rem;
     height: 1.6rem;
-    aspect-ratio: 1 / 1;
     border: 1px solid rgb(var(--clr-theme) / .5);
     border-radius: .2rem;
     background-color: rgb(var(--clr-theme));
     color: rgb(var(--clr-text-on-tint));
+    font-size: var(--fnt-sm);
+    font-weight: 900;
 
     > .icons {
         width: .8rem;
