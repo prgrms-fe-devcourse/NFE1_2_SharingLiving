@@ -10,7 +10,8 @@ const FindAccountInfo = () => {
   const [mode, setMode] = useState('id');
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
   const [message, setMessage] = useState('');
   const [isVerified, setIsVerified] = useState(false);
 
@@ -20,7 +21,8 @@ const FindAccountInfo = () => {
     setIsVerified(false);
     setFullName('');
     setEmail('');
-    setPassword('');
+    setCurrentPassword('');
+    setNewPassword('');
   };
 
   const handleFindId = async (e) => {
@@ -33,44 +35,58 @@ const FindAccountInfo = () => {
         setMessage('해당 이름으로 등록된 아이디가 없습니다.');
       }
     } catch (error) {
-      setMessage('아이디를 찾을 수 없습니다.');
+      console.error('Find ID error:', error.response || error);
+      setMessage('아이디를 찾을 수 없습니다. 오류: ' + (error.response?.data?.message || error.message));
     }
   };
 
   const handleVerifyUser = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get(`${API_BASE_URL}/users/get-users?fullName=${fullName}&email=${email}`);
-      if (response.data.length > 0) {
+      const response = await axios.get(`${API_BASE_URL}/search/users/${fullName}`);
+      const user = response.data.find(u => u.email === email);
+      if (user) {
         setIsVerified(true);
-        setMessage('사용자 확인이 완료되었습니다. 새 비밀번호를 입력해주세요.');
+        setMessage('사용자 확인이 완료되었습니다. 현재 비밀번호와 새 비밀번호를 입력해주세요.');
       } else {
-        setMessage('입력한 정보와 일치하는 사용자가 없습니다.');
+        setMessage('입력하신 정보와 일치하는 계정을 찾을 수 없습니다.');
       }
     } catch (error) {
-      setMessage('사용자 확인에 실패했습니다.');
+      console.error('User verification error:', error.response || error);
+      setMessage('사용자 확인에 실패했습니다. 오류: ' + (error.response?.data?.message || error.message));
     }
   };
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('Token'); // 또는 'tempToken'
-      await axios.put(`${API_BASE_URL}/settings/update-password`, 
-        { password },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setMessage('비밀번호가 성공적으로 변경되었습니다.');
-      setIsVerified(false);
-      // 비밀번호 변경 후 임시 토큰 삭제
-      // localStorage.removeItem('tempToken');
-    } catch (error) {
-      if (error.response && error.response.status === 401) {
-        setMessage('인증에 실패했습니다. 다시 로그인해 주세요.');
-        navigate('/login');
+      // 먼저 현재 비밀번호로 로그인을 시도합니다.
+      const loginResponse = await axios.post(`${API_BASE_URL}/login`, {
+        email,
+        password: currentPassword
+      });
+
+      if (loginResponse.data.token) {
+        // 로그인 성공 시, 얻은 토큰으로 비밀번호를 변경합니다.
+        const resetResponse = await axios.put(
+          `${API_BASE_URL}/settings/update-password`,
+          { password: newPassword },
+          { headers: { 
+            'Authorization': `Bearer ${loginResponse.data.token}`,
+            'Content-Type': 'application/json'
+          }}
+        );
+
+        if (resetResponse.status === 200) {
+          setMessage('비밀번호가 성공적으로 변경되었습니다. 새 비밀번호로 로그인해주세요.');
+          setTimeout(() => navigate('/login'), 3000);
+        }
       } else {
-        setMessage('비밀번호 변경에 실패했습니다.');
+        throw new Error('로그인에 실패했습니다.');
       }
+    } catch (error) {
+      console.error('Password reset error:', error.response || error);
+      setMessage('비밀번호 변경에 실패했습니다. 오류: ' + (error.response?.data?.message || error.message));
     }
   };
 
@@ -95,28 +111,41 @@ const FindAccountInfo = () => {
         </form>
       ) : (
         <form onSubmit={isVerified ? handleResetPassword : handleVerifyUser}>
-          <input
-            type="text"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            placeholder="이름을 입력하세요"
-            required
-          />
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="이메일을 입력하세요"
-            required
-          />
+          {!isVerified && (
+            <>
+              <input
+                type="text"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="이름을 입력하세요"
+                required
+              />
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="이메일을 입력하세요"
+                required
+              />
+            </>
+          )}
           {isVerified && (
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="새 비밀번호를 입력하세요"
-              required
-            />
+            <>
+              <input
+                type="password"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                placeholder="현재 비밀번호를 입력하세요"
+                required
+              />
+              <input
+                type="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                placeholder="새 비밀번호를 입력하세요"
+                required
+              />
+            </>
           )}
           <button type="submit">
             {isVerified ? '비밀번호 변경' : '사용자 확인'}
@@ -125,7 +154,7 @@ const FindAccountInfo = () => {
       )}
 
       {message && <p className="message">{message}</p>}
-      <button onClick={() => navigate(-1)}>로그인 화면으로 돌아가기</button>
+      <button onClick={() => navigate('/login')}>로그인 화면으로 돌아가기</button>
     </div>
   );
 };
