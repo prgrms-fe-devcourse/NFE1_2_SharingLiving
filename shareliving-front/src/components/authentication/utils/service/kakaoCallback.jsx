@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useAppContext } from '../../../../context/AppContext'; 
 
 const KAKAO_CLIENT_ID = import.meta.env.VITE_APP_KAKAO_CLIENT_ID;
 const KAKAO_REDIRECT_URI = import.meta.env.VITE_APP_KAKAO_REDIRECT_URI;
@@ -9,6 +10,7 @@ const KakaoCallback = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [status, setStatus] = useState('Processing Kakao login...');
+  const { updateSocialLoginInfo } = useAppContext(); 
 
   useEffect(() => {
     const code = new URLSearchParams(location.search).get('code');
@@ -52,10 +54,19 @@ const KakaoCallback = () => {
         });
 
         console.log('User Info:', userInfoResponse.data);
-        setStatus('Login successful! Redirecting...');
+        setStatus('Login successful! Updating user info...');
         
-        localStorage.setItem('userInfo', JSON.stringify(userInfoResponse.data));
-        setTimeout(() => navigate('/'), 2000);
+        // AppContext를 사용하여 사용자 정보 업데이트
+        updateSocialLoginInfo({
+          id: userInfoResponse.data.id,
+          name: userInfoResponse.data.properties.nickname,
+          email: userInfoResponse.data.kakao_account.email,
+          profileImage: userInfoResponse.data.properties.profile_image,
+          provider: 'kakao',
+          token: tokenResponse.data.access_token
+        });
+
+        setTimeout(() => navigate('/mypage'), 2000);
       } else {
         throw new Error('No access token received');
       }
