@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useAppContext } from "../context/AppContext";
+import { useAppContext } from '../context/AppContext';
 
-const API_BASE_URL = "https://kdt.frontend.5th.programmers.co.kr:5003";
+const API_BASE_URL = 'https://kdt.frontend.5th.programmers.co.kr:5003';
 
 const UserControls = ({ isMobile }) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -18,6 +18,7 @@ const UserControls = ({ isMobile }) => {
 
     const handleLogout = async () => {
         setIsLoading(true);
+
         try {
             const token = localStorage.getItem('token');
             await axios.post(`${API_BASE_URL}/logout`, {}, {
@@ -67,7 +68,8 @@ const UserControls = ({ isMobile }) => {
                     onClick={handleLogout}
                     disabled={isLoading}
                 >
-                    {isLoading ? "처리 중..." : "로그아웃"}
+                    <svg xmlns="http://www.w3.org/2000/svg" className="icons" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C15.2713 2 18.1757 3.57078 20.0002 5.99923L17.2909 5.99931C15.8807 4.75499 14.0285 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C14.029 20 15.8816 19.2446 17.2919 17.9998L20.0009 17.9998C18.1765 20.4288 15.2717 22 12 22ZM19 16V13H11V11H19V8L24 12L19 16Z"></path></svg>
+                    <span>{isLoading ? "처리 중..." : "로그아웃"}</span>
                 </button>
             </div>
             {message && <p className="info-message">{message}</p>}

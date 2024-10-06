@@ -1,5 +1,38 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+import { useAppContext } from '../context/AppContext';
+const API_BASE_URL = 'https://kdt.frontend.5th.programmers.co.kr:5003';
+
 const HasUserLoggedIn = () => {
-  const isUserLog = false; // 임시 유저 값
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
+  const { currentUser, setCurrentUser } = useAppContext();
+
+  const isUserLog = currentUser.token === null ? false : true; // 임시 유저 값
+
+  const handleLogout = async () => {
+      setIsLoading(true);
+      try {
+          const token = localStorage.getItem('token');
+          await axios.post(`${API_BASE_URL}/logout`, {}, {
+              headers: { Authorization: `Bearer ${token}` }
+          });
+          localStorage.removeItem('token');
+          localStorage.removeItem('userInfo');
+          setCurrentUser(null);
+          console.clear();
+          setMessage("");
+          navigate('/login');
+      } catch (error) {
+          console.error("Logout error:", error);
+          setMessage("로그아웃 중 오류가 발생했습니다.");
+      } finally {
+          setIsLoading(false);
+      }
+  };
 
   if (isUserLog) {
     const { notifications, messages } = {
@@ -21,17 +54,19 @@ const HasUserLoggedIn = () => {
           </button>
         </div>
 
-        <button type="button" id="btnHeaderLogout" className="button-with-icon front" title="로그아웃">
+        <button type="button" id="btnHeaderLogout" className="button-with-icon front" title="로그아웃" onClick={ handleLogout } disabled={ isLoading }>
           <svg xmlns="http://www.w3.org/2000/svg" className="icons" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C15.2713 2 18.1757 3.57078 20.0002 5.99923L17.2909 5.99931C15.8807 4.75499 14.0285 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C14.029 20 15.8816 19.2446 17.2919 17.9998L20.0009 17.9998C18.1765 20.4288 15.2717 22 12 22ZM19 16V13H11V11H19V8L24 12L19 16Z"></path></svg>
           <span>로그아웃</span>
         </button>
+
+        { message && <p className="info-message">{message}</p> }
       </div>
     )
   }
 
   return (
     <div className="user-info-container">
-      <button id="btnHeaderLogin" className="button-with-icon front" title="로그인">
+      <button id="btnHeaderLogin" className="button-with-icon front" title="로그인" onClick={ () => { navigate('/login') } }>
         <svg xmlns="http://www.w3.org/2000/svg" className="icons" viewBox="0 0 24 24" fill="currentColor"><path d="M10 11V8L15 12L10 16V13H1V11H10ZM2.4578 15H4.58152C5.76829 17.9318 8.64262 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C8.64262 4 5.76829 6.06817 4.58152 9H2.4578C3.73207 4.94289 7.52236 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C7.52236 22 3.73207 19.0571 2.4578 15Z"></path></svg>
         <span>로그인</span>
       </button>
