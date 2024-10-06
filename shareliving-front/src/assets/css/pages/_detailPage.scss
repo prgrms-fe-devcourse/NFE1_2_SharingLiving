@@ -131,6 +131,37 @@
     padding: 2.4rem .8rem;
 }
 
+#detailControls {
+    display: flex;
+    justify-content: center;
+    gap: .4rem;
+
+    > button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .2rem;
+        padding: .8rem;
+        border: 1px solid rgb(var(--clr-theme));
+        border-radius: .4rem;
+
+        .icons {
+            width: .8rem;
+        }
+    }
+}
+
+#btnLikeArticle {
+    border-color: palevioletred;
+    color: palevioletred;
+
+    &.liked {
+        border-color: transparent;
+        background-color: palevioletred;
+        color: rgb(var(--clr-text-on-tint));
+    }
+}
+
 #detailReply {
     display: flex;
     flex-flow: column nowrap;
@@ -155,7 +186,7 @@
 }
 
 #articleReplyContainer {
-
+    border-block-start: 1px solid rgb(var(--clr-text) / .25);
 }
 
 #articleReplyEditor {

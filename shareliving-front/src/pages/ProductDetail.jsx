@@ -7,7 +7,7 @@ import ArticleReply from '../components/items/ArticleReply';
 const articleObject = {
   dataID: '',
   dataType: 'article',
-  title: '다 쓴 뭐시기 나눔합니다',
+  title: '다 쓴 물품 나눔합니다',
   date: '2024-09-13',
   author: {
     userName: '홍길동',
@@ -43,10 +43,22 @@ const articleObject = {
       userID: '12535jjdsfc',
       writtenDate: '2024-09-13',
       replyTo: {
-        replyTarget: 'reply',
+        replyTarget: 'article',
         targetID: '1234'
       },
       replyText: `apwrgjparwjgpoarejgpoarjgpo`,
+    },
+    {
+      dataID: '',
+      dataType: 'reply',
+      userName: 'ddd',
+      userID: '12535jjdsfc',
+      writtenDate: '2024-09-13',
+      replyTo: {
+        replyTarget: 'reply',
+        targetID: '1234'
+      },
+      replyText: `대댓글 대댓댓글`,
     }
   ],
 }
@@ -54,12 +66,19 @@ const articleObject = {
 const ProductDetail = () => {
   const thisLocation = useLocation().pathname.split('/').pop(); // 현재 접근한 문서의 id
   const [currentReplyTarget, setReplyTarget] = useState({ replyTarget: 'article', targetID: thisLocation }); // 최초 댓글 작성 대상 - 게시물
+  const [didILikedThis, setLikedStatus] = useState(false);
 
   useEffect(() => {
     const thisItem = getCurrentArticle(thisLocation).then((res) => { return JSON.parse(res.title); });
 
     console.log(thisItem);
   });
+
+  const iLikeThis = () => {
+    let currentLike = didILikedThis;
+
+    setLikedStatus(!currentLike);
+  }
 
   return (
     <article id="detailContainer" className="rounded">
@@ -74,8 +93,6 @@ const ProductDetail = () => {
           <h2 className="detail-title">{ articleObject.title }</h2>
 
           <dl className="detail-item-info">
-            <dt>나눔 제품 정보</dt>
-
             <dd className="detail-item-name" data-item-info-label="나눔 제품명">
               { articleObject.shareItem.itemName }
             </dd>
@@ -124,8 +141,16 @@ const ProductDetail = () => {
         { articleObject.articleText }
       </div>
 
-      <div>
-        { /** 좋아요 / 좋아요 취소 버튼 영역 */ }
+      <div id="detailControls">
+        <button id="btnLikeArticle" className={ didILikedThis ? 'liked' : null } onClick={ iLikeThis }>
+          <svg xmlns="http://www.w3.org/2000/svg" className="icons" viewBox="0 0 24 24" fill="currentColor"><path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853Z"></path></svg>
+
+          <p>좋아요 <span>{ articleObject.likes }</span></p>
+        </button>
+
+        <button id="btnSendMessage">
+          <p>나눔 신청</p>
+        </button>
       </div>
 
       <div id="detailReply">
@@ -136,8 +161,14 @@ const ProductDetail = () => {
         </div>
 
         <div id="articleReplyContainer">
-          <ArticleReply replyObject={ articleObject.replies[0] } />
-          { /** 댓글 아이템 컴포넌트 - 재귀를 통한 대댓글 구현 필요 */ }
+          <ArticleReply replyObject={ articleObject.replies[0] }>
+            <ArticleReply replyObject={ articleObject.replies[1] } />
+            <ArticleReply replyObject={ articleObject.replies[1] } />
+            <ArticleReply replyObject={ articleObject.replies[1] } />
+            <ArticleReply replyObject={ articleObject.replies[1] } />
+          </ArticleReply>
+
+          { /** 댓글 아이템 컴포넌트 - 재귀를 통한 대댓글 구현 필요. 위는 예시 */ }
         </div>
 
         <form id="articleReplyEditor">

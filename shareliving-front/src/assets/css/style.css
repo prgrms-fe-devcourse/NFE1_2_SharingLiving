@@ -1225,6 +1225,34 @@ a:hover, a:focus, a:active {
   padding: 2.4rem 0.8rem;
 }
 
+#detailControls {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+}
+#detailControls > button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.8rem;
+  border: 1px solid rgb(var(--clr-theme));
+  border-radius: 0.4rem;
+}
+#detailControls > button .icons {
+  width: 0.8rem;
+}
+
+#btnLikeArticle {
+  border-color: palevioletred;
+  color: palevioletred;
+}
+#btnLikeArticle.liked {
+  border-color: transparent;
+  background-color: palevioletred;
+  color: rgb(var(--clr-text-on-tint));
+}
+
 #detailReply {
   display: flex;
   flex-flow: column nowrap;
@@ -1244,6 +1272,10 @@ a:hover, a:focus, a:active {
 }
 .detail-reply-counter span {
   font-weight: 900;
+}
+
+#articleReplyContainer {
+  border-block-start: 1px solid rgb(var(--clr-text)/0.25);
 }
 
 #articleReplyEditor {
@@ -1789,3 +1821,58 @@ select:focus {
   }
 }
 /* _cardItems.scss */
+/* _articleReply.scss */
+.reply-item {
+  display: flex;
+  border-block-end: 1px solid rgb(var(--clr-text)/0.25);
+}
+
+.reply-target-indicator {
+  padding: 0.4rem;
+  border-inline-end: 1px solid rgb(var(--clr-text)/0.25);
+}
+.reply-target-indicator.re-reply {
+  background-image: linear-gradient(to bottom, rgb(var(--clr-theme)/0.05) 1.2rem, transparent 2.4rem);
+}
+.reply-target-indicator > .icons {
+  width: 0.8rem;
+  opacity: 0.75;
+}
+
+.reply-body {
+  flex: 1;
+}
+
+.reply-to-reply {
+  padding: 0.4rem;
+  border-block-end: 1px solid rgb(var(--clr-text)/0.25);
+  background-color: rgb(var(--clr-theme)/0.05);
+  color: rgb(var(--clr-text)/0.5);
+  font-size: var(--fnt-sm);
+}
+.reply-to-reply span {
+  color: rgb(var(--clr-text)/0.75);
+  font-weight: 700;
+}
+
+.reply-info {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem;
+  border-block-end: 1px solid rgb(var(--clr-text)/0.25);
+  color: rgb(var(--clr-text)/0.5);
+  font-size: var(--fnt-sm);
+}
+
+.reply-text {
+  padding: 0.8rem 0.4rem;
+  border-block-end: 1px solid rgb(var(--clr-text)/0.25);
+  line-height: 1.4;
+}
+
+.reply-item-controls {
+  padding: 0.4rem;
+}
+
+/* _articleReply.scss */

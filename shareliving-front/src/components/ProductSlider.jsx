@@ -18,7 +18,7 @@ const ProductSlider = () => {
     {
       enabled: !!channelId,
       select: (res) => {
-        const toTheLength = res.slice(res.length - 8, res.length); // 마지막 8개의 글 자르기
+        const toTheLength = res.slice(0, res.length - 1); // 마지막 8개의 글 자르기
 
         return toTheLength.map((product) => ({ ...product, ...JSON.parse(product.title) }));
       },
