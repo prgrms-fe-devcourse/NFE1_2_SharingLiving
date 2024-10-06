@@ -2,28 +2,71 @@ import React, { useState } from 'react';
 import './knowledge.scss';
 import { useNavigate } from 'react-router-dom';
 import ImageUploader from '../components/ImageUploader';
+import axios from 'axios';
 
 const KnowledgeWrite = () => {
   const navigate = useNavigate();
+  const token = localStorage.getItem('Token');
+  
   const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('knowledge'); 
+  const [category, setCategory] = useState('knowledge');
   const [type, setType] = useState('');
-  const [description, setDescription] = useState(''); 
+  const [description, setDescription] = useState('');
+  const [images, setImages] = useState([]);
 
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
     setCategory(selectedCategory);
-    
+
     if (selectedCategory === 'product') {
       navigate('/add-product');
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append(
+      'title',
+      JSON.stringify({
+        title,
+        category,
+        type,
+        description,
+      })
+    );
+
+    if (images) {
+      formData.append('image', images[0]);
+    } else {
+      formData.append('image', null);
+    }
+
+    formData.append('channelId', '66fca1eb6c571835b6423ae5');
+
+    try {
+      const response = await axios.post(
+        'https://kdt.frontend.5th.programmers.co.kr:5003/posts/create',
+        formData,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+        }
+      );
+      console.log(response.data);
+      // navigate('/');
+    } catch (error) {
+      console.error('데이터 전송 중 오류 발생:', error);
     }
   };
 
   return (
     <div className="knowledge-wrapper">
       <h1 className="title">나눔지식 등록 페이지</h1>
-      <ImageUploader />
-      <form className="knowledge-form">
+      <ImageUploader images={images} setImages={setImages} />
+      <form className="knowledge-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="input-title" className="form-label">글 제목</label>
           <input
@@ -42,7 +85,7 @@ const KnowledgeWrite = () => {
             id="dropdown"
             className="dropdown"
             value={category}
-              onChange={handleCategoryChange}
+            onChange={handleCategoryChange}
           >
             <option value="knowledge">지식</option>
             <option value="product">제품</option>
@@ -73,8 +116,18 @@ const KnowledgeWrite = () => {
         </div>
 
         <div className="form-actions">
-          <button type="button" className="cancel-button" onClick={() => {navigate('/');}}>취소</button>
-          <button type="submit" className="submit-button">등록</button>
+          <button
+            type="button"
+            className="cancel-button"
+            onClick={() => {
+              navigate('/');
+            }}
+          >
+            취소
+          </button>
+          <button type="submit" className="submit-button">
+            등록
+          </button>
         </div>
       </form>
     </div>

@@ -57,7 +57,7 @@ export const getAuthUser = async () => {
   console.log('token: ', token)
   console.log('userInfo: ', userInfo)
   if (!token) {
-    throw new Error('No auth token found');
+    return null; // 토큰이 없으면 null 반환
   }
 
   try {

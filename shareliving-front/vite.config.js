@@ -3,7 +3,10 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  publicDir: 'public',
   server: {
+    port: 5174, // 포트를 고정
+    historyApiFallback: true,
     proxy: {
       '/api': {
         target: 'https://kdt.frontend.5th.programmers.co.kr:5003',
@@ -32,6 +35,25 @@ export default defineConfig({
           });
           proxy.on('proxyRes', (proxyRes, req, _res) => {
             console.log('Received Kakao Response:', proxyRes.statusCode, req.url);
+            console.log('Response Headers:', proxyRes.headers);
+          });
+        },
+      },
+      '/google-api': {
+        target: 'https://accounts.google.com',
+        changeOrigin: true,
+        secure: true,
+        rewrite: (path) => path.replace(/^\/google-api/, ''),
+        configure: (proxy, _options) => {
+          proxy.on('error', (err, _req, _res) => {
+            console.log('Google proxy error', err);
+          });
+          proxy.on('proxyReq', (proxyReq, req, _res) => {
+            console.log('Sending Google Request:', req.method, req.url);
+            console.log('Request Headers:', proxyReq.getHeaders());
+          });
+          proxy.on('proxyRes', (proxyRes, req, _res) => {
+            console.log('Received Google Response:', proxyRes.statusCode, req.url);
             console.log('Response Headers:', proxyRes.headers);
           });
         },
