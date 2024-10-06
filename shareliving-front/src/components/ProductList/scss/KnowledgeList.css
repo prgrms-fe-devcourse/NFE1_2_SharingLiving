@@ -3,3 +3,7 @@
   flex-direction: column;
   gap: 12px;
 }
+
+.knowledgeCard {
+  width: 100%;
+}

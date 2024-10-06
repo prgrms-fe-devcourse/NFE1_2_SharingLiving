@@ -131,7 +131,7 @@ export const getCurrentArticle = async (articleID) => {
 
     return response.data;
   } catch (error) {
-    console.error(`Error get load article id: ${articleID}.`);
+    console.error(`Error get load article id: ${ articleID }.`);
 
     throw error;
   }

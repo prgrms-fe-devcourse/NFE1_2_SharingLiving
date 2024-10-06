@@ -61,8 +61,8 @@ const CardProducts = ({ type, itemObject }) => {
           </dl>
 
           <div className="card-info-container">
-            <span>{itemObject.region}</span>
-            <span>{itemObject.pickupMethod}</span>
+            <span>{ itemObject.region ? itemObject.region : '지역 없음' }</span>
+            <span>{ itemObject.pickupMethod ? itemObject.pickupMethod : '수거 방식 없음' }</span>
           </div>
         </div>
       </article>

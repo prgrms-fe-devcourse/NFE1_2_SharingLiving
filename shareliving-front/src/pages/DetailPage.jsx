@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useQuery } from 'react-query';
 import { getCurrentArticle } from '../components/authentication/utils/service/apiUtil';
 
 import ArticleReply from '../components/items/ArticleReply';
 
-const articleObject = {
+const articleObject = { // 초기 에상 데이터 구조
   dataID: '',
   dataType: 'article',
   title: '다 쓴 물품 나눔합니다',
@@ -59,7 +60,43 @@ const articleObject = {
         targetID: '1234'
       },
       replyText: `대댓글 대댓댓글`,
-    }
+    },
+    {
+      dataID: '',
+      dataType: 'reply',
+      userName: 'ddd',
+      userID: '12535jjdsfc',
+      writtenDate: '2024-09-13',
+      replyTo: {
+        replyTarget: 'reply',
+        targetID: '1234'
+      },
+      replyText: `대댓글 대댓댓글`,
+    },
+    {
+      dataID: '',
+      dataType: 'reply',
+      userName: 'ddd',
+      userID: '12535jjdsfc',
+      writtenDate: '2024-09-13',
+      replyTo: {
+        replyTarget: 'reply',
+        targetID: '1234'
+      },
+      replyText: `대댓글 대댓댓글`,
+    },
+    {
+      dataID: '',
+      dataType: 'reply',
+      userName: 'ddd',
+      userID: '12535jjdsfc',
+      writtenDate: '2024-09-13',
+      replyTo: {
+        replyTarget: 'reply',
+        targetID: '1234'
+      },
+      replyText: `대댓글 대댓댓글`,
+    },
   ],
 }
 
@@ -68,11 +105,12 @@ const DetailPage = ({ itemFrom }) => {
   const [currentReplyTarget, setReplyTarget] = useState({ replyTarget: 'article', targetID: thisLocation }); // 최초 댓글 작성 대상 - 게시물
   const [didILikedThis, setLikedStatus] = useState(false);
 
-  useEffect(() => {
-    const thisItem = getCurrentArticle(thisLocation).then((res) => { return JSON.parse(res.title); });
-
-    console.log(thisItem);
+  const { data: postDetail } = useQuery('postDetail', () => getCurrentArticle(thisLocation), { // 글 전체 데이터
+    enabled: !!thisLocation,
+    select: (res) => res
   });
+
+  const postData = JSON.parse(postDetail.title); // 글 주요 데이터
 
   const iLikeThis = () => {
     let currentLike = didILikedThis;
@@ -80,17 +118,20 @@ const DetailPage = ({ itemFrom }) => {
     setLikedStatus(!currentLike);
   }
 
+  console.log(postDetail)
+  console.log(postData);
+
   return (
     <article id="detailContainer" className="rounded">
-      <div id="detailImageContainer"> { /** 이미지 슬라이더 선택 렌더링으로 하나의 Detail 페이지를 재활용할 수 있을 것 같다. */ }
-        <img className="detail-image" src={ !!articleObject.articleImageURL === true ? articleObject.articleImageURL : 'https://picsum.photos/400/300?random=1' } alt="나눔 제품 이미지" />
+      <div id="detailImageContainer">
+        <img className="detail-image" src={ !!postDetail.image === true ? postDetail.image : 'https://picsum.photos/400/300?random=1' } alt="나눔 제품 이미지" />
 
-        { /** 이미지 미리보기 슬라이더 */ }
+        { /** 작성글의 자료형에서 이미지가 단일 오브젝트로 되어 있어 슬라이더는 우선 보류 */ }
       </div>
 
       <dl id="detailSummary">
         <dt className="detail-title-area">
-          <h2 className="detail-title">{ articleObject.title }</h2>
+          <h2 className="detail-title">{ postData.title }</h2>
 
           { itemFrom === 'product' ?
             <dl className="detail-item-info">
@@ -99,11 +140,11 @@ const DetailPage = ({ itemFrom }) => {
               </dd>
 
               <dd className="detail-item-shipping" data-item-info-label="수거 방식">
-                { articleObject.shareItem.shippingMethod }
+                { postData.pickupCompany }
               </dd>
 
               <dd className="detail-item-price" data-item-info-label="수거 비용">
-                { articleObject.shareItem.shippingPrice.toLocaleString('ko-KR') } 원
+                { postData.pickupCost.toLocaleString('ko-KR') } 원
               </dd>
             </dl>
             : null
@@ -116,7 +157,7 @@ const DetailPage = ({ itemFrom }) => {
               <img src="https://picsum.photos/64/64?random=2" alt="사용자 프로필 사진" />
             </div>
 
-            <p className="detail-user-name">{ articleObject.author.userName }</p>
+            <p className="detail-user-name">{ postDetail.author.fullName }</p>
           </div>
 
           <div className="detail-article-info">
@@ -132,7 +173,7 @@ const DetailPage = ({ itemFrom }) => {
             |
             <p className="detail-info-trees">
               <svg xmlns="http://www.w3.org/2000/svg" className="icons" viewBox="0 0 24 24" fill="currentColor"><path d="M18 7C18 7.2624 17.9832 7.52086 17.9505 7.77437C19.7712 8.80457 21 10.7588 21 13C21 16.3137 18.3137 19 15 19C14.2987 19 13.6256 18.8797 13 18.6586V22H11V18.4003C10.2499 18.7837 9.40022 19 8.5 19C5.46243 19 3 16.5376 3 13.5C3 12.0474 3.56312 10.7263 4.48297 9.74318C4.87725 10.8232 5.49744 11.7944 6.28576 12.5989L7.71424 11.1991C6.99071 10.4607 6.45705 9.53767 6.1906 8.50688C6.06607 8.02541 6 7.5204 6 7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7Z"></path></svg>
-              <span>{ articleObject.treeCount }</span>
+              <span>{ postData.tree }</span>
             </p>
           </div>
         </dd>
@@ -141,7 +182,7 @@ const DetailPage = ({ itemFrom }) => {
       <div className="separator"></div>
 
       <div id="detailText">
-        { articleObject.articleText }
+        { postData.description }
       </div>
 
       <div id="detailControls">
@@ -169,9 +210,9 @@ const DetailPage = ({ itemFrom }) => {
         <div id="articleReplyContainer">
           <ArticleReply replyObject={ articleObject.replies[0] }>
             <ArticleReply replyObject={ articleObject.replies[1] } />
-            <ArticleReply replyObject={ articleObject.replies[1] } />
-            <ArticleReply replyObject={ articleObject.replies[1] } />
-            <ArticleReply replyObject={ articleObject.replies[1] } />
+            <ArticleReply replyObject={ articleObject.replies[2] } />
+            <ArticleReply replyObject={ articleObject.replies[3] } />
+            <ArticleReply replyObject={ articleObject.replies[4] } />
           </ArticleReply>
 
           { /** 댓글 아이템 컴포넌트 - 재귀를 통한 대댓글 구현 필요. 위는 예시 */ }
