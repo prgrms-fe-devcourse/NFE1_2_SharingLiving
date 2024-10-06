@@ -1,9 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getCurrentArticle } from '../components/authentication/utils/service/apiUtil';
+
 import ArticleReply from '../components/items/ArticleReply';
 
 const articleObject = {
+  dataID: '',
+  dataType: 'article',
   title: '다 쓴 뭐시기 나눔합니다',
   date: '2024-09-13',
   author: {
@@ -16,10 +19,33 @@ const articleObject = {
   shareItem: {
     // 이 항목이 존재하면 제품 나눔, 아니면 지식 나눔
     // 제품 나눔일 경우 이 안에 제품에 대한 정보와 수거 방식, 비용 등에 대한 정보 포함
+    itemName: '나눔 생활 제품명',
+    shippingMethod: '택배',
+    shippingPrice: 2500,
+    itemImages: [
+      { imageURL: '' },
+      { imageURL: '' },
+      { imageURL: '' },
+      { imageURL: '' },
+      { imageURL: '' }
+    ]
   },
+  articleText: `
+    apwoerjgporjgpajr
+    gajreop[gbvjaeprjghperasjhgbiopaer
+    rjaepgobjaerpiohgbjapoj
+  `,
   replies: [
     {
-      name: 'ddd',
+      dataID: '',
+      dataType: 'reply',
+      userName: 'ddd',
+      userID: '12535jjdsfc',
+      writtenDate: '2024-09-13',
+      replyTo: {
+        replyTarget: 'reply',
+        targetID: '1234'
+      },
       replyText: `apwrgjparwjgpoarejgpoarjgpo`,
     }
   ],
@@ -27,6 +53,7 @@ const articleObject = {
 
 const ProductDetail = () => {
   const thisLocation = useLocation().pathname.split('/').pop(); // 현재 접근한 문서의 id
+  const [currentReplyTarget, setReplyTarget] = useState({ replyTarget: 'article', targetID: thisLocation }); // 최초 댓글 작성 대상 - 게시물
 
   useEffect(() => {
     const thisItem = getCurrentArticle(thisLocation).then((res) => { return JSON.parse(res.title); });
@@ -48,11 +75,18 @@ const ProductDetail = () => {
 
           <dl className="detail-item-info">
             <dt>나눔 제품 정보</dt>
-            { /** 만약 제품 나눔일 경우 제품에 대한 정보 표시 */ }
 
-            <dd className="detail-item-name">나눔 제품명</dd>
-            <dd className="detail-item-shipping">수거 방식</dd>
-            <dd className="detail-item-price">수거 비용</dd>
+            <dd className="detail-item-name" data-item-info-label="나눔 제품명">
+              { articleObject.shareItem.itemName }
+            </dd>
+
+            <dd className="detail-item-shipping" data-item-info-label="수거 방식">
+              { articleObject.shareItem.shippingMethod }
+            </dd>
+
+            <dd className="detail-item-price" data-item-info-label="수거 비용">
+              { articleObject.shareItem.shippingPrice.toLocaleString('ko-KR') } 원
+            </dd>
           </dl>
         </dt>
 
@@ -84,11 +118,15 @@ const ProductDetail = () => {
         </dd>
       </dl>
 
+      <div className="separator"></div>
+
       <div id="detailText">
-        본문 영역
+        { articleObject.articleText }
       </div>
 
-      <div className="separator"></div>
+      <div>
+        { /** 좋아요 / 좋아요 취소 버튼 영역 */ }
+      </div>
 
       <div id="detailReply">
         <div className="detail-reply-counter">
@@ -113,8 +151,6 @@ const ProductDetail = () => {
             입력
           </button>
         </form>
-
-
       </div>
     </article>
   );

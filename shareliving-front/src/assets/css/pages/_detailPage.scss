@@ -10,7 +10,7 @@
 }
 
 #detailSummary {
-
+    margin-block-end: .8rem;
 }
 
 .detail-title-area {
@@ -39,6 +39,32 @@
 
 .detail-item-info {
     display: flex;
+    flex-flow: column nowrap;
+    gap: .4rem;
+    padding: .8rem;
+
+    > dt {
+        margin-block-end: .4rem;
+        font-size: var(--fnt-lg);
+    }
+
+    > dd {
+        display: flex;
+        align-items: center;
+        gap: .8rem;
+
+        &::before {
+            padding: .2rem .8rem;
+            width: 4.8rem;
+            border-radius: 25rem;
+            background-color: rgb(var(--clr-max));
+            color: rgb(var(--clr-text-on-tint));
+            font-size: var(--fnt-sm);
+            font-weight: 700;
+            text-align: end;
+            content: attr(data-item-info-label);
+        }
+    }
 }
 
 .detail-info-area {

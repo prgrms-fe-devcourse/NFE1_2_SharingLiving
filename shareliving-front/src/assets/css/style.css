@@ -1115,6 +1115,10 @@ a:hover, a:focus, a:active {
   background-color: black;
 }
 
+#detailSummary {
+  margin-block-end: 0.8rem;
+}
+
 .detail-title-area {
   padding: 0.8rem;
 }
@@ -1141,6 +1145,29 @@ a:hover, a:focus, a:active {
 
 .detail-item-info {
   display: flex;
+  flex-flow: column nowrap;
+  gap: 0.4rem;
+  padding: 0.8rem;
+}
+.detail-item-info > dt {
+  margin-block-end: 0.4rem;
+  font-size: var(--fnt-lg);
+}
+.detail-item-info > dd {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.detail-item-info > dd::before {
+  padding: 0.2rem 0.8rem;
+  width: 4.8rem;
+  border-radius: 25rem;
+  background-color: rgb(var(--clr-max));
+  color: rgb(var(--clr-text-on-tint));
+  font-size: var(--fnt-sm);
+  font-weight: 700;
+  text-align: end;
+  content: attr(data-item-info-label);
 }
 
 .detail-info-area {
