@@ -3,25 +3,25 @@
   flex-wrap: wrap;
   gap: 12px;
 }
-
 .productCard {
   width: calc(25% - 9px);
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1000px) {
   .productCard {
     width: calc(33% - 6px);
   }
 }
-
-@media (max-width: 730px) {
+@media (max-width: 700px) {
   .productCard {
     width: calc(50% - 6px);
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 360px) {
   .productCard {
     width: 100%;
+    display: flex;
+    justify-content: center;
   }
 }
