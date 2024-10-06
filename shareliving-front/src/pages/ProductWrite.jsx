@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const ProductWrite = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem('Token');
+  const token = localStorage.getItem('token');
 
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('product');

@@ -20,7 +20,7 @@ const MyPage = () => {
 
   return (
     <div className="mypage">
-      <h1 className="mypage__title">마이페이지</h1>
+      <h1 className="mypage__title title">마이페이지</h1>
 
       {/* 대시보드 */}
       <section className="mypage__dashboard">

@@ -55,7 +55,7 @@ const FindAccountInfo = () => {
   const handleResetPassword = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('Token'); // 또는 'tempToken'
+      const token = localStorage.getItem('token'); // 또는 'tempToken'
       await axios.put(`${API_BASE_URL}/settings/update-password`, 
         { password },
         { headers: { Authorization: `Bearer ${token}` } }

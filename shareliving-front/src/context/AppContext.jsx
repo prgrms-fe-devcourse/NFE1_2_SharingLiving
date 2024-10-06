@@ -13,37 +13,17 @@ export const AppProvider = ({ children }) => {
   const [receivedMessages, setReceivedMessages] = useState([]);
   const [sentMessages, setSentMessages] = useState([]);
 
-  // 초기 현재 사용자 정보 상태 (토큰을 null로 초기화)
+  // 초기 현재 사용자 정보 상태
   const [currentUser, setCurrentUser] = useState({
     name: '현재 사용자',
     email: 'currentuser@example.com',
-    token: null, // 초기값을 null로 설정
-    stamps: 5,
+    stamps: 0,
+    userInfo: {},
   });
 
-  // 토큰 로딩 상태 추가
-  const [isTokenLoading, setIsTokenLoading] = useState(true);
-
-  useEffect(() => {
-    const userInfo = localStorage.getItem('userInfo');
-    if (userInfo) {
-      setCurrentUser((prevUser) => ({
-        ...prevUser,
-        ...JSON.parse(userInfo),
-      }));
-    }
-
-    const token = localStorage.getItem('token');
-    if (token) {
-      setCurrentUser((prevUser) => ({
-        ...prevUser,
-        token,
-      }));
-    }
-
-    // 토큰 로딩 완료
-    setIsTokenLoading(false);
-  }, []); // 빈 배열로 설정하여 한 번만 실행
+  // 스티커 상태 추가
+  const [stickers, setStickers] = useState([]);
+  console.log('stickers', stickers);
 
   // 답장 메시지 추가 함수
   const handleSendReply = (originalMessageId, replyContent) => {
@@ -86,14 +66,8 @@ export const AppProvider = ({ children }) => {
 
   // 로그아웃 함수 추가
   const logout = () => {
-    setCurrentUser({
-      name: '현재 사용자',
-      email: 'currentuser@example.com',
-      token: null,
-      stamps: 5,
-    });
+    setCurrentUser(null);
     localStorage.removeItem('userInfo');
-    localStorage.removeItem('token');
   };
 
   return (
@@ -110,13 +84,15 @@ export const AppProvider = ({ children }) => {
         handleSendReply,
         currentUser,
         setCurrentUser,
-        isTokenLoading, // 추가: 로딩 상태 전달
+        stickers, // 스티커 상태 추가
+        setStickers, // 스티커 상태 업데이트 함수 추가
+        // isTokenLoading, // 추가: 로딩 상태 전달
         // 탭 활성화 관련 상태
         activeTab,
         setActiveTab,
-         // 소셜 로그인 관련 함수 추가
-         updateSocialLoginInfo,
-         logout,
+        // 소셜 로그인 관련 함수 추가
+        updateSocialLoginInfo,
+        logout,
       }}
     >
       {children}
