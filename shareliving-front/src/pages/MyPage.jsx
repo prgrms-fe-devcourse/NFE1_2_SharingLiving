@@ -26,14 +26,14 @@ const MyPage = () => {
       <section className="mypage__dashboard">
         <div className="mypage__user-info">
           <h3 className="mypage__user-info-title">내 정보</h3>
-          <p className="mypage__user-nickname">이름: {currentUser.name}</p>
+          <p className="mypage__user-nickname">닉네임: {currentUser.name}</p>
           <p className="mypage__user-nickname">
             계정 아이디: {currentUser.email}
           </p>
-          <div className="mypage__user-stamps">
-            <h1>나무 보호 서비스</h1>
-            <TreeSlider />
-          </div>
+        </div>
+        <div className="mypage__user-stamps">
+          <h1>나무 보호 서비스</h1>
+          <TreeSlider />
         </div>
       </section>
 

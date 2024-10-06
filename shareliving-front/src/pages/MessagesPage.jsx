@@ -159,7 +159,7 @@ const MessagesPage = () => {
 
   return (
     <div className="messages-container">
-      <h1>메시지함</h1>
+      <h1 className="title">메시지함</h1>
       {loading && <p>메시지 불러오는 중...</p>}
       {error && <p className="error-message">{error}</p>}
 

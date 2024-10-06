@@ -12,10 +12,10 @@ const NoticeDetail = () => {
   const notice = notices.find((n) => n.id === Number(noticeId));
 
   return (
-    <div>
+    <div className="notice-wrapper">
       {notice ? (
         <div>
-          <h1>{notice.title}</h1>
+          <h1 className="title">{notice.title}</h1>
           <p>{notice.content}</p>
         </div>
       ) : (

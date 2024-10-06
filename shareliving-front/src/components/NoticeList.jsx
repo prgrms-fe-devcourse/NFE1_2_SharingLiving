@@ -1,6 +1,7 @@
 // components/NoticeList.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './NoticeList.scss';
 
 const NoticeList = () => {
   const notices = [

@@ -6,11 +6,11 @@ import './EditProfile.scss';
 
 const EditProfile = () => {
   const { currentUser, setCurrentUser } = useAppContext(); // 현재 사용자 정보와 setter 가져오기
-  const [nickname, setNickname] = useState(currentUser.name);
+  const [nickName, setNickname] = useState(currentUser.name);
   const [email, setEmail] = useState(currentUser.email);
-  const [password, setPassword] = useState('');
-  const [address, setAddress] = useState(currentUser.userInfo.address || '');
-  const [profilePicture, setProfilePicture] = useState(null);
+  const [password, setPassword] = useState(currentUser.password);
+  const [newPassword, setNewPassword] = useState('');
+  const [address, setAddress] = useState(currentUser.address);
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -20,16 +20,17 @@ const EditProfile = () => {
     const updatedUser = {
       ...currentUser,
       email: email,
-      name: nickname,
+      name: nickName,
+      password: newPassword,
+      address: address,
       userInfo: {
         ...currentUser.userInfo,
-        address: address,
       },
       // 프로필 사진 처리 로직 추가 가능
     };
 
     setCurrentUser(updatedUser); // 상태 업데이트
-    console.log('정보가 수정되었습니다.', updatedUser);
+    alert('정보가 수정되었습니다.', updatedUser);
   };
 
   return (
@@ -37,14 +38,14 @@ const EditProfile = () => {
       <h1 className="title">내 정보 수정</h1>
       <form className="profile-edit-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="nickname" className="form-label">
+          <label htmlFor="email" className="form-label">
             e-mail
           </label>
           <input
             type="text"
             id="email"
             value={email}
-            onChange={(e) => setNickname(e.target.value)} // 이메일 상태 업데이트
+            onChange={(e) => setEmail(e.target.value)} // 이메일 상태 업데이트
             placeholder="새 닉네임 입력"
           />
         </div>
@@ -55,7 +56,7 @@ const EditProfile = () => {
           <input
             type="text"
             id="nickname"
-            value={nickname}
+            value={nickName}
             onChange={(e) => setNickname(e.target.value)} // 닉네임 상태 업데이트
             placeholder="새 닉네임 입력"
           />
@@ -79,20 +80,8 @@ const EditProfile = () => {
           <input
             type="password"
             id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)} // 비밀번호 상태 업데이트
-            placeholder="새 비밀번호 입력"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password" className="form-label">
-            비밀번호 확인
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)} // 비밀번호 상태 업데이트
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)} // 비밀번호 상태 업데이트
             placeholder="새 비밀번호 입력"
           />
         </div>
@@ -109,15 +98,14 @@ const EditProfile = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="address" className="form-label">
+          <label htmlFor="role" className="form-label">
             계정 종류
           </label>
           <input
             type="text"
-            id="address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)} // 주소 상태 업데이트
-            placeholder="새 주소 입력"
+            id="role"
+            value={currentUser.userInfo.role}
+            readOnly
           />
         </div>
         {/* <div className="form-group">

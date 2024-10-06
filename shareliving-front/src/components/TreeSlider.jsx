@@ -130,7 +130,10 @@ const TreeSlider = () => {
         나무 심기
       </button>
       <p className="tree-slider__current-trees">
-        현재 심은 나무 수: {totalTreesPlanted}
+        내가 심은 나무 수: {totalTreesPlanted}
+      </p>
+      <p className="tree-slider__total-trees">
+        내가 보호한 나무 수: {currentUser.stamps}
       </p>
       <h2 className="tree-slider__level">레벨 {treeLevel + 1}</h2>
       <ProgressBar progress={progress} />
@@ -153,12 +156,9 @@ const TreeSlider = () => {
         ))}
       </Slider>
       <div className="tree-slider__status">
-        <p className="tree-slider__total-trees">
-          총 보호한 나무 수: {currentUser.stamps}
-        </p>
         {stickers.length > 0 && (
           <div className="tree-slider__stickers">
-            <p>받은 스티커:</p>
+            <p>내가 수확한 나무들:</p>
             <div className="tree-slider__stickers-container">
               {stickers.map((sticker, index) => (
                 <img

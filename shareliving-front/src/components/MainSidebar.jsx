@@ -15,16 +15,20 @@ const SideBarContent = ({ isLogged }) => {
         <h2>{currentUser.name}의 정보</h2>
         <p>이메일: {currentUser.email}</p>
         <p>총 보호한 나무 수: {currentUser.stamps}</p>
-        <h3>받은 스티커</h3>
-        <div className="stickers">
-          {lastSticker && (
-            <img
-              src={lastSticker}
-              alt="Last Sticker"
-              className="sidebar__sticker-image"
-            />
-          )}
-        </div>
+        {stickers.length > 0 && ( // 스티커가 있을 경우에만 렌더링
+          <>
+            <h3>최근 수확한 나무</h3>
+            <div className="stickers">
+              {lastSticker && (
+                <img
+                  src={lastSticker}
+                  alt="Last Sticker"
+                  className="sidebar__sticker-image"
+                />
+              )}
+            </div>
+          </>
+        )}
       </div>
     );
   }

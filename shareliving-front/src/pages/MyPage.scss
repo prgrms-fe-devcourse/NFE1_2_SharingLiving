@@ -12,8 +12,6 @@
   &__dashboard,
   &__other-features {
     margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
 
@@ -22,9 +20,23 @@
     }
   }
 
+  &__dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 15px;
+  }
+  &__other-features {
+    padding: 0;
+    background-color: unset;
+  }
+
   &__user-info,
   &__user-stamps {
     margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 
     &-title {
       margin: 0;
@@ -60,15 +72,19 @@
   &__feature-link {
     display: block;
     width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
+    padding: 15px;
+    font-size: 16px;
+    background-color: transparent;
+    color: #337235;
+    border: 2px solid #337235;
     text-align: center;
     text-decoration: none;
     border-radius: 5px;
     box-sizing: border-box;
     &:hover {
-      background-color: #0056b3;
+      background-color: #337235;
+      color: #fff;
+      border: 2px solid #337235;
     }
   }
 }

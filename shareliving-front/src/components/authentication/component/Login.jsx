@@ -84,6 +84,10 @@ const Login = () => {
       name: userData.fullName,
       email: userData.email,
       stamps: userData.stamps || 50,
+      sticker: userData.sticker,
+      nickName: userData.nickName || '닉네임',
+      password: userData.password || '12345678',
+      address: userData.address || '서울 관악구 신림동',
       userInfo: userData,
     };
     setCurrentUser({ ...userInfo, token });

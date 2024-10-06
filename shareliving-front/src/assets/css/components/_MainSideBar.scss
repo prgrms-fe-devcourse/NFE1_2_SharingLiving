@@ -1,76 +1,109 @@
 /* _MainSideBar.scss */
 
-#sideBarMain { // 메인 사이드바
+#sideBarMain {
+  // 메인 사이드바
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.6rem;
+  position: sticky;
+  top: 4rem;
+  width: 16rem;
+  > div {
+    width: 100%;
     display: flex;
-    flex-flow: column nowrap;
-    gap: .6rem;
-    position: sticky;
-    top: 4rem;
-    width: 16rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 10px;
+    gap: 17px;
+    padding: 30px 0;
+    text-align: center;
+    h2 {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    h3 {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .stickers {
+      justify-content: center;
+      height: 150px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      img {
+        height: 100%;
+      }
+    }
+  }
 }
 
-#sideBanner { // 사이드바 이용 안내 배너
-    height: 6rem;
+#sideBanner {
+  // 사이드바 이용 안내 배너
+  height: 6rem;
 }
 
-#sideNews { // 사이드바 최신 공지사항
-
+#sideNews {
+  // 사이드바 최신 공지사항
 }
 
 .sidebar-news-title {
-    display: flex;
-    align-items: center;
-    padding: .8rem;
-    font-weight: 900;
+  display: flex;
+  align-items: center;
+  padding: 0.8rem;
+  font-weight: 900;
 
-    > .icons {
-        width: .8rem;
-    }
+  > .icons {
+    width: 0.8rem;
+  }
 }
 
 .sidebar-news-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: .6rem;
-    padding-inline: .8rem;
-    padding-block-end: .8rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+  padding-inline: 0.8rem;
+  padding-block-end: 0.8rem;
 }
 
 .sidebar-news-item {
-    padding: .8rem;
-    aspect-ratio: 1 / 1;
-    border: 1px solid rgb(var(--clr-text) / .15);
-    border-radius: .4rem;
+  padding: 0.8rem;
+  aspect-ratio: 1 / 1;
+  border: 1px solid rgb(var(--clr-text) / 0.15);
+  border-radius: 0.4rem;
 
-    &:nth-child(3n + 1) {
-        background-color: rgb(var(--clr-tint-50));
-        color: rgb(var(--clr-text-on-tint));
-    }
+  &:nth-child(3n + 1) {
+    background-color: rgb(var(--clr-tint-50));
+    color: rgb(var(--clr-text-on-tint));
+  }
 
-    > a {
-        display: flex;
-        flex-flow: column nowrap;
-        justify-content: space-between;
-        height: 100%;
-    }
+  > a {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    height: 100%;
+  }
 
-    .icons {
-        margin-inline-start: auto;
-    }
+  .icons {
+    margin-inline-start: auto;
+  }
 }
 
-@media screen and (max-width: 1400px) { // 1400px부터 사이드바 숨김 처리, 버튼 클릭시 사이드에서 나오도록 표시
-    #sideBarMain {
-        display: none;
-        position: fixed;
-        inset-block: 0;
-        inset-inline-end: 0;
-        margin-inline-start: auto;
+@media screen and (max-width: 1400px) {
+  // 1400px부터 사이드바 숨김 처리, 버튼 클릭시 사이드에서 나오도록 표시
+  #sideBarMain {
+    display: none;
+    position: fixed;
+    inset-block: 0;
+    inset-inline-end: 0;
+    margin-inline-start: auto;
 
-        &.open {
-            display: initial;
-        }
+    &.open {
+      display: initial;
     }
+  }
 }
 
 /* _MainSideBar.scss */

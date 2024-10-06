@@ -18,6 +18,10 @@ export const AppProvider = ({ children }) => {
     name: '현재 사용자',
     email: 'currentuser@example.com',
     stamps: 0,
+    sticker: null,
+    nickName: '닉네임',
+    password: '',
+    address: '',
     userInfo: {},
   });
 

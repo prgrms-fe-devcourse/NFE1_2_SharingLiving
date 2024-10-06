@@ -94,8 +94,13 @@ const ShareHistory = () => {
   }
 
   return (
-    <div style={{ padding: '20px', maxWidth: '850px', margin: '0 auto'}}>
-      <h1 style={{ fontSize: '30px',}}>나눔 이용 내역</h1>
+    <div
+      className="sharehistory-container"
+      style={{ padding: '20px', maxWidth: '850px', margin: '0 auto' }}
+    >
+      <h1 className="title" style={{ fontSize: '30px' }}>
+        나눔 이용 내역
+      </h1>
 
       <div style={{ marginBottom: '15px' }}>
         <button
@@ -124,11 +129,19 @@ const ShareHistory = () => {
 
       {currentTab === 'products' && (
         <section>
-          <h2 style={{ marginBottom: '15px', fontSize: '25px' }}>제품 나눔 내역</h2>
-          <table style={{ width: '100%', borderCollapse: 'collapse'}}>
+          <h2 style={{ marginBottom: '15px', fontSize: '25px' }}>
+            제품 나눔 내역
+          </h2>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr>
-                <th style={{ border: '1px solid #ccc', padding: '10px', width: '50px' }}>
+                <th
+                  style={{
+                    border: '1px solid #ccc',
+                    padding: '10px',
+                    width: '50px',
+                  }}
+                >
                   선택
                 </th>
                 <th style={{ border: '1px solid #ccc', padding: '10px' }}>
@@ -142,7 +155,13 @@ const ShareHistory = () => {
             <tbody>
               {productShares.map((product) => (
                 <tr key={product.id}>
-                  <td style={{ border: '1px solid #ccc', padding: '10px', textAlign: 'center' }}>
+                  <td
+                    style={{
+                      border: '1px solid #ccc',
+                      padding: '10px',
+                      textAlign: 'center',
+                    }}
+                  >
                     <input
                       type="checkbox"
                       checked={product.selected}
@@ -177,14 +196,30 @@ const ShareHistory = () => {
               ))}
             </tbody>
           </table>
-          <button onClick={handleDeleteAll} style={{ margin: '10px', backgroundColor: 'transparent', border: 'none', transition: 'color 0.3s'}} 
-          onMouseEnter={(e) => (e.currentTarget.style.color = 'red')}
-          onMouseLeave={(e) => (e.currentTarget.style.color = 'black')} >
+          <button
+            onClick={handleDeleteAll}
+            style={{
+              margin: '10px',
+              backgroundColor: 'transparent',
+              border: 'none',
+              transition: 'color 0.3s',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = 'red')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'black')}
+          >
             전체 삭제
           </button>
-          <button onClick={handleDeleteSelected} style={{ margin: '10px', backgroundColor: 'transparent', border: 'none', transition: 'color 0.3s'}} 
-          onMouseEnter={(e) => (e.currentTarget.style.color = '#347235')}
-          onMouseLeave={(e) => (e.currentTarget.style.color = 'black')}>
+          <button
+            onClick={handleDeleteSelected}
+            style={{
+              margin: '10px',
+              backgroundColor: 'transparent',
+              border: 'none',
+              transition: 'color 0.3s',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = '#347235')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'black')}
+          >
             선택 삭제
           </button>
         </section>
@@ -192,7 +227,9 @@ const ShareHistory = () => {
 
       {currentTab === 'knowledge' && (
         <section>
-          <h2 style={{ marginBottom: '15px', fontSize: '25px' }}>지식 나눔 내역</h2>
+          <h2 style={{ marginBottom: '15px', fontSize: '25px' }}>
+            지식 나눔 내역
+          </h2>
           <div style={{ display: 'flex', flexWrap: 'wrap' }}>
             {knowledgeShares.map((knowledge) => (
               <div
