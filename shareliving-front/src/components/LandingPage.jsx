@@ -48,9 +48,9 @@ const LandingPage = () => {
           </div>
         </section>
 
-        <section id="secBanners">
+        {/* <section id="secBanners">
           배너 등이 들어갈 수 있는 더미 공간 - 제거해도 무관
-        </section>
+        </section> */}
 
         <section id="secShareProducts">
           <LandingSectionTitle
