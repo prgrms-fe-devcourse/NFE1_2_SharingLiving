@@ -1,7 +1,7 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Navigate, useLocation } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { AppProvider } from './context/AppContext'; // Context import
+import { AppProvider, useAppContext } from './context/AppContext'; // useAppContext 추가
 
 import './assets/css/style.css';
 import Layout from './components/layouts/Layout';
@@ -27,26 +27,17 @@ import FindAccountInfo from './components/authentication/component/FindAccountIn
 import KakaoCallback from './components/authentication/utils/service/kakaoCallback';
 import GoogleCallback from './components/authentication/utils/service/GoogleCallback';
 
-/*  
-  주석 규칙
+// ProtectedRoute 컴포넌트를 App.jsx 내에서 정의
+const ProtectedRoute = ({ children }) => {
+  const { currentUser } = useAppContext();
+  const location = useLocation();
 
-  - 404 오류 처리:
-    모든 페이지에서 발생할 수 있는 404 오류는
-    errorElement로 처리하여 사용자에게 안내합니다.
+  if (!currentUser) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
 
-  - CRUD 관련 오류 메시지 (상황에 따라 커스텀):
-    - R (조회 실패):
-      데이터를 불러오는 데 실패했습니다.
-
-    - U (업데이트 실패):
-      업데이트에 실패했습니다.
-
-    - C (생성 실패):
-      추가에 실패했습니다.
-
-    - D (삭제 실패):
-      삭제에 실패했습니다.
-*/
+  return children;
+};
 
 const baseRouter = createBrowserRouter([
   {
@@ -66,32 +57,32 @@ const baseRouter = createBrowserRouter([
       },
       {
         path: '/mypage',
-        element: <MyPage />,
+        element: <ProtectedRoute><MyPage /></ProtectedRoute>,
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
         path: '/edit-profile',
-        element: <EditProfile />,
+        element: <ProtectedRoute><EditProfile /></ProtectedRoute>,
         errorElement: <div>업데이트에 실패했습니다.</div>,
       },
       {
         path: '/messages',
-        element: <MessagesPage />,
+        element: <ProtectedRoute><MessagesPage /></ProtectedRoute>,
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
         path: '/messages/received/:messageId',
-        element: <MessageDetail />,
+        element: <ProtectedRoute><MessageDetail /></ProtectedRoute>,
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
         path: '/messages/received/:messageId/reply',
-        element: <ReplyMessage />,
+        element: <ProtectedRoute><ReplyMessage /></ProtectedRoute>,
         errorElement: <div>메시지 전송에 실패했습니다.</div>,
       },
       {
         path: '/messages/sent/:messageId',
-        element: <MessageDetail />,
+        element: <ProtectedRoute><MessageDetail /></ProtectedRoute>,
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
@@ -106,7 +97,7 @@ const baseRouter = createBrowserRouter([
       },
       {
         path: '/share-history',
-        element: <ShareHistory />,
+        element: <ProtectedRoute><ShareHistory /></ProtectedRoute>,
         errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
       },
       {
@@ -131,12 +122,12 @@ const baseRouter = createBrowserRouter([
       },
       {
         path: '/add-product',
-        element: <ProductWrite />,
+        element: <ProtectedRoute><ProductWrite /></ProtectedRoute>,
         errorElement: <div>제품 등록에 실패했습니다.</div>,
       },
       {
         path: '/add-knowledge',
-        element: <KnowledgeWrite />,
+        element: <ProtectedRoute><KnowledgeWrite /></ProtectedRoute>,
         errorElement: <div>지식 등록에 실패했습니다.</div>,
       },
       {
@@ -157,20 +148,8 @@ const baseRouter = createBrowserRouter([
       {
         path: '/find-account-info',
         element: <FindAccountInfo />,
-        errorElement: <div>회원가입에 실패했습니다.</div>,
+        errorElement: <div>회원 정보 찾기에 실패했습니다.</div>,
       },
-      {
-        path: '/product',
-        element: <ProductList />,
-        errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
-      },
-      {
-        path: '/knowledge',
-        element: <KnowledgeList />,
-        errorElement: <div>데이터를 불러오는 데 실패했습니다.</div>,
-      },
-
-      // 필요한 경로를 추가
     ],
   },
 ]);

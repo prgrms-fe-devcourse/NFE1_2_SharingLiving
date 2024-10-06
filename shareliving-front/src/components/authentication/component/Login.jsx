@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { login, getAuthUser } from "../utils/service/apiUtil";
+import { useAppContext } from "../../../context/AppContext";
 import "../scss/Login.scss";
 import Google from "../../../public/img/Google.png";
 import MainLogo from "../../../public/img/MainLogo.png";
@@ -11,6 +12,8 @@ const KAKAO_CLIENT_ID = import.meta.env.VITE_APP_KAKAO_CLIENT_ID;
 const KAKAO_REDIRECT_URI = import.meta.env.VITE_APP_KAKAO_REDIRECT_URI;
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_APP_GOOGLE_CLIENT_ID;
 const GOOGLE_REDIRECT_URI = import.meta.env.VITE_APP_GOOGLE_REDIRECT_URI;
+const NAVER_CLIENT_ID = import.meta.env.VITE_APP_NAVER_CLIENT_ID;
+const NAVER_REDIRECT_URI = import.meta.env.VITE_APP_NAVER_REDIRECT_URI;
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,19 +21,25 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [fullName, setFullName] = useState("");
+  
+  const { setCurrentUser, isTokenLoading } = useAppContext();
 
   useEffect(() => {
-    checkAuthStatus();
-  }, []);
+    if (!isTokenLoading) {
+      checkAuthStatus();
+    }
+    initializeNaverLogin();
+  }, [isTokenLoading]);
 
   const checkAuthStatus = async () => {
     try {
-      const userData = await getAuthUser();
-      if (userData && userData.fullName) {
-        setIsLoggedIn(true);
-        setFullName(userData.fullName);
+      const token = localStorage.getItem('token');
+      if (token) {
+        const userData = await getAuthUser(token);
+        if (userData) {
+          updateUserInfo(userData, token);
+          navigate("/");
+        }
       }
     } catch (error) {
       console.error("Auth check error:", error);
@@ -47,8 +56,7 @@ const Login = () => {
 
     try {
       const response = await login(email, password);
-      setIsLoggedIn(true);
-      setFullName(response.user.fullName);
+      updateUserInfo(response.user, response.token);
       navigate("/");
     } catch (error) {
       console.error("Login error:", error);
@@ -58,13 +66,31 @@ const Login = () => {
     }
   };
 
+  const updateUserInfo = (userData, token) => {
+    const userInfo = {
+      name: userData.fullName,
+      email: userData.email,
+      stamps: userData.stamps || 0,
+    };
+    setCurrentUser({ ...userInfo, token });
+    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    localStorage.setItem('token', token);
+  };
+
   const handleGoogleLogin = () => {
     const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${encodeURIComponent(GOOGLE_REDIRECT_URI)}&response_type=code&scope=email profile`;
     window.location.href = googleAuthUrl;
   };
 
-  const handleNaverLogin = () => {
-    console.log("Naver login not implemented yet");
+  const initializeNaverLogin = () => {
+    const { naver } = window;
+    const naverLogin = new naver.LoginWithNaverId({
+      clientId: NAVER_CLIENT_ID,
+      callbackUrl: NAVER_REDIRECT_URI,
+      isPopup: false,
+      loginButton: { color: "green", type: 3, height: 60 },
+    });
+    naverLogin.init();
   };
 
   const handleKakaoLogin = () => {
@@ -107,9 +133,7 @@ const Login = () => {
             <a onClick={handleGoogleLogin} className="google-login-button">
               <img src={Google} alt="Google" className="google-icon" />
             </a>
-            <a onClick={handleNaverLogin} className="naver-login-button">
-              <img src={naver} alt="Naver" className="naver-icon" />
-            </a>
+            <div id="naverIdLogin"></div>
           </div>
         </div>
       </main>
