@@ -1,0 +1,70 @@
+.tree-slider {
+  text-align: center;
+  background-color: #f0f8f0;
+  border: 2px solid #d2e8d2;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+.tree-slider button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+.tree-slider button:hover {
+  background-color: #45a049;
+}
+.tree-slider button:disabled {
+  background-color: #a5d6a7;
+  cursor: not-allowed;
+}
+.tree-slider h2 {
+  font-size: 24px;
+  color: #2e7d32;
+  margin-bottom: 15px;
+}
+.tree-slider .progress-bar {
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  height: 20px;
+  margin-bottom: 15px;
+}
+.tree-slider .progress-bar .progress {
+  background-color: #76c7c0;
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.3s;
+}
+.tree-slider .stickers {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.tree-slider .stickers .sticker-image {
+  width: 60px;
+  height: 60px;
+  margin: 5px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.tree-slider .card {
+  position: relative;
+  margin: 0 10px;
+}
+.tree-slider .card img {
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+.tree-slider .card img:hover {
+  transform: scale(1.05);
+}
+.tree-slider .card.hidden {
+  display: none;
+}

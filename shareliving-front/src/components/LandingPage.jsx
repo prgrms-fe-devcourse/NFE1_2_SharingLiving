@@ -17,7 +17,7 @@ const LandingPage = () => {
     {
       enabled: !!channelId,
       select: (res) => {
-        const toTheLength = res.slice(0, res.length); // 임시 길이 - 최종적으로는 최근 글 3개가 적당할 것
+        const toTheLength = res.slice(res.length - 6, res.length - 1);
 
         return toTheLength.map((knowledge) => ({ ...knowledge, ...JSON.parse(knowledge.title) }));
       },

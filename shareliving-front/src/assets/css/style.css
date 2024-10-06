@@ -559,6 +559,7 @@ a:hover, a:focus, a:active {
   --border-color: var(--clr-text);
   position: relative;
   margin-block: 0.5rem;
+  margin-inline: auto;
   width: min(100% - 1.6rem, 20rem);
   height: 1px;
   background-color: rgb(var(--border-color));
@@ -665,7 +666,6 @@ a:hover, a:focus, a:active {
   padding: 0.8rem;
   font-size: var(--fnt-lg);
   font-weight: 700;
-  cursor: pointer;
 }
 .nav-item:hover {
   background-image: linear-gradient(to top, rgb(var(--clr-theme)), rgb(var(--clr-theme)) 0.2rem, transparent 0.2rem);
@@ -1113,6 +1113,148 @@ a:hover, a:focus, a:active {
 #detailImageContainer {
   height: 16rem;
   background-color: black;
+}
+
+.detail-title-area {
+  padding: 0.8rem;
+}
+
+.detail-title {
+  position: relative;
+  margin-block-end: 0.8rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: var(--fnt-title-md);
+  font-weight: 700;
+  z-index: 1;
+}
+.detail-title::before {
+  position: absolute;
+  inset: 0 -0.2rem;
+  margin: auto auto -0.2rem;
+  height: 0.8rem;
+  border-radius: 0.2rem;
+  background-color: rgb(var(--clr-theme)/0.15);
+  z-index: -1;
+  content: "";
+}
+
+.detail-item-info {
+  display: flex;
+}
+
+.detail-info-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 0.8rem;
+}
+
+.detail-user-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.detail-user-image {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 25rem;
+  overflow: hidden;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  pointer-events: none;
+}
+.detail-user-image > img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.detail-user-name {
+  font-weight: 700;
+}
+.detail-user-name::after {
+  content: " 님";
+}
+
+.detail-article-info {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+.detail-article-info > p {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.detail-article-info .icons {
+  width: 0.8rem;
+}
+
+#detailText {
+  padding: 2.4rem 0.8rem;
+}
+
+#detailReply {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.8rem;
+  padding: 0.8rem;
+}
+
+.detail-reply-counter {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding-block-end: 0.8rem;
+  border-block-end: 1px solid rgb(var(--clr-text)/0.15);
+}
+.detail-reply-counter .icons {
+  width: 1.2rem;
+}
+.detail-reply-counter span {
+  font-weight: 900;
+}
+
+#articleReplyEditor {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.2rem;
+}
+
+#txtReplyInput {
+  margin-block-end: 0.2rem;
+  padding: 0.4rem;
+  width: 100%;
+  min-height: 5.4rem;
+  resize: vertical;
+  border: 1px solid rgb(var(--clr-theme)/0.5);
+  border-radius: 0.2rem;
+  background-color: rgb(var(--clr-min)/0.25);
+  -webkit-backdrop-filter: blur(0.4rem);
+          backdrop-filter: blur(0.4rem);
+}
+#txtReplyInput:hover {
+  border-color: rgb(var(--clr-theme)/0.6);
+  background-color: rgb(var(--clr-min)/0.5);
+}
+#txtReplyInput:focus {
+  border-color: rgb(var(--clr-theme)/0.75);
+  background-color: rgb(var(--clr-min));
+  outline: 3px solid rgb(var(--clr-tint-50)/0.5);
+}
+#btnSubmitReply {
+  align-self: flex-end;
+  padding-inline: 2.4rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 2.4rem;
+  border-radius: 0.2rem;
+  background-color: rgb(var(--clr-theme));
+  color: rgb(var(--clr-text-on-tint));
 }
 
 /* _detailPage.scss */

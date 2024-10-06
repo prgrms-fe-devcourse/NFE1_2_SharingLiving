@@ -2,37 +2,58 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  background-color: #f9f9f9;
+  padding: 200px;
+  background-color: #f8f6f6;
   min-height: 100vh;
 }
 .signup-container h2 {
-  margin-bottom: 20px;
-  font-size: 24px;
+  margin-bottom: 50px;
+  font-size: 29px;
   color: #333;
 }
 .signup-container .signup-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 100%;
   max-width: 400px;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-.signup-container .signup-form input {
+.signup-container .signup-form .email-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 19px;
+}
+.signup-container .signup-form .email-input input[type=text] {
+  flex: 1;
+}
+.signup-container .signup-form .email-input span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 1px;
+  font-size: 19px;
+  transform: translateY(8px);
+}
+.signup-container .signup-form .email-input select {
+  width: 130px;
+}
+.signup-container .signup-form input, .signup-container .signup-form select {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
+  padding: 6px;
+  margin-bottom: 28px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
+  line-height: 1.5;
+  box-sizing: border-box;
 }
-.signup-container .signup-form input:focus {
+.signup-container .signup-form input:focus, .signup-container .signup-form select:focus {
   border-color: #3d6e36;
   outline: none;
+}
+.signup-container .signup-form input[type=tel]::-moz-placeholder {
+  color: #999;
+}
+.signup-container .signup-form input[type=tel]::placeholder {
+  color: #999;
 }
 .signup-container .signup-form .terms-container {
   width: 100%;
@@ -40,45 +61,30 @@
   border-top: 1px solid #ccc;
   padding-top: 15px;
 }
-.signup-container .signup-form .terms-container .all-terms {
+.signup-container .signup-form .terms-container .all-terms, .signup-container .signup-form .terms-container div {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   margin-bottom: 10px;
 }
-.signup-container .signup-form .terms-container .all-terms label {
+.signup-container .signup-form .terms-container .all-terms label, .signup-container .signup-form .terms-container div label {
   font-size: 14px;
   color: #333;
   cursor: pointer;
+  margin-left: 10px;
+  flex: 1;
 }
-.signup-container .signup-form .terms-container .all-terms input[type=checkbox] {
+.signup-container .signup-form .terms-container .all-terms input[type=checkbox], .signup-container .signup-form .terms-container div input[type=checkbox] {
   width: 16px;
   height: 16px;
-  margin-right: 10px;
+  margin: 0;
 }
-.signup-container .signup-form .terms-container div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-.signup-container .signup-form .terms-container div label {
-  font-size: 14px;
-  color: #333;
-  cursor: pointer;
-}
-.signup-container .signup-form .terms-container div input[type=checkbox] {
-  width: 16px;
-  height: 16px;
-  margin-right: 10px;
-}
-.signup-container .signup-form .terms-container div a {
+.signup-container .signup-form .terms-container .all-terms a, .signup-container .signup-form .terms-container div a {
   font-size: 14px;
   color: #007bff;
   text-decoration: none;
   cursor: pointer;
 }
-.signup-container .signup-form .terms-container div a:hover {
+.signup-container .signup-form .terms-container .all-terms a:hover, .signup-container .signup-form .terms-container div a:hover {
   text-decoration: underline;
 }
 .signup-container .signup-form .submit-button {
@@ -98,4 +104,8 @@
 }
 .signup-container .signup-form .submit-button:hover:not(:disabled) {
   background-color: #2f542a;
+}
+.signup-container .error-message {
+  color: red;
+  margin-top: 10px;
 }
