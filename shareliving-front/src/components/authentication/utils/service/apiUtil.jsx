@@ -54,8 +54,8 @@ export const logout = async () => {
 export const getAuthUser = async () => {
   const token = localStorage.getItem('token');
   const userInfo = localStorage.getItem('userInfo');
-  console.log('token: ', token)
-  console.log('userInfo: ', userInfo)
+  console.log('token: ', token);
+  console.log('userInfo: ', userInfo);
   if (!token) {
     return null; // 토큰이 없으면 null 반환
   }
@@ -93,9 +93,11 @@ export const getChannelList = async () => {
   }
 };
 
-export const getProductChannel = async (channelId) => {
+export const getProductChannel = async (channelId, offset, limit = 20) => {
   try {
-    const response = await api.get(`/posts/channel/${channelId}`);
+    const response = await api.get(
+      `/posts/channel/${channelId}?offset=${offset}&limit=${limit}`
+    );
     return response.data;
   } catch (error) {
     console.error('Get channel list error:', error);
@@ -129,10 +131,10 @@ export const getCurrentArticle = async (articleID) => {
 
     return response.data;
   } catch (error) {
-    console.error(`Error get load article id: ${ articleID }.`);
+    console.error(`Error get load article id: ${articleID}.`);
 
     throw error;
   }
-}
+};
 
 export default api;

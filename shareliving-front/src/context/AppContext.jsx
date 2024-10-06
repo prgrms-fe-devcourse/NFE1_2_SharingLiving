@@ -70,6 +70,32 @@ export const AppProvider = ({ children }) => {
   // 탭 메뉴 활성화 상태
   const [activeTab, setActiveTab] = useState('received');
 
+  // 소셜 로그인 정보 업데이트 함수 추가
+  const updateSocialLoginInfo = (socialUserInfo) => {
+    const updatedUser = {
+      ...currentUser,
+      ...socialUserInfo,
+      token: socialUserInfo.token || currentUser.token,
+    };
+    setCurrentUser(updatedUser);
+    localStorage.setItem('userInfo', JSON.stringify(updatedUser));
+    if (socialUserInfo.token) {
+      localStorage.setItem('token', socialUserInfo.token);
+    }
+  };
+
+  // 로그아웃 함수 추가
+  const logout = () => {
+    setCurrentUser({
+      name: '현재 사용자',
+      email: 'currentuser@example.com',
+      token: null,
+      stamps: 5,
+    });
+    localStorage.removeItem('userInfo');
+    localStorage.removeItem('token');
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -88,6 +114,9 @@ export const AppProvider = ({ children }) => {
         // 탭 활성화 관련 상태
         activeTab,
         setActiveTab,
+         // 소셜 로그인 관련 함수 추가
+         updateSocialLoginInfo,
+         logout,
       }}
     >
       {children}
