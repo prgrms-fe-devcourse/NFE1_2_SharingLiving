@@ -6,12 +6,6 @@ const ArticleReply = ({ replyObject, children }) => {
       </div>
 
       <div className="reply-body">
-        { replyObject.replyTo.replyTarget === 'reply' ?
-          <div className="reply-to-reply">
-            To. <span>{ replyObject.replyTo.replyTarget }</span>
-          </div> : null
-        }
-
         <div className="reply-info">
           <div className="reply-user-tag">
             { replyObject.userName }
@@ -30,11 +24,17 @@ const ArticleReply = ({ replyObject, children }) => {
           { /** 대댓글 컨테이너 */ }
         </div>
 
-        <div className="reply-item-controls">
-          <button type="button" className="button-add-reply">
-            댓글 작성하기
-          </button>
-        </div>
+        { replyObject.replyTo.replyTarget === 'article' ?
+          <div className="reply-item-controls">
+            <button type="button" className="button-add-reply">
+              대댓글 작성하기
+            </button>
+          </div>
+          :
+          <div className="reply-to-reply">
+            To. <span>{ replyObject.replyTo.replyTarget }</span>
+          </div>
+        }
       </div>
     </div>
   );
