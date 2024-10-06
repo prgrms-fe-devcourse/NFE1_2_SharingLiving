@@ -5,7 +5,7 @@ import { useAppContext } from "../context/AppContext";
 
 const API_BASE_URL = "https://kdt.frontend.5th.programmers.co.kr:5003";
 
-const UserControls = () => {
+const UserControls = ({ isMobile }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
@@ -38,7 +38,7 @@ const UserControls = () => {
     };
 
     return (
-        <div className="header-user-area">
+        <div className={ `header-user-area ${ isMobile ? 'on' : null }` }>
             <div className="total-search-container">
                 <input type="text" name="search-value" id="txtSearch" className="input-element" placeholder="검색어 입력..." />
                 <button type="button" id="btnTotalSearch">
@@ -59,10 +59,10 @@ const UserControls = () => {
                     </button>
                 </div>
 
-                <button 
-                    type="button" 
-                    id="btnHeaderLogout" 
-                    className="button-with-icon front" 
+                <button
+                    type="button"
+                    id="btnHeaderLogout"
+                    className="button-with-icon front"
                     title="로그아웃"
                     onClick={handleLogout}
                     disabled={isLoading}

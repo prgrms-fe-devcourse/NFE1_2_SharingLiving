@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import LogoImage from '../assets/images/logo.png';
-import UserControls from './UserControls';
+import UserControls from './UserControlls';
 import ShareModal from './ShareModal';
 
 const Header = () => {
