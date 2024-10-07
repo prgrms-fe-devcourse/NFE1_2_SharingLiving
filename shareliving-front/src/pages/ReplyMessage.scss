@@ -47,15 +47,17 @@
     padding: 12px;
     font-size: 18px;
     font-weight: bold;
+    background-color: #337235;
     color: #fff;
-    background-color: #007bff;
-    border: none;
+    border: 2px solid #337235;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s ease;
 
     &:hover {
-      background-color: #0056b3;
+      background-color: transparent;
+      color: #337235;
+      border: 2px solid #337235;
     }
 
     &:disabled {
