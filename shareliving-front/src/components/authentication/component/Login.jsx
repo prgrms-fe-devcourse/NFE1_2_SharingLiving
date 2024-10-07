@@ -83,7 +83,7 @@ const Login = () => {
     const userInfo = {
       name: userData.fullName,
       email: userData.email,
-      stamps: userData.stamps || 50,
+      stamps: userData.stamps || 75,
       sticker: userData.sticker,
       nickName: userData.nickName || '닉네임',
       password: userData.password || '12345678',
